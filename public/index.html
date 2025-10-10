@@ -91,7 +91,8 @@
         <div class="mt-10 relative">
 
             <!--search input-->
-            <input class="border border-secondary/50 w-full rounded h-10 py-px pr-10 hover:border-primary/50 focus:border-primary"
+            <input id="search-city-input"
+                   class="border border-secondary/50 w-full rounded h-10 py-px pr-10 hover:border-primary/50 focus:border-primary"
                    type="text" placeholder="جستجوی شهر">
 
             <!--search icon-->
@@ -102,22 +103,15 @@
             </button>
 
             <!--city search result-->
-            <div class="hidden w-full bg-bgGray shadow-box h-80 overflow-auto custom-scroll">
+            <div id="city-search-result" class="hidden w-full bg-bgGray shadow-box h-80 overflow-auto custom-scroll">
 
                 <!--city list-->
-                <ul class=" *:p-4 text-primary *:w-full *:hover:bg-secondary/10 *:transition-colors *:duration-300 *:cursor-pointer">
-                    <li>ساری</li>
-                    <li>ساری</li>
-                    <li>ساری</li>
-                    <li>ساری</li>
-                    <li>ساری</li>
-                    <li>ساری</li>
-                    <li>ساری</li>
-                    <li>ساری</li>
+                <ul id="searched-city" class=" *:p-4 text-primary *:w-full *:hover:bg-secondary/10 *:transition-colors *:duration-300 *:cursor-pointer">
+                    <!--loaded from js-->
                 </ul>
 
                 <!--city empty-->
-                <div class="h-full flex flex-col items-center justify-center">
+                <div id="empty-search" class="h-full flex flex-col items-center justify-center hidden">
                     <img src="./images/city-search-icon.png" alt="">
                     <span class="text-secondary text-xs"> نتیجه ایی برای جستجوی شما یافت نشد.</span>
                 </div>
@@ -130,17 +124,8 @@
 
             <h3 class="text-primary font-medium">شهر های پربازدید</h3>
 
-            <div class="flex flex-wrap justify-center w-full *:w-25 gap-y-10 *:text-center pt-10 ">
-                <span>تبریز</span>
-                <span>ارومیه</span>
-                <span>اصفهان</span>
-                <span>کرج</span>
-                <span>بوشهر</span>
-                <span>تهران</span>
-                <span>مشهد</span>
-                <span>اهواز</span>
-                <span>شیراز</span>
-                <span>کرمان</span>
+            <div id="popular-cities" class="flex flex-wrap justify-center w-full *:w-25 gap-y-10 *:text-center pt-10 ">
+                <!--loaded from js-->
             </div>
         </div>
     </main>
@@ -162,36 +147,19 @@
         </div>
 
         <!--social media-->
-
         <div id="socials-container"
              class="social flex justify-center items-center gap-x-8 my-4 text-secondary **:hover:text-primary **:transition-colors **:duration-300">
-            <a href="#">
-                <svg class="size-5">
-                    <use href="#instagram"></use>
-                </svg>
-            </a>
-            <a href="#">
-                <svg class="size-5">
-                    <use href="#linkedin"></use>
-                </svg>
-            </a>
-            <a href="#">
-                <svg class="size-5">
-                    <use href="#aparat"></use>
-                </svg>
-            </a>
-            <a href="#">
-                <svg class="size-5">
-                    <use href="#twitter"></use>
-                </svg>
-            </a>
+            <!--loaded from js-->
         </div>
     </footer>
-
 </section>
 
 <!--loader-->
-<div class="loader"></div>
+<div id="loader" class="w-full h-screen fixed inset-0 flex items-center justify-center bottom-16 bg-bgGray z-50">
+    <div class="w-10 h-10 border-4 border-t-red border-gray-300 rounded-full animate-spin"></div>
+</div>
 
+
+<script src="./js/pages/index.js" type="module"></script>
 </body>
 </html>
