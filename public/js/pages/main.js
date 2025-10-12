@@ -1,4 +1,4 @@
-import {getFromLocalStorage} from "../function/utils.js";
+import {addToSearchParam, getFromLocalStorage} from "../function/utils.js";
 import {getCategories, getPosts, showCategories, showPosts} from "../function/main.js";
 
 const loader = document.querySelector("#loader");
@@ -20,6 +20,15 @@ window.addEventListener("load", async () => {
         //get and show categories
         const categories = await getCategories();
         await showCategories(categories, categoriesContainer);
+
+        //send category to search param
+        categoriesContainer.addEventListener("click" , (event) => {
+
+           const categoryLi = event.target.closest(".categoryLi");
+           if (categoryLi){
+               addToSearchParam('categoryID',categoryLi.id);
+           }
+        });
 
     } else {
 
