@@ -22,27 +22,37 @@ const calculateTimePassed = (date) => {
     const month = Math.floor(day / 30);
     const year = Math.floor(month / 12);
 
-    if (min < 1){
+    if (min < 1) {
         return "لحظاتی قبل";
     } else if (min < 15) {
         return `دقایقی قبل`;
-    }else if (min < 30) {
+    } else if (min < 30) {
         return `یک ربع قبل`;
     } else if (min < 45) {
         return `نیم ساعت قبل`;
-    }else if (hour < 1) {
+    } else if (hour < 1) {
         return `45 دقیقه قبل`;
-    } else if (day < 1){
+    } else if (day < 1) {
         return `${hour} ساعت قبل`;
-    } else if (month < 1){
+    } else if (month < 1) {
         return `${day} روز قبل`;
-    } else if (year < 1){
+    } else if (year < 1) {
         return `${month} ماه قبل`;
     } else {
         return `${year} سال قبل`;
     }
 }
 
+const addToSearchParam = (param, value) => {
+
+    const url = new URL(location.href);
+    const searchParam = url.searchParams;
+
+    searchParam.set(param,value);
+    url.search = searchParam.toString();
+
+    location.href = url.toString();
+}
 
 
-export {baseUrl, saveInLocalStorage, getFromLocalStorage,calculateTimePassed}
+export {baseUrl, saveInLocalStorage, getFromLocalStorage, calculateTimePassed,addToSearchParam}

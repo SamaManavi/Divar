@@ -63,7 +63,7 @@ const showCategories = async (categories, categoriesContainer) => {
 
         categoriesContainer.insertAdjacentHTML("beforeend", `
             
-            <li class="group" id="${category._id}">
+            <li class="group categoryLi" id="${category._id}">
                 <a href="#" class="flex gap-x-2 group-hover:text-primary">
                     <svg class="size-5 font-bold text-sm rotate-90">
                         <use href="#chevron-down"></use>
