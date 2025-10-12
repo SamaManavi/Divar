@@ -325,89 +325,8 @@
             <!--categories-->
             <div class="flex flex-col gap-y-8">
                 <span class="text-primary text-xs ">دسته ها</span>
-                <ul class="flex flex-col gap-y-5 pb-8 border-b border-secondary/20">
-                    <li class="group">
-                        <a href="#" class="flex gap-x-2 group-hover:text-primary">
-                            <svg class="size-5 font-bold text-sm rotate-90">
-                                <use href="#chevron-down"></use>
-                            </svg>
-                            <span class="font-bold text-sm">املاک</span>
-                        </a>
-                    </li>
-                    <li class="group">
-                        <a href="#" class="flex gap-x-2 group-hover:text-primary">
-                            <svg class="size-5 font-bold text-sm rotate-90">
-                                <use href="#chevron-down"></use>
-                            </svg>
-                            <span class="font-bold text-sm">وسایل نقلیه</span>
-                        </a>
-                    </li>
-                    <li class="group">
-                        <a href="#" class="flex gap-x-2 group-hover:text-primary">
-
-                            <svg class="size-5 font-bold text-sm rotate-90">
-                                <use href="#chevron-down"></use>
-                            </svg>
-                            <span class="font-bold text-sm">کالای دیجیتال</span>
-                        </a>
-                    </li>
-                    <li class="group">
-                        <a href="#" class="flex gap-x-2 group-hover:text-primary">
-
-                            <svg class="size-5 font-bold text-sm rotate-90">
-                                <use href="#chevron-down"></use>
-                            </svg>
-                            <span class="font-bold text-sm">خانه و آشپز خانه</span>
-                        </a>
-                    </li>
-                    <li class="group">
-                        <a href="#" class="flex gap-x-2 group-hover:text-primary">
-                            <svg class="size-5 font-bold text-sm rotate-90">
-                                <use href="#chevron-down"></use>
-                            </svg>
-                            <span class="font-bold text-sm">خدمات</span>
-                        </a>
-                    </li>
-                    <li class="group">
-                        <a href="#" class="flex gap-x-2 group-hover:text-primary">
-                            <svg class="size-5 font-bold text-sm rotate-90">
-                                <use href="#chevron-down"></use>
-                            </svg>
-                            <span class="font-bold text-sm">وسایل شخصی</span>
-                        </a>
-                    </li>
-                    <li class="group">
-                        <a href="#" class="flex gap-x-2 group-hover:text-primary">
-                            <svg class="size-5 font-bold text-sm rotate-90">
-                                <use href="#chevron-down"></use>
-                            </svg>
-                            <span class="font-bold text-sm">سرگرمی و فراغت</span>
-                        </a>
-                    </li>
-                    <li class="group">
-                        <a href="#" class="flex gap-x-2 group-hover:text-primary">
-                            <svg class="size-5 font-bold text-sm rotate-90">
-                                <use href="#chevron-down"></use>
-                            </svg>
-                            <span class="font-bold text-sm">اجتماعی</span>
-                        </a>
-                    </li>
-                    <li class="group">
-                        <a href="#" class="flex gap-x-2 group-hover:text-primary">
-                            <svg class="size-5 font-bold text-sm rotate-90">
-                                <use href="#chevron-down"></use>
-                            </svg>
-                            <span class="font-bold text-sm">تجهیزات و صنعتی</span>
-                        </a>
-                    </li>
-                    <li class="group">
-                        <a href="#" class="flex gap-x-2 group-hover:text-primary">
-                            <svg class="size-5 font-bold text-sm rotate-90">
-                                <use href="#chevron-down"></use>
-                            </svg>
-                            <span class="font-bold text-sm">استخدام و کاریابی</span>
-                        </a>
-                    </li>
+                <ul id="categories-container" class="flex flex-col gap-y-5 pb-8 border-b border-secondary/20">
+                    <!--loaded from js-->
                 </ul>
             </div>
 
@@ -560,8 +479,9 @@
         <!--main content-->
         <main class="w-full">
             <h3 class="mb-5 text-xs">انواع آگاهی ها و نیازمندی های تهران</h3>
-            <div id="posts-container" class="grid gap-y-3 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 md:gap-x-1 lg:gap-x-2 ">
-            <!--loaded from js-->
+            <div id="posts-container"
+                 class="grid gap-y-3 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 md:gap-x-1 lg:gap-x-2 ">
+                <!--loaded from js-->
             </div>
         </main>
     </div>
