@@ -14,7 +14,8 @@ const showPosts = (posts, postsContainer) => {
 
         posts.forEach((post) => {
 
-            postsContainer.insertAdjacentHTML("beforeend", `
+            postsContainer.insertAdjacentHTML("beforeend",
+                `
                     <div id="${post._id}" class="flex justify-between gap-x-4 h-42 rounded border border-secondary/50 p-3">
                         <div class="flex flex-col justify-between">
                         <span class="text-base text-primary line-clamp-2">${post.title}</span>
@@ -36,7 +37,9 @@ const showPosts = (posts, postsContainer) => {
                         </svg>
                     </div>
                     </div>
-                `);
+                `
+            );
+
         });
 
     } else {
@@ -47,6 +50,30 @@ const showPosts = (posts, postsContainer) => {
     }
 }
 
+const getCategories = async () => {
 
+    const response = await fetch(`${baseUrl}/v1/category/`);
+    return await response.json();
 
-export {getPosts, showPosts,}
+}
+
+const showCategories = async (categories, categoriesContainer) => {
+
+    categories.data.categories.forEach((category) => {
+
+        categoriesContainer.insertAdjacentHTML("beforeend", `
+            
+            <li class="group" id="${category._id}">
+                <a href="#" class="flex gap-x-2 group-hover:text-primary">
+                    <svg class="size-5 font-bold text-sm rotate-90">
+                        <use href="#chevron-down"></use>
+                    </svg>
+                    <span class="font-bold text-sm">${category.title}</span>
+                </a>
+            </li>
+
+        `);
+    });
+}
+
+export {getPosts, showPosts, getCategories, showCategories}
