@@ -46,13 +46,37 @@ const calculateTimePassed = (date) => {
 const addToSearchParam = (param, value) => {
 
     const url = new URL(location.href);
+
     const searchParam = url.searchParams;
 
-    searchParam.set(param,value);
+    searchParam.set(param, value);
+
     url.search = searchParam.toString();
 
     location.href = url.toString();
 }
 
+const getFromSearchParam = (param) => {
 
-export {baseUrl, saveInLocalStorage, getFromLocalStorage, calculateTimePassed,addToSearchParam}
+    const urlParams = new URLSearchParams(location.search);
+    return urlParams.get(param);
+}
+
+const removeParamFromUrl = (param) => {
+
+    const url = new URL(location.href);
+    url.searchParams.delete(param);
+    window.history.replaceState(null, null, url);
+    location.reload();
+}
+
+
+export {
+    baseUrl,
+    saveInLocalStorage,
+    getFromLocalStorage,
+    calculateTimePassed,
+    addToSearchParam,
+    getFromSearchParam,
+    removeParamFromUrl
+}

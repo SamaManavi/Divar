@@ -14,8 +14,7 @@ const showPosts = (posts, postsContainer) => {
 
         posts.forEach((post) => {
 
-            postsContainer.insertAdjacentHTML("beforeend",
-                `
+            postsContainer.insertAdjacentHTML("beforeend", `
                     <div id="${post._id}" class="flex justify-between gap-x-4 h-42 rounded border border-secondary/50 p-3">
                         <div class="flex flex-col justify-between">
                         <span class="text-base text-primary line-clamp-2">${post.title}</span>
@@ -37,8 +36,7 @@ const showPosts = (posts, postsContainer) => {
                         </svg>
                     </div>
                     </div>
-                `
-            );
+                `);
 
         });
 
@@ -57,11 +55,85 @@ const getCategories = async () => {
 
 }
 
-const showCategories = async (categories, categoriesContainer) => {
+const showCategories = async (categories, categoriesContainer, isSubCat, isSubSubCat) => {
 
-    categories.data.categories.forEach((category) => {
+    if (isSubCat) {
 
+        // insert html for all ads and title of category
         categoriesContainer.insertAdjacentHTML("beforeend", `
+            <li class="group" id="allAdsLi">
+                <a href="#" class="flex items-center gap-x-2 group-hover:text-primary duration-300">
+                    <svg class="size-4 font-bold text-sm">
+                        <use href="#arrow-right"></use>
+                    </svg>
+                    <span class="font-bold text-sm">همه آگهی ها</span>
+                </a>
+            </li>
+           
+            <li class="group categoryLi">
+                <a href="#" class="flex items-center gap-x-2 text-primary">
+                    <svg class="size-5 font-bold text-sm">
+                        <use href="#chevron-down"></use>
+                    </svg>
+                    <span class="font-bold text-sm">${categories[0].title}</span>
+                </a>
+            </li>                    
+        `);
+
+        //show subCategories Li s
+        categories[0].subCategories.forEach((subCat) => {
+
+            categoriesContainer.insertAdjacentHTML("beforeend", `
+                    
+                <li class="group categoryLi" id="${subCat._id}">
+                    <span class="font-bold text-xs group-hover:text-primary duration-300 cursor-pointer pr-10">${subCat.title}</span>
+                </li>
+            `);
+        });
+
+    } else if (isSubSubCat) {
+
+        // insert html for all ads and title of category and title of subCategory
+        categoriesContainer.insertAdjacentHTML("beforeend", `
+            
+            <li class="group" id="allAdsLi">
+                <a href="#" class="flex items-center gap-x-2 group-hover:text-primary duration-300">
+                    <svg class="size-4 font-bold text-sm">
+                        <use href="#arrow-right"></use>
+                    </svg>
+                    <span class="font-bold text-sm">همه آگهی ها</span>
+                </a>
+            </li>  
+            <li class="group">
+                <a href="#" class="flex items-center gap-x-2 text-primary">
+                    <svg class="size-4 font-bold text-sm">
+                        <use href="#chevron-down"></use>
+                    </svg>
+                    <span class="font-bold text-sm">${await findCategoryParentById(categories[0].parent)}</span>
+                </a>
+            </li>  
+            <li class="group">
+                <span class="font-bold text-sm text-primary cursor-pointer pr-10">${categories[0].title}</span>
+            </li>  
+        `);
+
+        //show subSubCategories Li s
+        categories[0].subCategories.forEach((subCat) => {
+
+            categoriesContainer.insertAdjacentHTML("beforeend", `
+                    
+                <li class="group categoryLi" id="${subCat._id}">
+                    <span class="font-bold text-xs group-hover:text-primary duration-300 cursor-pointer pr-15">${subCat.title}</span>
+                </li>
+            `);
+        });
+
+    } else {
+
+        // just show category
+        categories.forEach((category) => {
+
+            categoriesContainer.insertAdjacentHTML("beforeend", `
             
             <li class="group categoryLi" id="${category._id}">
                 <a href="#" class="flex gap-x-2 group-hover:text-primary">
@@ -73,7 +145,17 @@ const showCategories = async (categories, categoriesContainer) => {
             </li>
 
         `);
-    });
+        });
+    }
 }
+
+const findCategoryParentById = async (id) => {
+
+    const categories = await getCategories();
+
+    const categoryInfo = categories.data.categories.find((category) => category._id === id);
+    return categoryInfo.title;
+}
+
 
 export {getPosts, showPosts, getCategories, showCategories}
