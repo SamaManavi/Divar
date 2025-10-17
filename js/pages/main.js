@@ -4,7 +4,10 @@ import {getCategories, getPosts, showCategories, showPosts} from "../function/ma
 const loader = document.querySelector("#loader");
 const categoriesContainer = document.querySelector("#categories-container");
 const postsContainer = document.querySelector("#posts-container")
-
+const globalSearch = document.querySelector("#globalSearch");
+const modalOverlay = document.querySelector("#modalOverlay");
+const modalGlobalSearch = document.querySelector("#modalGlobalSearch");
+const globalSearchInput = document.querySelector("#globalSearchInput");
 
 window.addEventListener("load", async () => {
 
@@ -39,7 +42,6 @@ window.addEventListener("load", async () => {
         const categories = await getCategories();
         const categoryId = getFromSearchParam("categoryID");
 
-
         if (categoryId) {
 
             // find main category which in searchParam
@@ -57,11 +59,31 @@ window.addEventListener("load", async () => {
                 await showCategories(subCategoriesInfo, categoriesContainer, false, true)
             }
 
-        } else {
+        }
+        else {
 
             // show main category
-            await showCategories(categories.data.categories, categoriesContainer, false, false,null);
+            await showCategories(categories.data.categories, categoriesContainer, false, false, null);
         }
+
+        // global search input
+        globalSearch.addEventListener("click", () => {
+
+            modalOverlay.classList.remove("hidden");
+            modalGlobalSearch.classList.remove("hidden");
+        });
+        globalSearchInput.addEventListener("keyup", (event) => {
+
+            if (event.keyCode === 13){
+
+                event.preventDefault();
+                if (event.target.value.trim()){
+                    addToSearchParam("value", event.target.value.trim())
+                }
+            }
+        });
+        //binding between url and searchInput
+        globalSearchInput.value = getFromSearchParam("value");
 
     } else {
 
