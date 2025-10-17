@@ -69,7 +69,6 @@ const showCategories = async (categories, categoriesContainer, isSubCat, isSubSu
                     <span class="font-bold text-sm">همه آگهی ها</span>
                 </a>
             </li>
-           
             <li class="group categoryLi">
                 <a href="#" class="flex items-center gap-x-2 text-primary">
                     <svg class="size-5 font-bold text-sm">
@@ -77,19 +76,11 @@ const showCategories = async (categories, categoriesContainer, isSubCat, isSubSu
                     </svg>
                     <span class="font-bold text-sm">${categories[0].title}</span>
                 </a>
-            </li>                    
+            </li> 
+            <ul class="flex flex-col gap-y-2 pr-2 mt-3 mr-10 *:text-sm/7 *:font-bold *:hover:text-primary *:transition-colors *:duration-300 *:cursor-pointer">
+                ${renderCategoryTemplate(categories[0].subCategories)}                   
+            </ul> 
         `);
-
-        //show subCategories Li s
-        categories[0].subCategories.forEach((subCat) => {
-
-            categoriesContainer.insertAdjacentHTML("beforeend", `
-                    
-                <li class="group categoryLi" id="${subCat._id}">
-                    <span class="font-bold text-xs group-hover:text-primary duration-300 cursor-pointer pr-10">${subCat.title}</span>
-                </li>
-            `);
-        });
 
     } else if (isSubSubCat) {
 
@@ -115,18 +106,10 @@ const showCategories = async (categories, categoriesContainer, isSubCat, isSubSu
             <li class="group">
                 <span class="font-bold text-sm text-primary cursor-pointer pr-10">${categories[0].title}</span>
             </li>  
+            <ul class="flex flex-col gap-y-2 pr-2 mt-3 mr-14 border-r border-secondary/30 *:text-secondary *:text-sm/7 *:font-bold *:hover:text-primary *:transition-colors *:duration-300 *:cursor-pointer">
+                ${renderCategoryTemplate(categories[0].subCategories)}
+            </ul>
         `);
-
-        //show subSubCategories Li s
-        categories[0].subCategories.forEach((subCat) => {
-
-            categoriesContainer.insertAdjacentHTML("beforeend", `
-                    
-                <li class="group categoryLi" id="${subCat._id}">
-                    <span class="font-bold text-xs group-hover:text-primary duration-300 cursor-pointer pr-15">${subCat.title}</span>
-                </li>
-            `);
-        });
 
     } else {
 
@@ -143,7 +126,6 @@ const showCategories = async (categories, categoriesContainer, isSubCat, isSubSu
                     <span class="font-bold text-sm">${category.title}</span>
                 </a>
             </li>
-
         `);
         });
     }
@@ -155,6 +137,19 @@ const findCategoryParentById = async (id) => {
 
     const categoryInfo = categories.data.categories.find((category) => category._id === id);
     return categoryInfo.title;
+}
+
+const renderCategoryTemplate = (categories) => {
+
+    return categories.map((category) => {
+
+        return `   
+                <li class="group categoryLi" id="${category._id}">
+                    <span>${category.title}</span>
+                </li>
+            `
+    }).join("");
+
 }
 
 

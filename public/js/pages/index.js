@@ -1,5 +1,6 @@
-import {getAllCities, getSocial, showPopularCities, showSocial} from "../function";
-import {baseUrl, saveInLocalStorage} from "../function/utils.js";
+import {getAllCities, showPopularCities} from "../function";
+import {saveInLocalStorage} from "../function/utils.js";
+import {getSocial, showSocial} from "../function/shared.js";
 
 const popularCitiesContainer = document.querySelector("#popular-cities");
 const socialsContainer = document.querySelector("#socials-container")

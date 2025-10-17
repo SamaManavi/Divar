@@ -227,8 +227,8 @@
                 </div>
 
                 <!--advertisements search-->
-                <div class="group flex relative">
-                    <input class="h-11 w-70 xl:w-120 bg-[#ffffff14] rounded-sm p-5" type="text"
+                <div id="globalSearch" class="group flex relative">
+                    <input id="globalSearchInput" class="h-11 w-70 xl:w-120 bg-[#ffffff14] rounded-sm p-5" type="text"
                            placeholder="جستجو در همه آگهی ها ">
 
                     <button class="absolute left-2 top-2.5 group-hover:text-gray-300 duration-300">
@@ -238,7 +238,7 @@
                     </button>
 
                     <!--  موقعی که رو اینپوت کیلیک شد و مودال زیر نمایش داده شد رنگ اینپون باید هم رنگ بک گراند مودال شود /// modal -->
-                    <div class="absolute left-0 right-0 shadow-one w-70 xl:w-120 h-auto bg-bgGray p-4 top-11 border-t border-secondary/20 rounded-br rounded-bl hidden">
+                    <div id="modalGlobalSearch" class="absolute left-0 right-0 shadow-one w-70 xl:w-120 h-auto bg-bgGray p-4 top-11 border-t border-secondary/20 rounded-br rounded-bl hidden">
                         <span class="text-sm text-bold text-secondary pt-2"> بیشترین جستجو های دیوار</span>
                         <ul class="most-searched flex flex-wrap gap-3 pt-4">
                             <!--most searched-->
@@ -689,7 +689,7 @@
 </div>
 
 <!--famous search ad while search (desktop) ///// این صفحه پشت مودال هست خود مودال داخل بخش هدر دسکتاپ بخش سرچ اد است-->
-<div class="flex items-center justify-center max-h-screen size-full fixed inset-0 bg-black/50 backdrop-blur-[2px] z-10 hidden"></div>
+<div id="modalOverlay" class="flex items-center justify-center max-h-screen size-full fixed inset-0 bg-black/50 backdrop-blur-[2px] z-10 hidden"></div>
 
 <!--search ad and famous search (mobile)-->
 <div class="flex items-center justify-center max-h-screen size-full fixed inset-0 bg-bgGray z-10 lg:hidden hidden">
