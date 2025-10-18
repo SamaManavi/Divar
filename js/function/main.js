@@ -76,17 +76,17 @@ const showCategories = async (categories, categoriesContainer, isSubCat, isSubSu
                     </svg>
                     <span class="font-bold text-sm">${categories[0].title}</span>
                 </a>
-            </li> 
+            </li>
             <ul class="flex flex-col gap-y-2 pr-2 mt-3 mr-10 *:text-sm/7 *:font-bold *:hover:text-primary *:transition-colors *:duration-300 *:cursor-pointer">
-                ${renderCategoryTemplate(categories[0].subCategories)}                   
-            </ul> 
+                ${renderCategoryTemplate(categories[0].subCategories)}
+            </ul>
         `);
 
     } else if (isSubSubCat) {
 
         // insert html for all ads and title of category and title of subCategory
         categoriesContainer.insertAdjacentHTML("beforeend", `
-            
+
             <li class="group" id="allAdsLi">
                 <a href="#" class="flex items-center gap-x-2 group-hover:text-primary duration-300">
                     <svg class="size-4 font-bold text-sm">
@@ -94,7 +94,7 @@ const showCategories = async (categories, categoriesContainer, isSubCat, isSubSu
                     </svg>
                     <span class="font-bold text-sm">همه آگهی ها</span>
                 </a>
-            </li>  
+            </li>
             <li class="group">
                 <a href="#" class="flex items-center gap-x-2 text-primary">
                     <svg class="size-4 font-bold text-sm">
@@ -102,10 +102,10 @@ const showCategories = async (categories, categoriesContainer, isSubCat, isSubSu
                     </svg>
                     <span class="font-bold text-sm">${await findCategoryParentById(categories[0].parent)}</span>
                 </a>
-            </li>  
+            </li>
             <li class="group">
                 <span class="font-bold text-sm text-primary cursor-pointer pr-10">${categories[0].title}</span>
-            </li>  
+            </li>
             <ul class="flex flex-col gap-y-2 pr-2 mt-3 mr-14 border-r border-secondary/30 *:text-secondary *:text-sm/7 *:font-bold *:hover:text-primary *:transition-colors *:duration-300 *:cursor-pointer">
                 ${renderCategoryTemplate(categories[0].subCategories)}
             </ul>
@@ -117,7 +117,7 @@ const showCategories = async (categories, categoriesContainer, isSubCat, isSubSu
         categories.forEach((category) => {
 
             categoriesContainer.insertAdjacentHTML("beforeend", `
-            
+
             <li class="group categoryLi" id="${category._id}">
                 <a href="#" class="flex gap-x-2 group-hover:text-primary">
                     <svg class="size-5 font-bold text-sm rotate-90">
@@ -149,8 +149,48 @@ const renderCategoryTemplate = (categories) => {
                 </li>
             `
     }).join("");
+}
+const renderFilterOptions = (filterOptions) => {
 
+    return filterOptions.map((filter) => {
+        return `
+                <option value="">${filter}</option>
+        `
+    }).join("");
 }
 
+const renderFiltering = (categoryFilter, containerFilter) => {
 
-export {getPosts, showPosts, getCategories, showCategories}
+    categoryFilter.forEach((filter) => {
+
+        containerFilter.insertAdjacentHTML("beforeend", `
+            ${filter.type === "selectbox" ? `
+            
+                <!--selectBox-->
+                <div class="flex gap-x-1 pb-5">
+                    <span class="text-primary text-sm font-bold">قیمت</span>
+                    <span class="">(تومان)</span>
+                </div>
+                <div class="flex items-center gap-x-4 pb-2">
+                    <span class="text-xs">از</span>
+                    <select class="bg-darkGray border rounded border-secondary/50 py-1 p-2 w-65 hover:border-secondary outline-none focus:border-red" name="" id="">
+                        ${renderFilterOptions(filter.options)}
+                    </select>
+                </div>
+            ` : ""}
+            
+            ${filter.type === "checkbox" ? `
+            
+                <!--checkBox-->
+                <span class="text-primary text-sm font-bold">عکس دار</span>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+            ` : ""}
+        
+        `);
+    });
+}
+
+export {getPosts, showPosts, getCategories, showCategories, renderFiltering}

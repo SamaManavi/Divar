@@ -1,5 +1,5 @@
 import {addToSearchParam, getFromLocalStorage, getFromSearchParam, removeParamFromUrl} from "../function/utils.js";
-import {getCategories, getPosts, showCategories, showPosts} from "../function/main.js";
+import {getCategories, getPosts, renderFiltering, showCategories, showPosts} from "../function/main.js";
 
 const loader = document.querySelector("#loader");
 const categoriesContainer = document.querySelector("#categories-container");
@@ -8,6 +8,7 @@ const globalSearch = document.querySelector("#globalSearch");
 const modalOverlay = document.querySelector("#modalOverlay");
 const modalGlobalSearch = document.querySelector("#modalGlobalSearch");
 const globalSearchInput = document.querySelector("#globalSearchInput");
+const filterCategoryContainer = document.querySelector("#filter-category");
 
 window.addEventListener("load", async () => {
 
@@ -51,16 +52,29 @@ window.addEventListener("load", async () => {
 
                 // show sub category
                 await showCategories(categoryInfos, categoriesContainer, true, false)
+
+                //sucCategory filtering
+                if (categoryInfos[0].filters.length) {
+
+                    renderFiltering(categoryInfos[0].filters, filterCategoryContainer);
+                }
+
             } else {
 
                 // show subSubCategory(there is a categoryID in searchParam but its not main category id ==> categoryInfos.length)
                 const allSubCategories = categories.data.categories.flatMap((category) => category.subCategories);
                 const subCategoriesInfo = allSubCategories.filter((subCategory) => subCategory._id === categoryId);
+
                 await showCategories(subCategoriesInfo, categoriesContainer, false, true)
+
+                //sucSubCategory filtering
+                if (subCategoriesInfo[0].filters.length) {
+
+                    renderFiltering(subCategoriesInfo[0].filters, filterCategoryContainer);
+                }
             }
 
-        }
-        else {
+        } else {
 
             // show main category
             await showCategories(categories.data.categories, categoriesContainer, false, false, null);
@@ -74,16 +88,17 @@ window.addEventListener("load", async () => {
         });
         globalSearchInput.addEventListener("keyup", (event) => {
 
-            if (event.keyCode === 13){
+            if (event.keyCode === 13) {
 
                 event.preventDefault();
-                if (event.target.value.trim()){
+                if (event.target.value.trim()) {
                     addToSearchParam("value", event.target.value.trim())
                 }
             }
         });
         //binding between url and searchInput
         globalSearchInput.value = getFromSearchParam("value");
+
 
     } else {
 

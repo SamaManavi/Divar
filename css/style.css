@@ -356,9 +356,6 @@
   .mr-14 {
     margin-right: calc(var(--spacing) * 14);
   }
-  .mr-15 {
-    margin-right: calc(var(--spacing) * 15);
-  }
   .mb-5 {
     margin-bottom: calc(var(--spacing) * 5);
   }
@@ -884,9 +881,6 @@
   .border-t-red {
     border-top-color: var(--color-red);
   }
-  .border-r-secondary {
-    border-right-color: var(--color-secondary);
-  }
   .border-b-secondary\/5 {
     border-bottom-color: color-mix(in srgb, hsla(0, 0%, 100%, 0.56) 5%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -1228,6 +1222,10 @@
   .duration-300 {
     --tw-duration: 300ms;
     transition-duration: 300ms;
+  }
+  .outline-none {
+    --tw-outline-style: none;
+    outline-style: none;
   }
   .select-none {
     -webkit-user-select: none;
