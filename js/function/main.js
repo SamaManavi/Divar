@@ -7,7 +7,7 @@ const getPosts = async () => {
 
     let url = `${baseUrl}/v1/post/?city=${cityId}&limit=100`;
 
-    if (categoryId){
+    if (categoryId) {
 
         url += `&categoryId=${categoryId}`;
     }
@@ -64,7 +64,7 @@ const getCategories = async () => {
 
 }
 
-const showCategories = async (categories, categoriesContainer, isSubCat, isSubSubCat) => {
+const showCategories = async (categories, categoriesContainer, isSubCat, isSubSubCat, isSubSubCatSelected) => {
 
     if (isSubCat) {
 
@@ -109,14 +109,42 @@ const showCategories = async (categories, categoriesContainer, isSubCat, isSubSu
                     <svg class="size-4 font-bold text-sm">
                         <use href="#chevron-down"></use>
                     </svg>
-                    <span class="font-bold text-sm">${await findCategoryParentById(categories[0].parent)}</span>
+                    <span class="font-bold text-sm">${await findCategoryParentNameById(categories.parent, true)}</span>
                 </a>
             </li>
             <li class="group">
-                <span class="font-bold text-sm text-primary cursor-pointer pr-10">${categories[0].title}</span>
+                <span class="font-bold text-sm text-primary cursor-pointer pr-10">${categories.title}</span>
             </li>
             <ul class="flex flex-col gap-y-2 pr-2 mt-3 mr-14 border-r border-secondary/30 *:text-secondary *:text-sm/7 *:font-bold *:hover:text-primary *:transition-colors *:duration-300 *:cursor-pointer">
-                ${renderCategoryTemplate(categories[0].subCategories)}
+                ${renderCategoryTemplate(categories.subCategories)}
+            </ul>
+        `);
+
+    } else if (isSubSubCatSelected) {
+
+        categoriesContainer.insertAdjacentHTML("beforeend", `
+
+            <li class="group" id="allAdsLi">
+                <a href="#" class="flex items-center gap-x-2 group-hover:text-primary duration-300">
+                    <svg class="size-4 font-bold text-sm">
+                        <use href="#arrow-right"></use>
+                    </svg>
+                    <span class="font-bold text-sm">همه آگهی ها</span>
+                </a>
+            </li>
+            <li class="group">
+                <a href="#" class="flex items-center gap-x-2 text-primary">
+                    <svg class="size-4 font-bold text-sm">
+                        <use href="#chevron-down"></use>
+                    </svg>
+                    <span class="font-bold text-sm">${await findGrandparentSubSubCat(categories.parent)}</span>
+                </a>
+            </li>
+            <li class="group">
+                <span class="font-bold text-sm text-primary cursor-pointer pr-10">${await findCategoryParentNameById(categories.parent, true)}</span>
+            </li>
+            <ul class="flex flex-col gap-y-2 mt-3 mr-14 border-r border-secondary/30 *:text-secondary *:text-sm/7 *:font-bold *:hover:text-primary *:transition-colors *:duration-300 *:cursor-pointer">
+                     ${await renderSelectedSubSubCat(categories.parent)}
             </ul>
         `);
 
@@ -140,25 +168,66 @@ const showCategories = async (categories, categoriesContainer, isSubCat, isSubSu
     }
 }
 
-const findCategoryParentById = async (id) => {
+const findCategoryParentNameById = async (parentId, titleWanted) => {
 
     const categories = await getCategories();
+    const categoryInfo = categories.data.categories.find((category) => category._id === parentId);
+    const allSubCategories = categories.data.categories.flatMap((category) => category.subCategories);
+    const subCategoriesInfo = allSubCategories.find((subCategory) => subCategory._id === parentId);
 
-    const categoryInfo = categories.data.categories.find((category) => category._id === id);
-    return categoryInfo.title;
+    if (titleWanted) {
+
+        if (categoryInfo) {
+
+            return categoryInfo.title;
+
+        } else if (subCategoriesInfo) {
+
+            return subCategoriesInfo.title;
+        }
+
+    } else {
+
+        if (categoryInfo) {
+
+            return categoryInfo.parent;
+
+        } else if (subCategoriesInfo) {
+
+            return subCategoriesInfo.parent;
+        }
+    }
+}
+
+const findGrandparentSubSubCat = async (parentId) => {
+
+    const parent = await findCategoryParentNameById(parentId, false);
+    return await findCategoryParentNameById(parent, true);
 }
 
 const renderCategoryTemplate = (categories) => {
 
+    const categoryId = getFromSearchParam("categoryID");
+
     return categories.map((category) => {
 
         return `   
-                <li class="group categoryLi" id="${category._id}">
+                <li class="group categoryLi pr-2 ${categoryId === category._id ? '*:text-red border-r-2 border-red' : ''}" id="${category._id}">
                     <span>${category.title}</span>
                 </li>
             `
     }).join("");
 }
+
+const renderSelectedSubSubCat = async (parentID) => {
+
+    const categories = await getCategories();
+    const allSubCategories = categories.data.categories.flatMap((category) => category.subCategories);
+    const subCategoriesInfo = allSubCategories.find((subCategory) => subCategory._id === parentID);
+
+    return renderCategoryTemplate(subCategoriesInfo.subCategories)
+}
+
 const renderFilterOptions = (filterOptions) => {
 
     return filterOptions.map((filter) => {
