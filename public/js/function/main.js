@@ -173,7 +173,7 @@ const renderFiltering = (categoryFilter, containerFilter) => {
                 </div>
                 <div class="flex items-center gap-x-4 pb-2">
                     <span class="text-xs">از</span>
-                    <select class="bg-darkGray border rounded border-secondary/50 py-1 p-2 w-65 hover:border-secondary outline-none focus:border-red" name="" id="">
+                    <select class="bg-bgGray border rounded border-secondary/50 py-1 p-2 w-65 hover:border-secondary outline-none focus:border-red" name="" id="">
                         ${renderFilterOptions(filter.options)}
                     </select>
                 </div>

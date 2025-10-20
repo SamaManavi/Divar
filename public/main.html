@@ -228,12 +228,12 @@
 
                 <!--advertisements search-->
                 <div id="globalSearch" class="group flex relative">
-                    <input id="globalSearchInput" class="h-11 w-70 xl:w-120 bg-[#ffffff14] rounded-sm p-5" type="text"
+                    <input id="globalSearchInput" autocomplete="off" class="h-11 w-70 xl:w-120 bg-[#ffffff14] rounded-sm p-5" type="text"
                            placeholder="جستجو در همه آگهی ها ">
 
-                    <button class="absolute left-2 top-2.5 group-hover:text-gray-300 duration-300">
+                    <button class="z-10 absolute left-2 top-2.5 group-hover:text-gray-300 duration-300">
                         <svg class="size-5">
-                            <use href="#magnifying-glass"></use>
+                            <use id="searchIconDesktop" href="#magnifying-glass"></use>
                         </svg>
                     </button>
 
@@ -293,7 +293,9 @@
     <!--top section search -->
     <div class="flex items-center size-full">
         <div class="flex items-center justify-between h-12 w-full bg-bgGray border border-secondary rounded-sm p-5">
-            <span class="text-sm"> جستجو در همه آگهی ها</span>
+            <div id="globalSearchMobile" class="w-full">
+                <span id="globalSearchMobileSpan" class="w-full text-sm"> جستجو در همه آگهی ها</span>
+            </div>
 
             <!--city name-->
             <div class="flex items-center gap-x-4 divide-x divide-secondary/40">
@@ -700,7 +702,7 @@
      class="flex items-center justify-center max-h-screen size-full fixed inset-0 bg-black/50 backdrop-blur-[2px] z-10 hidden"></div>
 
 <!--search ad and famous search (mobile)-->
-<div class="flex items-center justify-center max-h-screen size-full fixed inset-0 bg-bgGray z-10 lg:hidden hidden">
+<div id="globalSearchModal" class="flex items-center justify-center z-50 max-h-screen size-full fixed inset-0 bg-bgGray z-10 lg:hidden hidden">
     <div class="flex flex-col size-full">
 
         <div class="relative flex items-center justify-center h-15 w-full bg-[#ffffff14] pl-2 pr-8">
@@ -711,13 +713,13 @@
                 </svg>
             </button>
 
-            <input class="h-10 w-full bg-bgGray border border-secondary rounded-sm p-5 focus:border-red"
+            <input id="globalSearchInputMobile" autocomplete="off" class="h-10 w-full bg-bgGray border border-secondary rounded-sm p-5 focus:border-red"
                    type="text"
                    placeholder="جستجو در همه آگهی ها ">
 
             <button class="absolute left-4 top-5.5">
                 <svg class="size-4">
-                    <use href="#magnifying-glass"></use>
+                    <use id="searchIconMobile" href="#magnifying-glass"></use>
                 </svg>
             </button>
         </div>
