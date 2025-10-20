@@ -18,16 +18,17 @@ const globalSearchMobileSpan = document.querySelector("#globalSearchMobileSpan")
 const globalSearchMobileIcon = document.querySelector("#globalSearchMobileIcon");
 
 
-
 window.addEventListener("load", async () => {
 
     // root protection
     if (getFromLocalStorage("city")) {
 
+        const data = await Promise.allSettled([getPosts(),getCategories()]);
+
         loader.classList.add("hidden");
 
         // get and show posts
-        const posts = await getPosts();
+        const posts = data[0].value;
         showPosts(posts.data.posts, postsContainer);
 
         //send category to search param
@@ -49,7 +50,7 @@ window.addEventListener("load", async () => {
         });
 
         //handle categories and subCategories and subSubCategories
-        const categories = await getCategories();
+        const categories = data[1].value;
         const categoryId = getFromSearchParam("categoryID");
 
         if (categoryId) {
@@ -74,19 +75,31 @@ window.addEventListener("load", async () => {
                 const allSubCategories = categories.data.categories.flatMap((category) => category.subCategories);
                 const subCategoriesInfo = allSubCategories.filter((subCategory) => subCategory._id === categoryId);
 
-                await showCategories(subCategoriesInfo, categoriesContainer, false, true)
 
-                //sucSubCategory filtering
-                if (subCategoriesInfo[0].filters.length) {
+                if (subCategoriesInfo.length) {
 
-                    renderFiltering(subCategoriesInfo[0].filters, filterCategoryContainer);
+                    await showCategories(subCategoriesInfo[0], categoriesContainer, false, true, false);
+
+                    //sucSubCategory filtering
+                    if (subCategoriesInfo[0].filters.length) {
+
+                        renderFiltering(subCategoriesInfo[0].filters, filterCategoryContainer);
+                    }
+
+                } else {
+
+                    // show subSubCategorySelected(color red)
+                    const allSubSubCategories = allSubCategories.flatMap((subCategory) => subCategory.subCategories);
+                    const subSubCategorySelected = allSubSubCategories.filter((subCategory) => subCategory._id === categoryId);
+
+                    await showCategories(subSubCategorySelected[0], categoriesContainer, false, false, true);
                 }
             }
 
         } else {
 
             // show main category
-            await showCategories(categories.data.categories, categoriesContainer, false, false, null);
+            await showCategories(categories.data.categories, categoriesContainer, false, false, false);
         }
 
         // global search input(open)desktop
@@ -207,8 +220,5 @@ window.addEventListener("load", async () => {
         }
 
 
-    } else {
-
-        loader.classList.remove("hidden");
     }
 });

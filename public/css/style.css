@@ -827,6 +827,14 @@
     border-right-style: var(--tw-border-style);
     border-right-width: 1px;
   }
+  .border-r-2 {
+    border-right-style: var(--tw-border-style);
+    border-right-width: 2px;
+  }
+  .border-r-3 {
+    border-right-style: var(--tw-border-style);
+    border-right-width: 3px;
+  }
   .border-b {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 1px;
@@ -1364,6 +1372,11 @@
     :is(& > *) {
       --tw-font-weight: var(--font-weight-bold);
       font-weight: var(--font-weight-bold);
+    }
+  }
+  .\*\:text-red {
+    :is(& > *) {
+      color: var(--color-red);
     }
   }
   .\*\:text-secondary {
