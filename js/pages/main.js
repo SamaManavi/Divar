@@ -15,6 +15,8 @@ const searchIconDesktop = document.querySelector("#searchIconDesktop");
 const globalSearchModal = document.querySelector("#globalSearchModal");
 const globalSearchInputMobile = document.querySelector("#globalSearchInputMobile");
 const globalSearchMobileSpan = document.querySelector("#globalSearchMobileSpan");
+const globalSearchMobileIcon = document.querySelector("#globalSearchMobileIcon");
+
 
 
 window.addEventListener("load", async () => {
@@ -194,7 +196,9 @@ window.addEventListener("load", async () => {
         if (searchParamValue) {
 
             // change search icon while input has amount
+            globalSearchMobileIcon.setAttribute("href", "#x-mark");
             searchIconMobile.setAttribute("href", "#x-mark");
+
 
             // fill input with search param value
             globalSearchMobile.value = searchParamValue;
