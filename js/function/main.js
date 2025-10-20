@@ -1,10 +1,19 @@
-import {baseUrl, getFromLocalStorage, calculateTimePassed} from "./utils.js";
+import {baseUrl, getFromLocalStorage, calculateTimePassed, getFromSearchParam} from "./utils.js";
 
 const getPosts = async () => {
 
     const cityId = getFromLocalStorage("city")[0].id;
+    const categoryId = getFromSearchParam("categoryID");
 
-    const response = await fetch(`${baseUrl}/v1/post/?city=${cityId}&limit=100`);
+    let url = `${baseUrl}/v1/post/?city=${cityId}&limit=100`;
+
+    if (categoryId){
+
+        url += `&categoryId=${categoryId}`;
+    }
+
+    const response = await fetch(`${url}`);
+
     return await response.json();
 }
 
