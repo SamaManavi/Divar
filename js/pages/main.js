@@ -61,7 +61,7 @@ window.addEventListener("load", async () => {
             if (categoryInfos.length) {
 
                 // show sub category
-                await showCategories(categoryInfos, categoriesContainer, true, false)
+                await showCategories(categoryInfos[0], categoriesContainer, true, false)
 
                 //sucCategory filtering
                 if (categoryInfos[0].filters.length) {
@@ -93,6 +93,13 @@ window.addEventListener("load", async () => {
                     const subSubCategorySelected = allSubSubCategories.filter((subCategory) => subCategory._id === categoryId);
 
                     await showCategories(subSubCategorySelected[0], categoriesContainer, false, false, true);
+
+                    //sucCategory filtering
+                    if (subSubCategorySelected[0].filters.length) {
+
+                        renderFiltering(subSubCategorySelected[0].filters, filterCategoryContainer);
+                        console.log(subSubCategorySelected[0].filters)
+                    }
                 }
             }
 
@@ -218,7 +225,6 @@ window.addEventListener("load", async () => {
             globalSearchMobileSpan.innerHTML = `${searchParamValue}`
             globalSearchInputMobile.value = `${searchParamValue}`;
         }
-
 
     }
 });
