@@ -1,5 +1,12 @@
 import {addToSearchParam, getFromLocalStorage, getFromSearchParam, removeParamFromUrl} from "../function/utils.js";
-import {getCategories, getPosts, renderFiltering, showCategories, showPosts} from "../function/main.js";
+import {
+    getCategories,
+    getPosts,
+    renderFiltering,
+    showCategories,
+    showFamousSearch,
+    showPosts
+} from "../function/main.js";
 
 const loader = document.querySelector("#loader");
 const categoriesContainer = document.querySelector("#categories-container");
@@ -16,6 +23,7 @@ const globalSearchModal = document.querySelector("#globalSearchModal");
 const globalSearchInputMobile = document.querySelector("#globalSearchInputMobile");
 const globalSearchMobileSpan = document.querySelector("#globalSearchMobileSpan");
 const globalSearchMobileIcon = document.querySelector("#globalSearchMobileIcon");
+const mostSearchedContainer = document.querySelector("#mostSearched");
 
 
 window.addEventListener("load", async () => {
@@ -23,7 +31,7 @@ window.addEventListener("load", async () => {
     // root protection
     if (getFromLocalStorage("city")) {
 
-        const data = await Promise.allSettled([getPosts(),getCategories()]);
+        const data = await Promise.allSettled([getPosts(), getCategories()]);
 
         loader.classList.add("hidden");
 
@@ -98,12 +106,12 @@ window.addEventListener("load", async () => {
                     if (subSubCategorySelected[0].filters.length) {
 
                         renderFiltering(subSubCategorySelected[0].filters, filterCategoryContainer);
-                        console.log(subSubCategorySelected[0].filters)
                     }
                 }
             }
 
-        } else {
+        }
+        else {
 
             // show main category
             await showCategories(categories.data.categories, categoriesContainer, false, false, false);
@@ -147,7 +155,7 @@ window.addEventListener("load", async () => {
 
                 event.preventDefault();
                 if (event.target.value.trim()) {
-                    addToSearchParam("value", event.target.value.trim())
+                    addToSearchParam("search", event.target.value.trim())
                 }
             }
         });
@@ -172,13 +180,13 @@ window.addEventListener("load", async () => {
                 globalSearchModal.classList.add("hidden");
 
                 if (event.target.value.trim()) {
-                    addToSearchParam("value", event.target.value.trim())
+                    addToSearchParam("search", event.target.value.trim())
                 }
             }
         });
 
         //binding between url and searchInput
-        const searchParamValue = getFromSearchParam("value");
+        const searchParamValue = getFromSearchParam("search");
 
         // send from searchParam to input (desktop)
         if (searchParamValue) {
@@ -197,7 +205,7 @@ window.addEventListener("load", async () => {
 
                 globalSearchInput.value = "";
                 searchIconDesktop.setAttribute("href", "#magnifying-glass");
-                removeParamFromUrl("value");
+                removeParamFromUrl("search");
             }
         });
 
@@ -208,7 +216,7 @@ window.addEventListener("load", async () => {
 
                 globalSearchInputMobile.value = "";
                 searchIconMobile.setAttribute("href", "#magnifying-glass");
-                removeParamFromUrl("value");
+                removeParamFromUrl("search");
             }
         });
 
@@ -226,5 +234,18 @@ window.addEventListener("load", async () => {
             globalSearchInputMobile.value = `${searchParamValue}`;
         }
 
+        //show famous search
+        showFamousSearch(mostSearchedContainer);
+
+        //click on mostSearched li and send to url
+        mostSearchedContainer.addEventListener("click", (event) => {
+
+           const searchValue = event.target.closest(".searchValue");
+
+           if (searchValue){
+
+               addToSearchParam("search", searchValue.dataset.search);
+           }
+        });
     }
 });

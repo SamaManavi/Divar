@@ -4,12 +4,18 @@ const getPosts = async () => {
 
     const cityId = getFromLocalStorage("city")[0].id;
     const categoryId = getFromSearchParam("categoryID");
+    const searchValue = getFromSearchParam("search");
 
     let url = `${baseUrl}/v1/post/?city=${cityId}&limit=100`;
 
     if (categoryId) {
 
         url += `&categoryId=${categoryId}`;
+    }
+
+    if (searchValue) {
+        url += `&search=${searchValue}`;
+
     }
 
     const response = await fetch(`${url}`);
@@ -271,4 +277,18 @@ const renderFiltering = (categoryFilter, containerFilter) => {
     });
 }
 
-export {getPosts, showPosts, getCategories, showCategories, renderFiltering}
+const showFamousSearch = (mostSearchedContainer) => {
+
+    const mostSearchedName = ['تلوزیون', 'لپ تاپ', 'موبایل', 'ساعت', 'ماشین'];
+
+    mostSearchedName.forEach((search) => {
+
+        mostSearchedContainer.insertAdjacentHTML("beforeend", `
+        
+            <li data-search="${search}" class="searchValue h-7 flex items-center text-secondary cursor-pointer text-sm border border-secondary/50 px-3 py-1 rounded-full">${search}</li>
+        `);
+    });
+}
+
+
+export {getPosts, showPosts, getCategories, showCategories, renderFiltering, showFamousSearch}
