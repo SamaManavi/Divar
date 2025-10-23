@@ -83,11 +83,11 @@ const showCategories = async (categories, categoriesContainer, isSubCat, isSubSu
                     <svg class="size-5 font-bold text-sm">
                         <use href="#chevron-down"></use>
                     </svg>
-                    <span class="font-bold text-sm">${categories[0].title}</span>
+                    <span class="font-bold text-sm">${categories.title}</span>
                 </a>
             </li>
             <ul class="flex flex-col gap-y-2 pr-2 mt-3 mr-10 *:text-sm/7 *:font-bold *:hover:text-primary *:transition-colors *:duration-300 *:cursor-pointer">
-                ${renderCategoryTemplate(categories[0].subCategories)}
+                ${renderCategoryTemplate(categories.subCategories)}
             </ul>
         `);
 
@@ -104,7 +104,7 @@ const showCategories = async (categories, categoriesContainer, isSubCat, isSubSu
                     <span class="font-bold text-sm">همه آگهی ها</span>
                 </a>
             </li>
-            <li class="group">
+            <li class="group categoryLi" id="${categories.parent}">
                 <a href="#" class="flex items-center gap-x-2 text-primary">
                     <svg class="size-4 font-bold text-sm">
                         <use href="#chevron-down"></use>
@@ -112,7 +112,7 @@ const showCategories = async (categories, categoriesContainer, isSubCat, isSubSu
                     <span class="font-bold text-sm">${await findCategoryParentNameById(categories.parent, true)}</span>
                 </a>
             </li>
-            <li class="group">
+            <li class="group categoryLi" id="${categories.parent}">
                 <span class="font-bold text-sm text-primary cursor-pointer pr-10">${categories.title}</span>
             </li>
             <ul class="flex flex-col gap-y-2 pr-2 mt-3 mr-14 border-r border-secondary/30 *:text-secondary *:text-sm/7 *:font-bold *:hover:text-primary *:transition-colors *:duration-300 *:cursor-pointer">
@@ -132,7 +132,7 @@ const showCategories = async (categories, categoriesContainer, isSubCat, isSubSu
                     <span class="font-bold text-sm">همه آگهی ها</span>
                 </a>
             </li>
-            <li class="group">
+            <li class="group categoryLi" id="${await findCategoryParentNameById(categories.parent, false)}">
                 <a href="#" class="flex items-center gap-x-2 text-primary">
                     <svg class="size-4 font-bold text-sm">
                         <use href="#chevron-down"></use>
@@ -140,7 +140,7 @@ const showCategories = async (categories, categoriesContainer, isSubCat, isSubSu
                     <span class="font-bold text-sm">${await findGrandparentSubSubCat(categories.parent)}</span>
                 </a>
             </li>
-            <li class="group">
+            <li class="group categoryLi" id="${categories.parent}">
                 <span class="font-bold text-sm text-primary cursor-pointer pr-10">${await findCategoryParentNameById(categories.parent, true)}</span>
             </li>
             <ul class="flex flex-col gap-y-2 mt-3 mr-14 border-r border-secondary/30 *:text-secondary *:text-sm/7 *:font-bold *:hover:text-primary *:transition-colors *:duration-300 *:cursor-pointer">
@@ -245,22 +245,22 @@ const renderFiltering = (categoryFilter, containerFilter) => {
             ${filter.type === "selectbox" ? `
             
                 <!--selectBox-->
-                <div class="flex gap-x-1 pb-5">
-                    <span class="text-primary text-sm font-bold">قیمت</span>
-                    <span class="">(تومان)</span>
-                </div>
-                <div class="flex items-center gap-x-4 pb-2">
-                    <span class="text-xs">از</span>
+                <div class="flex flex-col py-4 border-b border-secondary/20">
+                    <span class="text-primary text-sm font-bold pb-5">${filter.name}</span>
+
+                    <div class="flex items-center gap-x-4 pb-2">
                     <select class="bg-bgGray border rounded border-secondary/50 py-1 p-2 w-65 hover:border-secondary outline-none focus:border-red" name="" id="">
                         ${renderFilterOptions(filter.options)}
                     </select>
                 </div>
+                </div>
+
             ` : ""}
             
             ${filter.type === "checkbox" ? `
             
                 <!--checkBox-->
-                <span class="text-primary text-sm font-bold">عکس دار</span>
+                <span class="text-primary text-sm font-bold">${filter.name}</span>
                 <label class="switch">
                     <input type="checkbox">
                     <span class="slider"></span>
