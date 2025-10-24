@@ -5,6 +5,7 @@ const getPosts = async () => {
     const cityId = getFromLocalStorage("city")[0].id;
     const categoryId = getFromSearchParam("categoryID");
     const searchValue = getFromSearchParam("search");
+    const exchange = getFromSearchParam("exchange");
 
     let url = `${baseUrl}/v1/post/?city=${cityId}&limit=100`;
 
@@ -14,8 +15,13 @@ const getPosts = async () => {
     }
 
     if (searchValue) {
-        url += `&search=${searchValue}`;
 
+        url += `&search=${searchValue}`;
+    }
+
+    if (exchange){
+
+        url += `&exchange=${exchange}`;
     }
 
     const response = await fetch(`${url}`);
@@ -26,6 +32,8 @@ const getPosts = async () => {
 const showPosts = (posts, postsContainer) => {
 
     if (posts.length) {
+
+        postsContainer.innerHTML = "";
 
         posts.forEach((post) => {
 
@@ -243,11 +251,12 @@ const renderFilterOptions = (filterOptions) => {
     }).join("");
 }
 
-const renderFiltering = (categoryFilter, containerFilter) => {
+const renderFiltering = (categoryFilter, selectBoxContainer,checkBoxContainer) => {
 
     categoryFilter.forEach((filter) => {
 
-        containerFilter.insertAdjacentHTML("beforeend", `
+        selectBoxContainer.insertAdjacentHTML("beforeend", `
+        
             ${filter.type === "selectbox" ? `
             
                 <!--selectBox-->
@@ -260,19 +269,22 @@ const renderFiltering = (categoryFilter, containerFilter) => {
                     </select>
                 </div>
                 </div>
-
             ` : ""}
-            
+        `);
+
+        checkBoxContainer.insertAdjacentHTML("beforeend", `
+        
             ${filter.type === "checkbox" ? `
             
                 <!--checkBox-->
+            <div class="flex justify-between py-4 border-b border-secondary/20">
                 <span class="text-primary text-sm font-bold">${filter.name}</span>
                 <label class="switch">
                     <input type="checkbox">
                     <span class="slider"></span>
                 </label>
-            ` : ""}
-        
+            </div>
+            ` : ""}        
         `);
     });
 }
@@ -289,6 +301,7 @@ const showFamousSearch = (mostSearchedContainer) => {
         `);
     });
 }
+
 
 
 export {getPosts, showPosts, getCategories, showCategories, renderFiltering, showFamousSearch}
