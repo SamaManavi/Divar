@@ -1,11 +1,6 @@
 import {addToSearchParam, getFromLocalStorage, getFromSearchParam, removeParamFromUrl} from "../function/utils.js";
 import {
-    getCategories,
-    getPosts,
-    renderFiltering,
-    showCategories,
-    showFamousSearch,
-    showPosts
+    getCategories, getPosts, renderFiltering, showCategories, showFamousSearch, showPosts
 } from "../function/main.js";
 
 const loader = document.querySelector("#loader");
@@ -16,7 +11,8 @@ const modalOverlay = document.querySelector("#modalOverlay");
 const modalGlobalSearch = document.querySelector("#modalGlobalSearch");
 const globalSearchInput = document.querySelector("#globalSearchInput");
 const globalSearchMobile = document.querySelector("#globalSearchMobile");
-const filterCategoryContainer = document.querySelector("#filter-category");
+const filterSelectBoxContainer = document.querySelector("#filter-selectBox");
+const filterCheckBoxContainer = document.querySelector("#filter-checkBox");
 const searchIconMobile = document.querySelector("#searchIconMobile");
 const searchIconDesktop = document.querySelector("#searchIconDesktop");
 const globalSearchModal = document.querySelector("#globalSearchModal");
@@ -24,6 +20,9 @@ const globalSearchInputMobile = document.querySelector("#globalSearchInputMobile
 const globalSearchMobileSpan = document.querySelector("#globalSearchMobileSpan");
 const globalSearchMobileIcon = document.querySelector("#globalSearchMobileIcon");
 const mostSearchedContainer = document.querySelector("#mostSearched");
+const famousSearchMobileContainer = document.querySelector("#famous-search-modal-mobile");
+const hasPicture = document.querySelector("#has-picture");
+const exChange = document.querySelector("#ex-change");
 
 
 window.addEventListener("load", async () => {
@@ -37,6 +36,8 @@ window.addEventListener("load", async () => {
 
         // get and show posts
         const posts = data[0].value;
+        let backupPosts = [...posts.data.posts];
+
         showPosts(posts.data.posts, postsContainer);
 
         //send category to search param
@@ -74,7 +75,7 @@ window.addEventListener("load", async () => {
                 //sucCategory filtering
                 if (categoryInfos[0].filters.length) {
 
-                    renderFiltering(categoryInfos[0].filters, filterCategoryContainer);
+                    renderFiltering(categoryInfos[0].filters, filterSelectBoxContainer, filterCheckBoxContainer);
                 }
 
             } else {
@@ -91,7 +92,7 @@ window.addEventListener("load", async () => {
                     //sucSubCategory filtering
                     if (subCategoriesInfo[0].filters.length) {
 
-                        renderFiltering(subCategoriesInfo[0].filters, filterCategoryContainer);
+                        renderFiltering(subCategoriesInfo[0].filters, filterSelectBoxContainer, filterCheckBoxContainer);
                     }
 
                 } else {
@@ -105,13 +106,12 @@ window.addEventListener("load", async () => {
                     //sucCategory filtering
                     if (subSubCategorySelected[0].filters.length) {
 
-                        renderFiltering(subSubCategorySelected[0].filters, filterCategoryContainer);
+                        renderFiltering(subSubCategorySelected[0].filters, filterSelectBoxContainer, filterCheckBoxContainer);
                     }
                 }
             }
 
-        }
-        else {
+        } else {
 
             // show main category
             await showCategories(categories.data.categories, categoriesContainer, false, false, false);
@@ -122,13 +122,17 @@ window.addEventListener("load", async () => {
 
             modalOverlay.classList.remove("hidden");
             modalGlobalSearch.classList.remove("hidden");
+
+            //show famous search
+            showFamousSearch(famousSearchMobileContainer);
         });
 
         // global search mobile
         globalSearchMobile.addEventListener("click", () => {
 
             globalSearchModal.classList.remove("hidden");
-
+            //show famous search
+            showFamousSearch(mostSearchedContainer);
         });
 
         // global search (close)
@@ -234,18 +238,66 @@ window.addEventListener("load", async () => {
             globalSearchInputMobile.value = `${searchParamValue}`;
         }
 
-        //show famous search
-        showFamousSearch(mostSearchedContainer);
-
-        //click on mostSearched li and send to url
+        //click on mostSearched li and send to url(desktop)
         mostSearchedContainer.addEventListener("click", (event) => {
 
-           const searchValue = event.target.closest(".searchValue");
+            const searchValue = event.target.closest(".searchValue");
 
-           if (searchValue){
+            if (searchValue) {
 
-               addToSearchParam("search", searchValue.dataset.search);
-           }
+                addToSearchParam("search", searchValue.dataset.search);
+            }
         });
+
+        //click on mostSearched li and send to url(mobile)
+        famousSearchMobileContainer.addEventListener("click", (event) => {
+
+            const searchValueMobile = event.target.closest(".searchValue");
+
+            if (searchValueMobile) {
+
+                addToSearchParam("search", searchValueMobile.dataset.search)
+            }
+        });
+
+        // filter has picture --- exChange
+        let filteredPosts = backupPosts;
+
+        hasPicture.addEventListener("change", () => {
+
+            if (hasPicture.checked) {
+
+                addToSearchParam("pics", true);
+
+            } else {
+
+                removeParamFromUrl("pics");
+            }
+        });
+
+        exChange.addEventListener("change", () => {
+
+            if (exChange.checked) {
+
+                addToSearchParam("exchange", true);
+            } else {
+
+                removeParamFromUrl("exchange");
+            }
+
+        });
+
+        if (getFromSearchParam("exchange")) {
+
+            exChange.setAttribute("checked", "true");
+        }
+
+        if (getFromSearchParam("pics")) {
+
+            filteredPosts = filteredPosts.filter((post) => post.pics.length);
+            showPosts(filteredPosts, postsContainer);
+
+            hasPicture.setAttribute("checked", "true");
+        }
     }
 });

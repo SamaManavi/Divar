@@ -228,7 +228,8 @@
 
                 <!--advertisements search-->
                 <div id="globalSearch" class="group flex relative">
-                    <input id="globalSearchInput" autocomplete="off" class="h-11 w-70 xl:w-120 bg-[#ffffff14] rounded-sm p-5" type="text"
+                    <input id="globalSearchInput" autocomplete="off"
+                           class="h-11 w-70 xl:w-120 bg-[#ffffff14] rounded-sm p-5" type="text"
                            placeholder="جستجو در همه آگهی ها ">
 
                     <button class="z-10 absolute left-2 top-2.5 group-hover:text-gray-300 duration-300">
@@ -358,10 +359,11 @@
                 </div>
             </div>
 
-            <!--filter-->
-            <div id="filter-category">
+            <!--filter - select box-->
+            <div id="filter-selectBox">
                 <!--loaded from js-->
             </div>
+
 
             <!--neighborhood-->
             <div class="flex justify-between py-4 border-b border-secondary/20">
@@ -381,6 +383,20 @@
                     <input id="has-picture" type="checkbox">
                     <span class="slider"></span>
                 </label>
+            </div>
+
+            <!--ex-change-->
+            <div class="flex justify-between py-4 border-b border-secondary/20">
+                <span class="text-primary text-sm font-bold">معاوضه</span>
+                <label class="switch">
+                    <input id="ex-change" type="checkbox">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!--filter - check box-->
+            <div id="filter-checkBox">
+                <!--loaded from js-->
             </div>
 
             <!--extension-->
@@ -701,7 +717,8 @@
      class="flex items-center justify-center max-h-screen size-full fixed inset-0 bg-black/50 backdrop-blur-[2px] z-10 hidden"></div>
 
 <!--search ad and famous search (mobile)-->
-<div id="globalSearchModal" class="flex items-center justify-center z-50 max-h-screen size-full fixed inset-0 bg-bgGray z-10 lg:hidden hidden">
+<div id="globalSearchModal"
+     class="flex items-center justify-center z-50 max-h-screen size-full fixed inset-0 bg-bgGray z-10 lg:hidden hidden">
     <div class="flex flex-col size-full">
 
         <div class="relative flex items-center justify-center h-15 w-full bg-[#ffffff14] pl-2 pr-8">
@@ -712,7 +729,8 @@
                 </svg>
             </button>
 
-            <input id="globalSearchInputMobile" autocomplete="off" class="h-10 w-full bg-bgGray border border-secondary rounded-sm p-5 focus:border-red"
+            <input id="globalSearchInputMobile" autocomplete="off"
+                   class="h-10 w-full bg-bgGray border border-secondary rounded-sm p-5 focus:border-red"
                    type="text"
                    placeholder="جستجو در همه آگهی ها ">
 
@@ -726,11 +744,9 @@
         <!--famous search ad while search (mobile)-->
         <div class="max-w-full max-h-screen p-5 z-10">
             <span class="text-sm text-bold text-secondary pt-2"> بیشترین جستجو های دیوار</span>
-            <ul class="flex flex-wrap gap-3 pt-4">
+            <ul id="famous-search-modal-mobile" class="flex flex-wrap gap-3 pt-4">
                 <!--most searched-->
-                <li class="h-7 flex items-center text-secondary cursor-pointer text-sm border border-secondary/50 px-3 py-1 rounded-full">
-                    آپارتمان
-                </li>
+                <!--loaded from js-->
             </ul>
         </div>
     </div>
