@@ -25,6 +25,8 @@ const hasPicture = document.querySelector("#has-picture");
 const exChange = document.querySelector("#ex-change");
 const minPriceInput = document.querySelector("#minPriceInput");
 const maxPriceInput = document.querySelector("#maxPriceInput");
+const cityNameDesktop = document.querySelector("#city-name-desktop");
+const cityNameMobile = document.querySelector("#city-name-mobile");
 
 
 window.addEventListener("load", async () => {
@@ -366,5 +368,19 @@ window.addEventListener("load", async () => {
                 addToSearchParam("maxPrice", cleanValue);
             }
         });
+
+        //show city name
+        const cities = getFromLocalStorage("city");
+
+        if (cities.length > 1) {
+
+            cityNameDesktop.innerHTML = `${cities.length}شهر `;
+            cityNameMobile.innerHTML = `${cities.length}شهر `;
+
+        } else {
+
+            cityNameDesktop.innerHTML = cities[0].name;
+            cityNameMobile.innerHTML = cities[0].name;
+        }
     }
 });
