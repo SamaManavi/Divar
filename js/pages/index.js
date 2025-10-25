@@ -1,4 +1,4 @@
-import {getAllCities, showPopularCities} from "../function";
+import {getAllLocations, showPopularCities} from "../function";
 import {saveInLocalStorage} from "../function/utils.js";
 import {getSocial, showSocial} from "../function/shared.js";
 
@@ -13,7 +13,7 @@ const emptySearch = document.querySelector("#empty-search");
 window.addEventListener("load", async () => {
 
     // get all cities
-    const fetchedCities = await getAllCities();
+    const fetchedCities = await getAllLocations();
 
     // control load
     loader.classList.add("hidden");
