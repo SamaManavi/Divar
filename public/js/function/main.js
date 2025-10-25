@@ -6,6 +6,8 @@ const getPosts = async () => {
     const categoryId = getFromSearchParam("categoryID");
     const searchValue = getFromSearchParam("search");
     const exchange = getFromSearchParam("exchange");
+    const maxPrice = getFromSearchParam("maxPrice");
+    const minPrice = getFromSearchParam("minPrice");
 
     let url = `${baseUrl}/v1/post/?city=${cityId}&limit=100`;
 
@@ -19,9 +21,14 @@ const getPosts = async () => {
         url += `&search=${searchValue}`;
     }
 
-    if (exchange){
+    if (exchange) {
 
         url += `&exchange=${exchange}`;
+    }
+
+    if (minPrice || maxPrice) {
+
+        url += `&price=${minPrice}-${maxPrice}`;
     }
 
     const response = await fetch(`${url}`);
@@ -251,7 +258,7 @@ const renderFilterOptions = (filterOptions) => {
     }).join("");
 }
 
-const renderFiltering = (categoryFilter, selectBoxContainer,checkBoxContainer) => {
+const renderFiltering = (categoryFilter, selectBoxContainer, checkBoxContainer) => {
 
     categoryFilter.forEach((filter) => {
 
@@ -302,6 +309,17 @@ const showFamousSearch = (mostSearchedContainer) => {
     });
 }
 
+const priceFormater = (value) => {
+
+    value = value.replace(/[^0-9]/g, "");
+
+    if (value === "") {
+
+        return "";
+    }
+
+    return Number(value).toLocaleString();
+}
 
 
-export {getPosts, showPosts, getCategories, showCategories, renderFiltering, showFamousSearch}
+export {getPosts, showPosts, getCategories, showCategories, renderFiltering, showFamousSearch, priceFormater}

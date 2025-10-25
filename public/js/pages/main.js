@@ -1,6 +1,6 @@
 import {addToSearchParam, getFromLocalStorage, getFromSearchParam, removeParamFromUrl} from "../function/utils.js";
 import {
-    getCategories, getPosts, renderFiltering, showCategories, showFamousSearch, showPosts
+    getCategories, getPosts, priceFormater, renderFiltering, showCategories, showFamousSearch, showPosts
 } from "../function/main.js";
 
 const loader = document.querySelector("#loader");
@@ -23,6 +23,8 @@ const mostSearchedContainer = document.querySelector("#mostSearched");
 const famousSearchMobileContainer = document.querySelector("#famous-search-modal-mobile");
 const hasPicture = document.querySelector("#has-picture");
 const exChange = document.querySelector("#ex-change");
+const minPriceInput = document.querySelector("#minPriceInput");
+const maxPriceInput = document.querySelector("#maxPriceInput");
 
 
 window.addEventListener("load", async () => {
@@ -299,5 +301,70 @@ window.addEventListener("load", async () => {
 
             hasPicture.setAttribute("checked", "true");
         }
+
+
+        //filter Price
+
+        const minPriceSearchParam = getFromSearchParam("minPrice");
+        const maxPriceSearchParam = getFromSearchParam("maxPrice");
+
+        if (minPriceSearchParam) {
+
+            minPriceInput.value = priceFormater(minPriceSearchParam);
+        }
+
+        if (maxPriceSearchParam) {
+
+            maxPriceInput.value = priceFormater(maxPriceSearchParam);
+        }
+
+        // check input value format
+        minPriceInput.addEventListener("input", (event) => {
+
+            event.target.value = priceFormater(event.target.value);
+        });
+
+        maxPriceInput.addEventListener("input", (event) => {
+
+            event.target.value = priceFormater(event.target.value);
+        });
+
+        minPriceInput.addEventListener("blur", (event) => {
+
+
+            const cleanValue = event.target.value.replace(/[^\d]/g, "");
+
+            addToSearchParam("minPrice", cleanValue);
+
+        });
+
+        minPriceInput.addEventListener("keyup", (event) => {
+
+            if (event.keyCode === 13) {
+
+                const cleanValue = event.target.value.replace(/[^\d]/g, "");
+
+                addToSearchParam("minPrice", cleanValue);
+            }
+        });
+
+        maxPriceInput.addEventListener("blur", (event) => {
+
+
+            const cleanValue = event.target.value.replace(/[^\d]/g, "");
+
+            addToSearchParam("maxPrice", cleanValue);
+
+        });
+
+        maxPriceInput.addEventListener("keyup", (event) => {
+
+            if (event.keyCode === 13) {
+
+                const cleanValue = event.target.value.replace(/[^\d]/g, "");
+
+                addToSearchParam("maxPrice", cleanValue);
+            }
+        });
     }
 });
