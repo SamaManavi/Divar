@@ -28,7 +28,6 @@ const maxPriceInput = document.querySelector("#maxPriceInput");
 const cityNameDesktop = document.querySelector("#city-name-desktop");
 const cityNameMobile = document.querySelector("#city-name-mobile");
 
-
 window.addEventListener("load", async () => {
 
     // root protection

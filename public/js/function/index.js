@@ -1,6 +1,6 @@
 import {baseUrl} from "./utils.js";
 
-const getAllCities = async () => {
+const getAllLocations = async () => {
 
     const response = await fetch(`${baseUrl}/v1/location`);
     return await response.json();
@@ -23,4 +23,4 @@ const showPopularCities = (popularCities, popularCitiesContainer) => {
 
 
 
-export {getAllCities, showPopularCities}
+export {getAllLocations, showPopularCities}
