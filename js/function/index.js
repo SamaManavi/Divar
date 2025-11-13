@@ -16,11 +16,10 @@ const showPopularCities = (popularCities, popularCitiesContainer) => {
     });
 }
 
+const findCityObj = (cities, cityId) => {
+
+    return cities.find(city => city.id === cityId);
+}
 
 
-
-
-
-
-
-export {getAllLocations, showPopularCities}
+export {getAllLocations, showPopularCities, findCityObj}

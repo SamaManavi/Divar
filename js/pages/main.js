@@ -381,5 +381,7 @@ window.addEventListener("load", async () => {
             cityNameDesktop.innerHTML = cities[0].name;
             cityNameMobile.innerHTML = cities[0].name;
         }
+    }else{
+        location.href = "./index.html";
     }
 });

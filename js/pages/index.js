@@ -1,5 +1,5 @@
-import {getAllLocations, showPopularCities} from "../function";
-import {saveInLocalStorage} from "../function/utils.js";
+import {findCityObj, getAllLocations, showPopularCities} from "../function";
+import {getFromLocalStorage, saveInLocalStorage} from "../function/utils.js";
 import {getSocial, showSocial} from "../function/shared.js";
 
 const popularCitiesContainer = document.querySelector("#popular-cities");
@@ -12,76 +12,88 @@ const emptySearch = document.querySelector("#empty-search");
 
 window.addEventListener("load", async () => {
 
-    // get all cities
-    const fetchedCities = await getAllLocations();
+    if (getFromLocalStorage("city")) {
 
-    // control load
-    loader.classList.add("hidden");
+        window.location.href = "main.html";
 
-    // show popular cities
-    const popularCities = fetchedCities.data.cities.filter((city) => city.popular);
-    showPopularCities(popularCities, popularCitiesContainer);
+    } else {
 
-    // show social
-    const social = await getSocial();
-    showSocial(social, socialsContainer);
+        // get all cities
+        const fetchedCities = await getAllLocations();
+        const cities = fetchedCities.data.cities;
 
-    //search cities
-    searchCityInput.addEventListener("keyup", (event) => {
+        // control load
+        loader.classList.add("hidden");
 
-        if (event.target.value) {
+        // show popular cities
+        const popularCities = cities.filter((city) => city.popular);
+        showPopularCities(popularCities, popularCitiesContainer);
 
-            citySearchResult.classList.remove("hidden");
+        // show social
+        const social = await getSocial();
+        showSocial(social, socialsContainer);
 
-            const searchCityResults = fetchedCities.data.cities.filter((city) => city.name.startsWith(event.target.value));
+        //search cities
+        searchCityInput.addEventListener("keyup", (event) => {
 
-            if (searchCityResults.length) {
+            if (event.target.value) {
 
-                citiesSearchedContainer.innerHTML = "";
-                emptySearch.classList.add("hidden");
+                citySearchResult.classList.remove("hidden");
 
-                searchCityResults.forEach((city) => {
+                const searchCityResults = cities.filter((city) => city.name.startsWith(event.target.value));
 
-                    citiesSearchedContainer.insertAdjacentHTML("beforeend", `
+                if (searchCityResults.length) {
+
+                    citiesSearchedContainer.innerHTML = "";
+                    emptySearch.classList.add("hidden");
+
+                    searchCityResults.forEach((city) => {
+
+                        citiesSearchedContainer.insertAdjacentHTML("beforeend", `
                         <li id="${city.id}" class="cityName" data-city="${city.name}">${city.name}</li>
                     `);
-                })
+                    })
+
+                } else {
+
+                    citiesSearchedContainer.innerHTML = "";
+                    emptySearch.classList.remove("hidden");
+                }
 
             } else {
 
-                citiesSearchedContainer.innerHTML = "";
-                emptySearch.classList.remove("hidden");
+                citySearchResult.classList.add("hidden");
             }
 
-        } else {
+        });
 
-            citySearchResult.classList.add("hidden");
-        }
+        //go to city page
+        citiesSearchedContainer.addEventListener("click", (event) => {
 
-    });
+            const cityLi = event.target.closest(".cityName");
 
-    //go to city page
-    citiesSearchedContainer.addEventListener("click", (event) => {
+            const citySelected = findCityObj(cities, +cityLi.id);
 
-        const cityLi = event.target.closest(".cityName")
+            if (cityLi) {
 
-        if (cityLi) {
+                saveInLocalStorage('city', [citySelected]);
+                location.href = "main.html"
+            }
+        });
 
-            saveInLocalStorage('city', [{name: cityLi.dataset.city, id: cityLi.id}]);
-            location.href = "main.html"
-        }
-    });
+        popularCitiesContainer.addEventListener("click", (event) => {
 
-    popularCitiesContainer.addEventListener("click", (event) => {
+            const cityLi = event.target.closest(".cityName");
 
-        const cityLi = event.target.closest(".cityName")
+            const citySelected = findCityObj(cities, +cityLi.id);
 
-        if (cityLi) {
+            if (cityLi) {
 
-            saveInLocalStorage('city', [{name: cityLi.dataset.city, id: cityLi.id}]);
-            location.href = "main.html"
-        }
-    });
+                saveInLocalStorage('city', [citySelected]);
+                location.href = "main.html"
+            }
+        });
 
+    }
 });
 
