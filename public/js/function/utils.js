@@ -9,6 +9,11 @@ const getFromLocalStorage = (key) => {
     return JSON.parse(localStorage.getItem(key));
 }
 
+const removeFromLocalStorage = (key) => {
+
+    localStorage.removeItem(`${key}`);
+}
+
 // calculate time of created product
 const calculateTimePassed = (date) => {
 
@@ -78,5 +83,6 @@ export {
     calculateTimePassed,
     addToSearchParam,
     getFromSearchParam,
-    removeParamFromUrl
+    removeParamFromUrl,
+    removeFromLocalStorage
 }
