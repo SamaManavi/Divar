@@ -85,7 +85,7 @@ if (localStorageCities.length === 1) {
     document.title = `دیوار ${localStorageCities[0].name}: بزرگترین سایت نیازمندی های رایگان در ایران`;
 } else {
 
-    document.title = `${localStorageCities.length}دیوار: بزرگترین سایت نیازمندی های رایگان در ایران`;
+    document.title = ` دیوار ${localStorageCities.length} شهر : بزرگترین سایت نیازمندی های رایگان در ایران `;
 }
 
 

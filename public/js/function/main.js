@@ -2,7 +2,9 @@ import {baseUrl, getFromLocalStorage, calculateTimePassed, getFromSearchParam} f
 
 const getPosts = async () => {
 
-    const cityId = getFromLocalStorage("city")[0].id;
+    const citiesLocalStorage = getFromLocalStorage("city");
+    const cityId = citiesLocalStorage.map((city) => city.id).join("|");
+
     const categoryId = getFromSearchParam("categoryID");
     const searchValue = getFromSearchParam("search");
     const exchange = getFromSearchParam("exchange");
