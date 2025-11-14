@@ -80,6 +80,15 @@ const localStorageCities = getFromLocalStorage("city");
 let selectedItems = [];
 
 
+if (localStorageCities.length === 1) {
+
+    document.title = `دیوار ${localStorageCities[0].name}: بزرگترین سایت نیازمندی های رایگان در ایران`;
+} else {
+
+    document.title = `${localStorageCities.length}دیوار: بزرگترین سایت نیازمندی های رایگان در ایران`;
+}
+
+
 // show provinces
 const locations = await getAllLocations();
 const provinces = locations.data.provinces;
