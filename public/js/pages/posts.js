@@ -9,6 +9,7 @@ window.addEventListener("load", async () => {
     const postTimeLocation = document.querySelector("#postTimeLocation");
     const description = document.querySelector("#description");
     const breadcrumbContainer = document.querySelector("#breadcrumbContainer");
+    const shareIcon = document.querySelector("#shareIcon");
 
     const singlePost = await getSinglePost();
     const post = singlePost.data.post;
@@ -26,6 +27,9 @@ window.addEventListener("load", async () => {
         //breadcrumb
         renderBreadcrumb(post.breadcrumbs, post.title, breadcrumbContainer);
 
-
+        //share
+        shareIcon.addEventListener("click", async () => {
+            await navigator.share(location.href);
+        });
     }
 });
