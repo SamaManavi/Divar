@@ -269,39 +269,15 @@
 
                 <!--breadcrumb-->
                 <div class="mb-8 max-lg:pt-5">
-                    <ul class="text-xs flex items-center gap-x-1.5">
-                        <li>
-                            <a class="flex items-center gap-x-1.5 group hover:text-primary cursor-pointer">
-                                سرگرمی و فراغت
-                                <svg class="size-5 rotate-90 group-hover:rotate-270 transition-all duration-300">
-                                    <use href="#chevron-down"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="flex items-center gap-x-1.5 group hover:text-primary cursor-pointer">
-                                حیوانات
-                                <svg class="size-5 rotate-90 group-hover:rotate-270 transition-all duration-300">
-                                    <use href="#chevron-down"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a class="flex items-center gap-x-1.5 group hover:text-primary cursor-pointer">
-                                پرنده
-                                <svg class="size-5 rotate-90 group-hover:rotate-270 transition-all duration-300">
-                                    <use href="#chevron-down"></use>
-                                </svg>
-                            </a>
-                        </li>
-                        <li class="max-md:hidden text-secondary/50">فنچ نرگسی‌فنچ‌عروس</li>
+                    <ul  id="breadcrumbContainer" class="text-xs flex items-center gap-x-1.5">
+                        <!--loaded from js-->
                     </ul>
                 </div>
 
                 <!--section 1-->
                 <div class="flex flex-col gap-y-4 border-b border-secondary/10 py-4 max-lg:mb-6">
-                    <h3 class="text-primary font-bold text-base">نام آگهی</h3>
-                    <span class="text-sm">زمان آگهی ثبت شده و لوکیشن آن</span>
+                    <h3 id="postTitle" class="text-primary font-bold text-base">نام آگهی</h3>
+                    <span id="postTimeLocation" class="text-sm">زمان آگهی ثبت شده و لوکیشن آن</span>
                 </div>
 
                 <!--section 2-->
@@ -322,7 +298,7 @@
                         <svg class="size-5 hover:bg-secondary/10 hover:text-primary transition-colors rounded-full cursor-pointer">
                             <use href="#bookmark-solid"></use>
                         </svg>
-                        <svg class="size-5 hover:bg-secondary/10 hover:text-primary transition-colors rounded-full cursor-pointer">
+                        <svg id="shareIcon" class="size-5 hover:bg-secondary/10 hover:text-primary transition-colors rounded-full cursor-pointer">
                             <use href="#share"></use>
                         </svg>
                     </div>
@@ -361,7 +337,7 @@
                 <!--section 4-->
                 <div class="py-6 flex flex-col gap-y-2">
                     <h3 class="text-primary font-bold">توضیحات</h3>
-                    <span class="text-primary/80">dhdhshdjwldliwijd</span>
+                    <span id="description" class="text-primary/80">dhdhshdjwldliwijd</span>
                 </div>
 
             </div>
@@ -480,7 +456,7 @@
 
 <!--modal call info-->
 <!--اینو بزار تو سوییت الرت-->
-<div class="flex items-center justify-center fixed inset-0 bg-black/50 backdrop-blur-[2px] size-full z-30">
+<div class="flex items-center justify-center fixed inset-0 bg-black/50 backdrop-blur-[2px] size-full z-30 hidden">
     <!--modal-->
     <div class="max-w-125 bg-bgGray shadow-box rounded-lg">
         <header class="p-4 w-full">
@@ -518,6 +494,11 @@
     </div>
 </div>
 
+<!--loader-->
+<div id="loader" class="w-full h-screen fixed inset-0 flex items-center justify-center bottom-16 bg-bgGray z-50">
+    <div class="w-10 h-10 border-4 border-t-red border-gray-300 rounded-full animate-spin"></div>
+</div>
 
+<script src="./js/pages/posts.js" type="module"></script>
 </body>
 </html>
