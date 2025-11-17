@@ -1,7 +1,8 @@
 import {addToSearchParam, getFromLocalStorage, getFromSearchParam, removeParamFromUrl} from "../function/utils.js";
 import {
-    getCategories, getPosts, priceFormater, renderFiltering, showCategories, showFamousSearch, showPosts
+    getCategories, priceFormater, renderFiltering, showCategories, showFamousSearch
 } from "../function/main.js";
+import {getPosts, showPosts} from "../function/posts.js";
 
 const loader = document.querySelector("#loader");
 const categoriesContainer = document.querySelector("#categories-container");
@@ -300,9 +301,18 @@ window.addEventListener("load", async () => {
             hasPicture.setAttribute("checked", "true");
         }
 
+        // click in a post and send to search param
+        postsContainer.addEventListener("click", (event) => {
+
+            const singlePost = event.target.closest(".singlePost");
+
+            if (singlePost) {
+
+                window.location.href = `/Divar/public/post.html?id=${singlePost.id}`;
+            }
+        });
 
         //filter Price
-
         const minPriceSearchParam = getFromSearchParam("minPrice");
         const maxPriceSearchParam = getFromSearchParam("maxPrice");
 
