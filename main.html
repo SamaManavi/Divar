@@ -220,7 +220,7 @@
                 </div>
 
                 <!--categories-->
-                <div class="group flex items-center justify-center h-11 w-25 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
+                <div id="categoriesBtn" class="group flex items-center justify-center h-11 w-25 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
                     <span class="font-bold text-sm group-hover:text-white">دسته ها</span>
                     <svg class="size-5 group-hover:text-white">
                         <use href="#chevron-down"></use>
@@ -571,60 +571,6 @@
 
 </div>
 
-
-<!--modal categories-->
-<div class="flex items-center justify-center max-h-screen size-full fixed inset-0 bg-black/50 backdrop-blur-[2px] z-10 hidden">
-    <!--modal-->
-    <div class="absolute top-18 right-120 flex divide-x divide-secondary/30 max-w-300 w-full h-125 bg-bgGray shadow-box rounded-lg px-8 py-10">
-        <!--right section-->
-        <div class="w-50 pl-4 space-y-5">
-            <button class="flex items-center w-full gap-x-2 text-xs border border-secondary/20 rounded py-2 px-3 hover:bg-secondary/10 cursor-pointer">
-                <svg class="size-3">
-                    <use href="#arrow-right"></use>
-                </svg>
-                همه آگهی ها
-            </button>
-            <div>
-                <ul class="space-y-1 *:py-2 *:px-1 *:flex *:items-center *:justify-between *:hover:bg-secondary/10 *:cursor-pointer *:rounded *:duration-300 *:transition-colors">
-                    <li class="">
-                        <span class="text-sm">کالای دیجیتال </span>
-                        <svg class="size-4 rotate-90">
-                            <use href="#chevron-down"></use>
-                        </svg>
-                    </li>
-                    <li class="">
-                        <span class="text-sm">وسایل نقلیه</span>
-                        <svg class="size-4 rotate-90">
-                            <use href="#chevron-down"></use>
-                        </svg>
-                    </li>
-                    <li class="">
-                        <span class="text-sm">وسایل شخصی</span>
-                        <svg class="size-4 rotate-90">
-                            <use href="#chevron-down"></use>
-                        </svg>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!--left section-->
-        <div class="[column-width:300px] columns-auto">
-            <div class="flex flex-col break-inside-avoid py-3 pr-4">
-                <h3 class="text-primary text-sm hover:text-red">اسم کتگوری</h3>
-                <ul class="flex flex-col gap-y-2 pt-4 text-secondary/80 text-xs *:hover:text-red *:cursor-pointer">
-                    <li>نام محصول</li>
-                </ul>
-            </div>
-            <div class="flex flex-col break-inside-avoid py-3 pr-4">
-                <h3 class="text-primary text-sm hover:text-red">اسم کتگوری</h3>
-                <ul class="flex flex-col gap-y-2 pt-4 text-secondary/80 text-xs *:hover:text-red *:cursor-pointer">
-                    <li>نام محصول</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!--famous search ad while search (desktop) ///// این صفحه پشت مودال هست خود مودال داخل بخش هدر دسکتاپ بخش سرچ اد است-->
 <div id="modalOverlay"
      class="flex items-center justify-center max-h-screen size-full fixed inset-0 bg-black/50 backdrop-blur-[2px] z-10 hidden"></div>
@@ -811,6 +757,7 @@
     <div class="w-10 h-10 border-4 border-t-red border-gray-300 rounded-full animate-spin"></div>
 </div>
 
+<script src="./js/function/categoriesModal.js" type="module"></script>
 <script src="./js/function/cityModal.js" type="module"></script>
 <script src="./js/pages/main.js" type="module"></script>
 </body>
