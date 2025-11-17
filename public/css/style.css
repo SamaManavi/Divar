@@ -247,6 +247,15 @@
   .right-3 {
     right: calc(var(--spacing) * 3);
   }
+  .right-12 {
+    right: calc(var(--spacing) * 12);
+  }
+  .right-50 {
+    right: calc(var(--spacing) * 50);
+  }
+  .right-70 {
+    right: calc(var(--spacing) * 70);
+  }
   .right-120 {
     right: calc(var(--spacing) * 120);
   }
@@ -1706,11 +1715,6 @@
   .md\:h-auto {
     @media (width >= 48rem) {
       height: auto;
-    }
-  }
-  .md\:min-h-\[calc\(100vh-10\%\)\] {
-    @media (width >= 48rem) {
-      min-height: calc(100vh - 10%);
     }
   }
   .md\:w-125 {

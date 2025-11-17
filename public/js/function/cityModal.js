@@ -291,6 +291,7 @@ const prepareSelectItemsNames = (selectedItems) => {
 
     let selectItemNames = [];
 
+
     if (isAllCitiesSelected()) {
 
         selectItemNames = [];

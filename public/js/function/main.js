@@ -84,7 +84,6 @@ const getCategories = async () => {
 
     const response = await fetch(`${baseUrl}/v1/category/`);
     return await response.json();
-
 }
 
 const showCategories = async (categories, categoriesContainer, isSubCat, isSubSubCat, isSubSubCatSelected) => {

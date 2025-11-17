@@ -43,18 +43,15 @@ window.addEventListener("load", async () => {
 
         showPosts(posts.data.posts, postsContainer);
 
-        //send category to search param
         categoriesContainer.addEventListener("click", (event) => {
 
+            //send category to search param
             const categoryLi = event.target.closest(".categoryLi");
             if (categoryLi) {
                 addToSearchParam('categoryID', categoryLi.id);
             }
-        });
 
-        // comeback to all ads list
-        categoriesContainer.addEventListener("click", (event) => {
-
+            // comeback to all ads list
             const allAdsLi = event.target.closest("#allAdsLi");
             if (allAdsLi) {
                 removeParamFromUrl("categoryID");
@@ -381,7 +378,7 @@ window.addEventListener("load", async () => {
             cityNameDesktop.innerHTML = cities[0].name;
             cityNameMobile.innerHTML = cities[0].name;
         }
-    }else{
+    } else {
         location.href = "./index.html";
     }
 });
