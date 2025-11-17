@@ -85,7 +85,39 @@ const getSinglePost = async () => {
     const response = await fetch(`${baseUrl}/v1/post/${postId}`);
     return await response.json();
 }
+const renderBreadcrumb = (breadcrumbs, title, breadcrumbContainer) => {
+
+    breadcrumbContainer.innerHTML = "";
 
 
+    breadcrumbContainer.insertAdjacentHTML("beforeend", `
+        <li>
+            <a class="flex items-center gap-x-1.5 group hover:text-primary cursor-pointer">
+                ${breadcrumbs.category.title}
+                <svg class="size-5 rotate-90 group-hover:rotate-270 transition-all duration-300">
+                                    <use href="#chevron-down"></use>
+                                </svg>
+            </a>
+        </li>
+        <li>
+            <a class="flex items-center gap-x-1.5 group hover:text-primary cursor-pointer">
+                ${breadcrumbs.subCategory.title}
+                <svg class="size-5 rotate-90 group-hover:rotate-270 transition-all duration-300">
+                                    <use href="#chevron-down"></use>
+                                </svg>
+            </a>
+        </li>
+        <li class="">
+            <a class="flex items-center gap-x-1.5 group hover:text-primary cursor-pointer">
+                ${breadcrumbs.subSubCategory.title}
+                <svg class="size-5 rotate-90 group-hover:rotate-270 transition-all duration-300">
+                                    <use href="#chevron-down"></use>
+                                </svg>
+            </a>
+        </li>
+        <li class="max-md:hidden text-secondary/50">${title}</li>    
+    `)
+}
 
-export {getPosts, showPosts, getSinglePost}
+
+export {getPosts, showPosts, getSinglePost, renderBreadcrumb}

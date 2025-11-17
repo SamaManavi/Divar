@@ -1,4 +1,4 @@
-import {getSinglePost} from "../function/posts.js";
+import {getSinglePost, renderBreadcrumb} from "../function/posts.js";
 import {calculateTimePassed} from "../function/utils.js";
 
 
@@ -8,7 +8,7 @@ window.addEventListener("load", async () => {
     const postTitle = document.querySelector("#postTitle");
     const postTimeLocation = document.querySelector("#postTimeLocation");
     const description = document.querySelector("#description");
-
+    const breadcrumbContainer = document.querySelector("#breadcrumbContainer");
 
     const singlePost = await getSinglePost();
     const post = singlePost.data.post;
@@ -22,6 +22,9 @@ window.addEventListener("load", async () => {
         postTitle.innerHTML = `${post.title}`;
         description.innerHTML = `${post.description}`;
         postTimeLocation.innerHTML = `${data} در ${post.city.name} . ${post?.neighborhood?.name}`
+
+        //breadcrumb
+        renderBreadcrumb(post.breadcrumbs, post.title, breadcrumbContainer);
 
 
     }
