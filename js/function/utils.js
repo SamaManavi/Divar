@@ -1,5 +1,7 @@
 const baseUrl = "https://divarapi.liara.run";
 
+let isLogin = true;
+
 const saveInLocalStorage = (key, value) => {
 
     localStorage.setItem(key, JSON.stringify(value));
@@ -84,5 +86,6 @@ export {
     addToSearchParam,
     getFromSearchParam,
     removeParamFromUrl,
-    removeFromLocalStorage
+    removeFromLocalStorage,
+    isLogin
 }

@@ -89,7 +89,6 @@ const renderBreadcrumb = (breadcrumbs, title, breadcrumbContainer) => {
 
     breadcrumbContainer.innerHTML = "";
 
-
     breadcrumbContainer.insertAdjacentHTML("beforeend", `
         <li>
             <a class="flex items-center gap-x-1.5 group hover:text-primary cursor-pointer">
@@ -120,4 +119,5 @@ const renderBreadcrumb = (breadcrumbs, title, breadcrumbContainer) => {
 }
 
 
-export {getPosts, showPosts, getSinglePost, renderBreadcrumb}
+
+export {getPosts, showPosts, getSinglePost, renderBreadcrumb,}
