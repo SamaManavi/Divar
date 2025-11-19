@@ -64,5 +64,20 @@ window.addEventListener("load", async () => {
             }
         });
 
+        // close modal
+        modalLogin.addEventListener("click", (event) => {
+
+            if (event.target === modalLogin) {
+
+                modalLogin.classList.add("hidden");
+            }
+        });
+
+        // close modal
+        xMark.addEventListener("click", () => {
+
+            modalLogin.classList.add("hidden");
+        });
+
     }
 });
