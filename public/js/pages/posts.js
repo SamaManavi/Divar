@@ -1,5 +1,5 @@
 import {getSinglePost, renderBreadcrumb} from "../function/posts.js";
-import {calculateTimePassed} from "../function/utils.js";
+import {calculateTimePassed, isLogin} from "../function/utils.js";
 
 
 window.addEventListener("load", async () => {
@@ -10,6 +10,12 @@ window.addEventListener("load", async () => {
     const description = document.querySelector("#description");
     const breadcrumbContainer = document.querySelector("#breadcrumbContainer");
     const shareIcon = document.querySelector("#shareIcon");
+    const postFieldContainer = document.querySelector("#postFieldContainer");
+    const noteTextArea = document.querySelector("#noteTextArea");
+    const callInfoBtn = document.querySelector("#callInfo");
+    const modalLogin = document.querySelector("#modalLogin");
+    const xMark = document.querySelector("#xMark");
+    const trashIcon = document.querySelector("#trashIcon");
 
     const singlePost = await getSinglePost();
     const post = singlePost.data.post;
@@ -31,5 +37,18 @@ window.addEventListener("load", async () => {
         shareIcon.addEventListener("click", async () => {
             await navigator.share(location.href);
         });
+
+        //dynamicPostFields
+        post.dynamicFields.forEach((field) => {
+
+            postFieldContainer.insertAdjacentHTML("beforeend", `
+            <li>
+                <span class="text-sm font-bold">${field.name}</span>
+                <span class="text-primary">${field.data}</span>
+            </li>
+            `);
+
+        });
+
     }
 });
