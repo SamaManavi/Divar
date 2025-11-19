@@ -1,5 +1,6 @@
 import {getSinglePost, renderBreadcrumb} from "../function/posts.js";
 import {calculateTimePassed, isLogin} from "../function/utils.js";
+import {renderSwalCallInfo} from "../function/shared.js";
 
 
 window.addEventListener("load", async () => {
@@ -48,6 +49,19 @@ window.addEventListener("load", async () => {
             </li>
             `);
 
+        });
+
+        //call info
+        callInfoBtn.addEventListener("click", () => {
+
+            if (isLogin) {
+
+                renderSwalCallInfo();
+
+            } else {
+
+                modalLogin.classList.remove("hidden");
+            }
         });
 
     }
