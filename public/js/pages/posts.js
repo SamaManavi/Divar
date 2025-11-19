@@ -64,6 +64,27 @@ window.addEventListener("load", async () => {
             }
         });
 
+        // note
+        noteTextArea.addEventListener("click", () => {
+
+            if (isLogin) {
+
+                noteTextArea.addEventListener("keyup", () => {
+
+                    if (noteTextArea.value.trim().length){
+
+                        trashIcon.classList.remove("hidden");
+                    }else{
+                        trashIcon.classList.add("hidden");
+                    }
+                });
+
+            } else {
+
+                modalLogin.classList.remove("hidden");
+            }
+        });
+
         // close modal
         modalLogin.addEventListener("click", (event) => {
 
