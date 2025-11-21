@@ -18,7 +18,6 @@ const showSocial = (social, socialsContainer) => {
             `)
     });
 }
-
 const renderSwalCallInfo = () => {
 
     Swal.fire({
@@ -52,9 +51,7 @@ const renderSwalCallInfo = () => {
                     </main>
                 </div>
             </div>
-            `,
-        showConfirmButton: false,
-        didOpen: () => {
+            `, showConfirmButton: false, didOpen: () => {
             const overlay = document.getElementById("overlay");
             const modal = document.getElementById("modal");
             const closeBtn = document.getElementById("closeBtn");
@@ -75,5 +72,21 @@ const renderSwalCallInfo = () => {
 
 }
 
+const renderSwalToast = (icon, title) => {
 
-export {getSocial, showSocial,renderSwalCallInfo}
+    Swal.fire({
+
+        icon,
+        title,
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        background: '#333',
+        color: '#ffffffde',
+    });
+}
+
+
+export {getSocial, showSocial, renderSwalCallInfo, renderSwalToast}

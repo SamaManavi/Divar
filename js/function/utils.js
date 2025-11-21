@@ -1,7 +1,5 @@
 const baseUrl = "https://divarapi.liara.run";
 
-let isLogin = true;
-
 const saveInLocalStorage = (key, value) => {
 
     localStorage.setItem(key, JSON.stringify(value));
@@ -78,6 +76,8 @@ const removeParamFromUrl = (param) => {
 }
 
 
+
+
 export {
     baseUrl,
     saveInLocalStorage,
@@ -87,5 +87,5 @@ export {
     getFromSearchParam,
     removeParamFromUrl,
     removeFromLocalStorage,
-    isLogin
+    getToken,
 }

@@ -285,7 +285,8 @@
 
                     <!--buttons call info & chat-->
                     <div class="flex gap-x-4">
-                        <button id="callInfo" class="flex items-center justify-center h-10 w-30 rounded border border-red text-black hover:bg-red/90 bg-red cursor-pointer font-bold">
+                        <button id="callInfo"
+                                class="flex items-center justify-center h-10 w-30 rounded border border-red text-black hover:bg-red/90 bg-red cursor-pointer font-bold">
                             اطلاعات تماس
                         </button>
                         <button class="flex items-center justify-center h-10 w-30 rounded border border-secondary/50 text-secondary hover:bg-secondary/5 cursor-pointer font-bold">
@@ -432,56 +433,12 @@
 </footer>
 
 <!--////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-<!--login-->
-<div id="modalLogin" class="max-h-screen flex items-end sm:items-center justify-center fixed inset-0 bg-black/50 backdrop-blur-[2px] size-full z-30 hidden">
-    <!--modal-->
-    <div class="w-full sm:w-125 md:w-125 max-h-150 md:h-auto bg-bgGray shadow-box rounded-lg">
-
-        <header class="p-6 border-b border-secondary/20">
-            <!--title-->
-            <div class="flex items-center justify-between ">
-                <h3 class="font-bold text-primary text-lg">ورود به حساب کاربری</h3>
-                <svg id="xMark" class="size-4">
-                    <use href="#x-mark"></use>
-                </svg>
-            </div>
-        </header>
-
-        <main class="flex flex-col gap-y-8 border-b border-secondary/20 px-6 py-11">
-
-            <h3 class="font-bold text-primary text-lg">شماره موبایل خودرا وارد کنید</h3>
-            <span>برای استفاده از امکانات دیوار، لطفاً شمارهٔ موبایل خود را وارد کنید. کد تأیید به این شماره پیامک خواهد شد.</span>
-            <div class="relative">
-                <input type="number" autocomplete="tel" placeholder="شماره موبایل" dir="ltr"
-                       class="border border-secondary/50 pr-2 pl-13 placeholder:text-right w-full rounded py-2  hover:border-primary/50">
-                <button class="absolute top-1.5 left-2 rounded-full bg-secondary/10 py-1 px-2 text-sm text-primary">
-                    98+
-                </button>
-            </div>
-            <div class="flex gap-x-1">
-                <span class="text-red">شرایط استفاده خدمات </span>
-                <span>و </span>
-                <span class="text-red">حریم خصوصی </span>
-                <span>دیوار را میپذیرم.</span>
-            </div>
-        </main>
-
-        <footer class="py-3 px-5 border-b border-secondary/20">
-            <div class="flex items-center justify-end gap-x-4">
-                <div class="">
-                    <button class="flex items-center justify-center w-25 h-10 rounded border border-red text-black hover:bg-red/90 bg-red cursor-pointer font-bold px-6 py-1">
-                        تایید
-                    </button>
-                </div>
-            </div>
-        </footer>
-    </div>
-</div>
 
 <!--loader-->
 <div id="loader" class="w-full h-screen fixed inset-0 flex items-center justify-center bottom-16 bg-bgGray z-50">
     <div class="w-10 h-10 border-4 border-t-red border-gray-300 rounded-full animate-spin"></div>
 </div>
+
 
 <script src="./vendor/sweetalert2/sweetalert2@11.js"></script>
 <script src="./js/pages/posts.js" type="module"></script>

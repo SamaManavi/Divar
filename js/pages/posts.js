@@ -1,6 +1,7 @@
 import {getSinglePost, renderBreadcrumb} from "../function/posts.js";
 import {calculateTimePassed, isLogin} from "../function/utils.js";
 import {renderSwalCallInfo} from "../function/shared.js";
+import {loginModal} from "../function/auth.js";
 
 
 window.addEventListener("load", async () => {
@@ -14,12 +15,11 @@ window.addEventListener("load", async () => {
     const postFieldContainer = document.querySelector("#postFieldContainer");
     const noteTextArea = document.querySelector("#noteTextArea");
     const callInfoBtn = document.querySelector("#callInfo");
-    const modalLogin = document.querySelector("#modalLogin");
-    const xMark = document.querySelector("#xMark");
     const trashIcon = document.querySelector("#trashIcon");
 
     const singlePost = await getSinglePost();
     const post = singlePost.data.post;
+
 
     if (post) {
 
@@ -60,7 +60,7 @@ window.addEventListener("load", async () => {
 
             } else {
 
-                modalLogin.classList.remove("hidden");
+                loginModal();
             }
         });
 
@@ -71,34 +71,23 @@ window.addEventListener("load", async () => {
 
                 noteTextArea.addEventListener("keyup", () => {
 
-                    if (noteTextArea.value.trim().length){
+                    if (noteTextArea.value.trim().length) {
 
                         trashIcon.classList.remove("hidden");
-                    }else{
+
+                    } else {
+
                         trashIcon.classList.add("hidden");
                     }
                 });
 
             } else {
 
-                modalLogin.classList.remove("hidden");
+                loginModal();
             }
-        });
-
-        // close modal
-        modalLogin.addEventListener("click", (event) => {
-
-            if (event.target === modalLogin) {
-
-                modalLogin.classList.add("hidden");
-            }
-        });
-
-        // close modal
-        xMark.addEventListener("click", () => {
-
-            modalLogin.classList.add("hidden");
         });
 
     }
 });
+
+

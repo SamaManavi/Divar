@@ -1,6 +1,5 @@
 import {baseUrl, calculateTimePassed, getFromLocalStorage, getFromSearchParam} from "./utils.js";
 
-
 const postId = getFromSearchParam("id");
 const getPosts = async () => {
 
@@ -119,5 +118,5 @@ const renderBreadcrumb = (breadcrumbs, title, breadcrumbContainer) => {
 }
 
 
-
 export {getPosts, showPosts, getSinglePost, renderBreadcrumb,}
+
