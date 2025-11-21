@@ -75,7 +75,12 @@ const removeParamFromUrl = (param) => {
     location.reload();
 }
 
+const getToken = () => {
 
+    const token = getFromLocalStorage("token");
+
+    return token ? token : null;
+}
 
 
 export {

@@ -1,7 +1,7 @@
 import {getSinglePost, renderBreadcrumb} from "../function/posts.js";
-import {calculateTimePassed, isLogin} from "../function/utils.js";
+import {calculateTimePassed} from "../function/utils.js";
 import {renderSwalCallInfo} from "../function/shared.js";
-import {loginModal} from "../function/auth.js";
+import {isLogin, loginModal} from "../function/auth.js";
 
 
 window.addEventListener("load", async () => {
@@ -54,7 +54,7 @@ window.addEventListener("load", async () => {
         //call info
         callInfoBtn.addEventListener("click", () => {
 
-            if (isLogin) {
+            if (isLogin()) {
 
                 renderSwalCallInfo();
 
@@ -67,7 +67,7 @@ window.addEventListener("load", async () => {
         // note
         noteTextArea.addEventListener("click", () => {
 
-            if (isLogin) {
+            if (isLogin()) {
 
                 noteTextArea.addEventListener("keyup", () => {
 
