@@ -1,4 +1,4 @@
-import {baseUrl, saveInLocalStorage} from "./utils.js";
+import {baseUrl, getToken, saveInLocalStorage} from "./utils.js";
 import {renderSwalToast} from "./shared.js";
 
 document.body.insertAdjacentHTML("beforeend", `
@@ -131,6 +131,22 @@ const backToStep1 = document.querySelector("#back-to-step1");
 
 let timer = null;
 
+
+const isLogin = async () => {
+
+    const token = getToken();
+
+    if (token) {
+
+        const response = await fetch(`${baseUrl}/v1/auth/me`, {headers: {Authorization: `Bearer ${token}`}});
+
+        if (response.status === 200) {
+
+            return (await response.json()).data.user;
+        }
+    }
+    return false;
+}
 const loginModal = () => {
 
     numberInput.value = "";
@@ -224,7 +240,7 @@ const checkVerificationOfOTP = async (phoneNumber, OTPCode) => {
         }, body: JSON.stringify({phone: `${phoneNumber}`, otp: `${OTPCode}`})
     });
 
-    return {status : response.ok, token:(await response.json()).data.token};
+    return {status: response.ok, token: (await response.json()).data.token};
 }
 
 
@@ -321,4 +337,4 @@ backToStep1.addEventListener("click", () => {
     switchStep('signIn');
 })
 
-export {loginModal,}
+export {loginModal, isLogin}
