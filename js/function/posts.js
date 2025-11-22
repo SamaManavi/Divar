@@ -1,6 +1,5 @@
-import {baseUrl, calculateTimePassed, getFromLocalStorage, getFromSearchParam} from "./utils.js";
+import {baseUrl, calculateTimePassed, getFromLocalStorage, getFromSearchParam, getToken} from "./utils.js";
 
-const postId = getFromSearchParam("id");
 const getPosts = async () => {
 
     const citiesLocalStorage = getFromLocalStorage("city");
@@ -79,9 +78,12 @@ const showPosts = (posts, postsContainer) => {
         `)
     }
 }
-const getSinglePost = async () => {
+const getSinglePost = async (postId) => {
 
-    const response = await fetch(`${baseUrl}/v1/post/${postId}`);
+    const response = await fetch(`${baseUrl}/v1/post/${postId}`, {
+
+        headers: {Authorization: getToken() ? `Bearer ${getToken()}` : null}
+    });
     return await response.json();
 }
 const renderBreadcrumb = (breadcrumbs, title, breadcrumbContainer) => {
@@ -117,6 +119,13 @@ const renderBreadcrumb = (breadcrumbs, title, breadcrumbContainer) => {
     `)
 }
 
+const getNote = async (noteId) => {
 
-export {getPosts, showPosts, getSinglePost, renderBreadcrumb,}
+    const response = await fetch(`${baseUrl}/v1/note/${noteId}`, {
+        headers: {Authorization: `Bearer ${getToken()}`}
+    })
+    return await response.json();
+}
+
+export {getPosts, showPosts, getSinglePost, renderBreadcrumb, getNote}
 
