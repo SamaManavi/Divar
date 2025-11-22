@@ -62,9 +62,7 @@ const showPosts = (posts, postsContainer) => {
 
                         <div class="relative size-34 shrink-0">
                         <img src="${post.pics.length === 0 ? './images/no-image.png' : `${baseUrl}/${post.pics[0].path}`}" class="rounded w-full h-full">
-                        <svg class="absolute size-5 top-1 left-1 text-black">
-                            <use href="#bookmark"></use>
-                        </svg>
+                       
                     </div>
                     </div>
                 `);
@@ -80,9 +78,15 @@ const showPosts = (posts, postsContainer) => {
 }
 const getSinglePost = async (postId) => {
 
+    const headers = {};
+
+    if (getToken()) {
+
+        headers.Authorization = `Bearer ${getToken()}`;
+    }
     const response = await fetch(`${baseUrl}/v1/post/${postId}`, {
 
-        headers: {Authorization: getToken() ? `Bearer ${getToken()}` : null}
+        headers,
     });
     return await response.json();
 }
@@ -118,7 +122,6 @@ const renderBreadcrumb = (breadcrumbs, title, breadcrumbContainer) => {
         <li class="max-md:hidden text-secondary/50">${title}</li>    
     `)
 }
-
 const getNote = async (noteId) => {
 
     const response = await fetch(`${baseUrl}/v1/note/${noteId}`, {
@@ -126,6 +129,30 @@ const getNote = async (noteId) => {
     })
     return await response.json();
 }
+const bookmarkHandler = async (postId, action) => {
 
-export {getPosts, showPosts, getSinglePost, renderBreadcrumb, getNote}
+    let response = null;
+
+    if (action === "add") {
+
+        response = await fetch(`${baseUrl}/v1/bookmark/${postId}`, {
+            method: "POST",
+            headers: {Authorization: `Bearer ${getToken()}`}
+        });
+
+        return response.ok;
+
+    } else if (action === "remove") {
+
+        response = await fetch(`${baseUrl}/v1/bookmark/${postId}`, {
+            method: "DELETE",
+            headers: {Authorization: `Bearer ${getToken()}`}
+        });
+
+        return response.ok;
+    }
+}
+
+
+export {getPosts, showPosts, getSinglePost, renderBreadcrumb, getNote, bookmarkHandler}
 

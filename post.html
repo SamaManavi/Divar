@@ -243,9 +243,11 @@
             </svg>
         </div>
         <div class="flex gap-x-5">
-            <svg class="size-5">
-                <use href="#bookmark-solid"></use>
-            </svg>
+            <div id="bookmarkContainerMobi">
+                <svg class="size-5">
+                    <use href="#bookmark"></use>
+                </svg>
+            </div>
             <svg class="size-5">
                 <use href="#document"></use>
             </svg>
@@ -296,9 +298,11 @@
 
                     <!--share & bookmarks icons-->
                     <div class="flex items-center gap-x-5">
-                        <svg class="size-5 hover:bg-secondary/10 hover:text-primary transition-colors rounded-full cursor-pointer">
-                            <use href="#bookmark-solid"></use>
-                        </svg>
+                        <div id="bookmarkContainerDesk">
+                            <svg class="size-5 hover:bg-secondary/10 hover:text-primary transition-colors rounded-full cursor-pointer">
+                                <use href="#bookmark"></use>
+                            </svg>
+                        </div>
                         <svg id="shareIcon"
                              class="size-5 hover:bg-secondary/10 hover:text-primary transition-colors rounded-full cursor-pointer">
                             <use href="#share"></use>
@@ -337,7 +341,8 @@
                 <!--text area-->
                 <div class="relative max-lg:hidden">
 
-                    <textarea id="noteTextArea" rows="8" placeholder="یادداشت شما" class="w-full px-3 py-5 text-sm shadow-one outline-0 focus:border-primary border border-secondary rounded"></textarea>
+                    <textarea id="noteTextArea" rows="8" placeholder="یادداشت شما"
+                              class="w-full px-3 py-5 text-sm shadow-one outline-0 focus:border-primary border border-secondary rounded"></textarea>
 
                     <!--این باید هیدن باشد وقتی چیزی در تکست اریا نوشته شد برداشته شد-->
                     <div class="absolute left-3 bottom-11 p-2 rounded-full hover:bg-secondary/5 cursor-pointer">
