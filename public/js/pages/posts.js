@@ -1,4 +1,4 @@
-import {getNote, getSinglePost, renderBreadcrumb} from "../function/posts.js";
+import {bookmarkHandler, getNote, getSinglePost, renderBreadcrumb} from "../function/posts.js";
 import {baseUrl, calculateTimePassed, getFromSearchParam, getToken} from "../function/utils.js";
 import {renderSwalCallInfo} from "../function/shared.js";
 import {isLogin, loginModal} from "../function/auth.js";
@@ -16,12 +16,15 @@ window.addEventListener("load", async () => {
     const noteTextArea = document.querySelector("#noteTextArea");
     const callInfoBtn = document.querySelector("#callInfo");
     const trashIcon = document.querySelector("#trashIcon");
+    const bookmarkContainerMobi = document.querySelector("#bookmarkContainerMobi");
+    const bookmarkContainerDesk = document.querySelector("#bookmarkContainerDesk");
 
     const postId = getFromSearchParam("id");
 
     const singlePost = await getSinglePost(postId);
     const post = singlePost.data.post;
-    let noteId = post?.note._id;
+    let noteId = post?.note?._id;
+    let isBookmarked = post?.bookmarked;
 
     if (!post) return;
 
@@ -47,16 +50,16 @@ window.addEventListener("load", async () => {
         postFieldContainer.insertAdjacentHTML("beforeend", `
             <li>
                 <span class="text-sm font-bold">${field.name}</span>
-                <span class="text-primary">${field.data}</span>
+                <span class="text-primary">${typeof field.data === 'boolean' ? field.data === true ? 'دارد' : 'ندارد' : field.data}</span>
             </li>
-            `);
+        `);
 
     });
 
     //call info
-    callInfoBtn.addEventListener("click", () => {
+    callInfoBtn.addEventListener("click", async () => {
 
-        if (isLogin()) {
+        if (await isLogin()) {
 
             renderSwalCallInfo();
 
@@ -67,9 +70,9 @@ window.addEventListener("load", async () => {
     });
 
     // note
-    noteTextArea.addEventListener("click", () => {
+    noteTextArea.addEventListener("click", async () => {
 
-        if (isLogin()) {
+        if (await isLogin()) {
 
             // handle trash
             noteTextArea.addEventListener("keyup", () => {
@@ -123,7 +126,7 @@ window.addEventListener("load", async () => {
     });
 
     // show note if exist
-    if (post.note.content) {
+    if (post.note?.content) {
 
         noteTextArea.innerHTML = post.note.content
         trashIcon.classList.remove("hidden");
@@ -146,6 +149,87 @@ window.addEventListener("load", async () => {
 
         noteTextArea.value = "";
         trashIcon.classList.add("hidden");
+    });
+
+    //bookmark
+
+    // desk
+    if (isBookmarked) {
+
+        bookmarkContainerDesk.innerHTML = `<svg class="size-5">
+                        <use href="#bookmark-solid"></use>
+                    </svg>`
+        bookmarkContainerMobi.innerHTML = `<svg class="size-5">
+                        <use href="#bookmark-solid"></use>
+                    </svg>`
+
+    } else {
+
+        bookmarkContainerDesk.innerHTML = `<svg class="size-5">
+                        <use href="#bookmark"></use>
+                    </svg>`
+        bookmarkContainerMobi.innerHTML = `<svg class="size-5">
+                        <use href="#bookmark"></use>
+                    </svg>`
+    }
+
+    bookmarkContainerDesk.addEventListener("click", () => {
+
+        if (isLogin()) {
+
+            if (isBookmarked) {
+
+                const response = bookmarkHandler(postId, "remove");
+                if (response) {
+
+                    isBookmarked = false;
+                    bookmarkContainerDesk.innerHTML = `<svg class="size-5">
+                        <use href="#bookmark"></use>
+                    </svg>`
+                }
+
+            } else {
+
+                const response = bookmarkHandler(postId, "add");
+                if (response) {
+
+                    isBookmarked = true;
+                    bookmarkContainerDesk.innerHTML = `<svg class="size-5">
+                        <use href="#bookmark-solid"></use>
+                    </svg>`
+                }
+            }
+        }
+    });
+
+    bookmarkContainerMobi.addEventListener("click", () => {
+
+        if (isLogin()) {
+
+            if (isBookmarked) {
+
+                const response = bookmarkHandler(postId, "remove");
+                if (response) {
+
+                    isBookmarked = false;
+                    bookmarkContainerMobi.innerHTML = `<svg class="size-5">
+                        <use href="#bookmark"></use>
+                    </svg>`
+
+                }
+
+            } else {
+
+                const response = bookmarkHandler(postId, "add");
+                if (response) {
+
+                    isBookmarked = true;
+                    bookmarkContainerMobi.innerHTML = `<svg class="size-5">
+                        <use href="#bookmark-solid"></use>
+                    </svg>`
+                }
+            }
+        }
     });
 });
 
