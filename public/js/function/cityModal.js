@@ -383,7 +383,7 @@ cityModalBtnDesktop.addEventListener("click", () => {
 });
 
 // show city modal mobile
-cityModalBtnMobile.addEventListener("click", () => {
+cityModalBtnMobile?.addEventListener("click", () => {
 
     openModal();
 });

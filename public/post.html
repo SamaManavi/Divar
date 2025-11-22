@@ -182,7 +182,7 @@
                 </div>
 
                 <!--city name-->
-                <div class="group flex items-center justify-center h-11 w-20 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
+                <div id="cityModalBtnDesktop" class="group flex items-center justify-center h-11 w-20 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
                     <svg class="size-5 group-hover:text-white">
                         <use href="#location"></use>
                     </svg>
@@ -190,7 +190,7 @@
                 </div>
 
                 <!--categories-->
-                <div class="group flex items-center justify-center h-11 w-25 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
+                <div id="categoriesBtn" class="group flex items-center justify-center h-11 w-25 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
                     <span class="font-bold text-sm group-hover:text-white">دسته ها</span>
                     <svg class="size-5 group-hover:text-white">
                         <use href="#chevron-down"></use>
@@ -477,6 +477,8 @@
 
 <script src="./vendor/swiperjs/swiper-bundle.min.js"></script>
 <script src="./vendor/sweetalert2/sweetalert2@11.js"></script>
+<script src="./js/function/cityModal.js" type="module"></script>
+<script src="./js/function/categoriesModal.js" type="module"></script>
 <script src="./js/pages/posts.js" type="module"></script>
 </body>
 </html>
