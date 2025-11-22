@@ -18,6 +18,9 @@ window.addEventListener("load", async () => {
     const trashIcon = document.querySelector("#trashIcon");
     const bookmarkContainerMobi = document.querySelector("#bookmarkContainerMobi");
     const bookmarkContainerDesk = document.querySelector("#bookmarkContainerDesk");
+    const postPhotosContainerLaptop = document.querySelector("#postPhotosContainerLaptop");
+    const postPhotosContainerThumbs = document.querySelector(".postPhotosContainerThumbs");
+    const postPhotosContainerMain = document.querySelector(".postPhotosContainerMain");
 
     const postId = getFromSearchParam("id");
 
@@ -231,6 +234,51 @@ window.addEventListener("load", async () => {
             }
         }
     });
+
+    //image slider
+
+    if (post.pics.length) {
+
+        post.pics.forEach((pic) => {
+
+            postPhotosContainerThumbs.insertAdjacentHTML("beforeend", `
+            
+                <div class="swiper-slide !h-17 cursor-pointer swiper-slide-visible swiper-slide-fully-visible swiper-slide-active swiper-slide-thumb-active" role="group" aria-label="1 / 1" style="width: 67.6667px; margin-left: 10px;">
+                    <img src="${baseUrl}/${pic.path}" class="w-full h-full object-cover rounded" alt="post pic">
+                </div>
+            `);
+
+            postPhotosContainerMain.insertAdjacentHTML("beforeend", `
+            
+                 <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 1"
+                                 style="width: 456px; margin-left: 10px;">
+                    <img src="${baseUrl}/${pic.path}"
+                                     class="w-full h-full object-cover" alt="post pic">
+                 </div>
+            `);
+        });
+
+
+    } else {
+
+        postPhotosContainerLaptop.classList.add("hidden");
+    }
+
+    // اسلایدر بندانگشتی (پایینی)
+    const thumbsSwiper = new Swiper('.postPhotosThumbsSwiper', {
+        spaceBetween: 10, slidesPerView: 'auto', freeMode: true, watchSlidesProgress: true, direction: 'horizontal',
+    });
+
+// اسلایدر اصلی (بالایی)
+    const mainSwiper = new Swiper('.postPhotosMainSwiper', {
+        spaceBetween: 10, direction: 'horizontal', navigation: {
+            nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev',
+        }, thumbs: {
+            swiper: thumbsSwiper, // اتصال بندانگشتی‌ها به اسلایدر اصلی
+        },
+    });
+
+
 });
 
 

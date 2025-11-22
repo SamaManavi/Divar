@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>دیوار: بزرگترین سایت نیازمندی های رایگان در ایران</title>
 
+    <link rel="stylesheet" href="./vendor/swiperjs/swiper-bundle.min.css">
     <link rel="icon" href="images/logo.svg" type="image/png">
     <link rel="stylesheet" href="./css/style.css">
 </head>
@@ -328,14 +329,44 @@
 
             <!--section left-->
             <div class="flex flex-col size-full gap-y-8">
-                <!--bigger image-->
-                <div class="flex-1 max-lg:hidden">
-                    <img src="./images/no-image.png" class="size-full object-cover">
-                </div>
 
-                <!--swiper images-->
-                <div class="max-lg:hidden">
-                    <img src="./images/no-image.png" class="size-25 object-cover rounded">
+                <!--image-->
+                <div id="postPhotosContainerLaptop" class="max-lg:hidden select-none">
+                    <!-- Main Swiper -->
+                    <div class="swiper max-w-120 h-90 postPhotosMainSwiper w-full overflow-hidden swiper-initialized swiper-horizontal swiper-rtl swiper-backface-hidden">
+                        <div class="swiper-wrapper postPhotosContainerMain" id="swiper-wrapper-41176c341a33071a"
+                             aria-live="polite" style="transform: translate3d(0px, 0px, 0px);">
+                            <!--loaded from js-->
+                        </div>
+
+                        <!-- دکمه‌های قبلی/بعدی -->
+                        <div class="swiper-button-next !text-white swiper-button-disabled swiper-button-lock"
+                             tabindex="-1" role="button" aria-label="Next slide"
+                             aria-controls="swiper-wrapper-41176c341a33071a" aria-disabled="true">
+                            <svg class="swiper-navigation-icon" width="11" height="20" viewBox="0 0 11 20" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.38296 20.0762C0.111788 19.805 0.111788 19.3654 0.38296 19.0942L9.19758 10.2796L0.38296 1.46497C0.111788 1.19379 0.111788 0.754138 0.38296 0.482966C0.654131 0.211794 1.09379 0.211794 1.36496 0.482966L10.4341 9.55214C10.8359 9.9539 10.8359 10.6053 10.4341 11.007L1.36496 20.0762C1.09379 20.3474 0.654131 20.3474 0.38296 20.0762Z"
+                                      fill="currentColor"></path>
+                            </svg>
+                        </div>
+                        <div class="swiper-button-prev !text-white swiper-button-disabled swiper-button-lock"
+                             tabindex="-1" role="button" aria-label="Previous slide"
+                             aria-controls="swiper-wrapper-41176c341a33071a" aria-disabled="true">
+                            <svg class="swiper-navigation-icon" width="11" height="20" viewBox="0 0 11 20" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.38296 20.0762C0.111788 19.805 0.111788 19.3654 0.38296 19.0942L9.19758 10.2796L0.38296 1.46497C0.111788 1.19379 0.111788 0.754138 0.38296 0.482966C0.654131 0.211794 1.09379 0.211794 1.36496 0.482966L10.4341 9.55214C10.8359 9.9539 10.8359 10.6053 10.4341 11.007L1.36496 20.0762C1.09379 20.3474 0.654131 20.3474 0.38296 20.0762Z"
+                                      fill="currentColor"></path>
+                            </svg>
+                        </div>
+                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+
+                    <!-- Thumbs Swiper -->
+                    <div class="swiper postPhotosThumbsSwiper mt-4 w-full h-24 max-lg:hidden swiper-initialized swiper-horizontal swiper-free-mode swiper-rtl swiper-watch-progress swiper-backface-hidden swiper-thumbs">
+                        <div class="swiper-wrapper postPhotosContainerThumbs" id="swiper-wrapper-f258feab83586a44"
+                             aria-live="polite" style="transform: translate3d(0px, 0px, 0px);">
+                            <!--loaded from js-->
+                        </div>
+                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
                 </div>
 
                 <!--text area-->
@@ -444,7 +475,7 @@
     <div class="w-10 h-10 border-4 border-t-red border-gray-300 rounded-full animate-spin"></div>
 </div>
 
-
+<script src="./vendor/swiperjs/swiper-bundle.min.js"></script>
 <script src="./vendor/sweetalert2/sweetalert2@11.js"></script>
 <script src="./js/pages/posts.js" type="module"></script>
 </body>
