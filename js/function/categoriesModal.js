@@ -50,7 +50,6 @@ const closeModal = () => {
 const showCategoriesLists = () => {
 
     categoriesListContainer.innerHTML = "";
-    console.log(categories)
     categories.forEach((category) => {
 
         categoriesListContainer.insertAdjacentHTML("beforeend", `
