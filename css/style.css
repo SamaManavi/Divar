@@ -459,6 +459,9 @@
     width: 100%;
     height: 100%;
   }
+  .\!h-17 {
+    height: calc(var(--spacing) * 17) !important;
+  }
   .h-5 {
     height: calc(var(--spacing) * 5);
   }
@@ -488,6 +491,9 @@
   }
   .h-20 {
     height: calc(var(--spacing) * 20);
+  }
+  .h-24 {
+    height: calc(var(--spacing) * 24);
   }
   .h-42 {
     height: calc(var(--spacing) * 42);
@@ -1168,6 +1174,9 @@
   .font-medium {
     --tw-font-weight: var(--font-weight-medium);
     font-weight: var(--font-weight-medium);
+  }
+  .\!text-white {
+    color: var(--color-white) !important;
   }
   .text-\[\#242424\] {
     color: #242424;
