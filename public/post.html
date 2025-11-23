@@ -182,7 +182,8 @@
                 </div>
 
                 <!--city name-->
-                <div id="cityModalBtnDesktop" class="group flex items-center justify-center h-11 w-20 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
+                <div id="cityModalBtnDesktop"
+                     class="group flex items-center justify-center h-11 w-20 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
                     <svg class="size-5 group-hover:text-white">
                         <use href="#location"></use>
                     </svg>
@@ -190,23 +191,31 @@
                 </div>
 
                 <!--categories-->
-                <div id="categoriesBtn" class="group flex items-center justify-center h-11 w-25 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
+                <div id="categoriesBtn"
+                     class="group flex items-center justify-center h-11 w-25 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
                     <span class="font-bold text-sm group-hover:text-white">دسته ها</span>
                     <svg class="size-5 group-hover:text-white">
                         <use href="#chevron-down"></use>
                     </svg>
                 </div>
-
             </div>
 
             <!--left section-->
             <div class="flex items-center lg:gap-x-2 xl:gap-x-4">
+
                 <!--my divar-->
-                <div class="group flex items-center justify-center h-11 w-25 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
+                <div id="myDivarBtn"
+                     class="group flex items-center justify-center relative h-11 w-25 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
                     <svg class="size-5 group-hover:text-white">
                         <use href="#user"></use>
                     </svg>
                     <span class="font-bold text-sm group-hover:text-white">دیوار من</span>
+
+                    <!--dropdown my divar show whit click (desktop)-->
+                    <div id="myDivarModal"
+                         class="absolute left-0 right-0 top-15 shadow-box bg-bgGray w-45 h-auto rounded hidden">
+                        <!--loaded from js-->
+                    </div>
                 </div>
 
                 <!--chat-->
@@ -477,6 +486,7 @@
 
 <script src="./vendor/swiperjs/swiper-bundle.min.js"></script>
 <script src="./vendor/sweetalert2/sweetalert2@11.js"></script>
+<script src="./js/function/myDivar.js" type="module"></script>
 <script src="./js/function/cityModal.js" type="module"></script>
 <script src="./js/function/categoriesModal.js" type="module"></script>
 <script src="./js/pages/posts.js" type="module"></script>

@@ -3,6 +3,9 @@ import {
     getCategories, priceFormater, renderFiltering, showCategories, showFamousSearch
 } from "../function/main.js";
 import {getPosts, showPosts} from "../function/posts.js";
+import {loginModal} from "../function/auth.js";
+import {renderModal} from "../function/myDivar.js";
+
 
 const loader = document.querySelector("#loader");
 const categoriesContainer = document.querySelector("#categories-container");
@@ -28,6 +31,11 @@ const minPriceInput = document.querySelector("#minPriceInput");
 const maxPriceInput = document.querySelector("#maxPriceInput");
 const cityNameDesktop = document.querySelector("#city-name-desktop");
 const cityNameMobile = document.querySelector("#city-name-mobile");
+const myDivarModalMobi = document.querySelector("#myDivarModalMobi");
+const myDivarBtnMobi = document.querySelector("#myDivarMobiBtn");
+const myDivarMobiContainer = document.querySelector("#myDivarMobiContainer");
+
+
 
 window.addEventListener("load", async () => {
 
@@ -388,6 +396,28 @@ window.addEventListener("load", async () => {
             cityNameDesktop.innerHTML = cities[0].name;
             cityNameMobile.innerHTML = cities[0].name;
         }
+
+
+        // develop*************************************************************************
+        // bottom menu
+        myDivarBtnMobi.addEventListener("click", async () => {
+
+            myDivarModalMobi.classList.remove("hidden");
+            await renderModal(myDivarMobiContainer)
+        });
+
+        myDivarMobiContainer.addEventListener("click", (event) => {
+
+            const menuOption = event.target.closest(".menuOption");
+
+            if (menuOption) {
+                loginModal();
+            }
+        });
+
+        // *************************************************************************************
+
+
     } else {
         location.href = "./index.html";
     }
