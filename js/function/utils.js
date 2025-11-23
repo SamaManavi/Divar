@@ -78,10 +78,8 @@ const removeParamFromUrl = (param) => {
 const getToken = () => {
 
     const token = getFromLocalStorage("token");
-
     return token ? token : null;
 }
-
 
 export {
     baseUrl,

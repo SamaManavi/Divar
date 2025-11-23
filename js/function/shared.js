@@ -71,7 +71,6 @@ const renderSwalCallInfo = () => {
     });
 
 }
-
 const renderSwalToast = (icon, title) => {
 
     Swal.fire({

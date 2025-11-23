@@ -220,7 +220,8 @@
                 </div>
 
                 <!--categories-->
-                <div id="categoriesBtn" class="group flex items-center justify-center h-11 w-25 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
+                <div id="categoriesBtn"
+                     class="group flex items-center justify-center h-11 w-25 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
                     <span class="font-bold text-sm group-hover:text-white">دسته ها</span>
                     <svg class="size-5 group-hover:text-white">
                         <use href="#chevron-down"></use>
@@ -256,11 +257,18 @@
             <!--left section-->
             <div class="flex items-center lg:gap-x-2 xl:gap-x-4">
                 <!--my divar-->
-                <div class="group flex items-center justify-center h-11 w-25 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
+                <div id="myDivarBtn"
+                     class="group flex items-center justify-center relative h-11 w-25 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
                     <svg class="size-5 group-hover:text-white">
                         <use href="#user"></use>
                     </svg>
                     <span class="font-bold text-sm group-hover:text-white">دیوار من</span>
+
+                    <!--dropdown my divar show whit click (desktop)-->
+                    <div id="myDivarModal"
+                         class="absolute left-0 right-0 top-15 shadow-box bg-bgGray w-45 h-auto rounded hidden">
+                        <!--loaded from js-->
+                    </div>
                 </div>
 
                 <!--chat-->
@@ -515,11 +523,11 @@
 <!--///////////////////////////////////////////////////////////////////////////-->
 
 <!--bottom section mobile - tablet-->
-<div class=" fixed bottom-0 w-full h-18 lg:hidden">
-    <div class="flex items-center h-full w-full bg-darkGray shadow-one z-100000">
+<div class=" fixed bottom-0 w-full h-18 lg:hidden z-100000">
+    <div class="flex items-center h-full w-full bg-darkGray shadow-one ">
 
         <!--ads-->
-        <div class="flex-1 h-full">
+        <div id="ads" class="flex-1 h-full">
             <div class="flex flex-col items-center justify-center h-full gap-y-1 cursor-pointer hover:bg-[#ffffff14]/80 duration-300">
                 <svg class="size-5 group-hover:text-white">
                     <use href="#home"></use>
@@ -559,7 +567,7 @@
         </div>
 
         <!--my divar-->
-        <div class="flex-1 h-full">
+        <div id="myDivarMobiBtn" class="flex-1 h-full">
             <div class="flex flex-col items-center justify-center h-full gap-y-1 cursor-pointer hover:bg-[#ffffff14]/80 duration-300">
                 <svg class="size-5 group-hover:text-white">
                     <use href="#user"></use>
@@ -611,101 +619,18 @@
     </div>
 </div>
 
-<!--dropdown my divar show whit click (desktop)-->
-<div class="absolute left-80 top-18 shadow-box bg-bgGray w-45 h-auto rounded hidden">
-    <ul class="divide-y divide-secondary/10 *:flex *:gap-x-3 *:items-center *:p-2 *:text-sm *:font-bold *:pr-4 *:py-2">
-        <li class="">
-            <svg class="size-4">
-                <use href="#login"></use>
-            </svg>
-            <span>ورود</span>
-        </li>
-        <li class="">
-            <svg class="size-4">
-                <use href="#folder"></use>
-            </svg>
-            <span>آگهی های من</span>
-        </li>
-        <li class="">
-            <svg class="size-4">
-                <use href="#bookmark"></use>
-            </svg>
-            <span>نشان ها</span>
-        </li>
-        <li class="">
-            <svg class="size-4">
-                <use href="#paper"></use>
-            </svg>
-            <span>یادداشت ها</span>
-        </li>
-        <li class="">
-            <svg class="size-4">
-                <use href="#history"></use>
-            </svg>
-            <span>بازدید های اخیر</span>
-        </li>
-        <li class="">
-            <svg class="size-4">
-                <use href="#setting"></use>
-            </svg>
-            <span>تنظیمات</span>
-        </li>
-    </ul>
-</div>
-
 <!--my divar show whit click (mobile)-->
-<div class="flex items-center justify-center max-h-screen size-full fixed inset-0 bg-bgGray z-10 hidden">
-
+<div id="myDivarModalMobi" class="flex items-center justify-center max-h-screen size-full fixed inset-0 bg-bgGray z-10 lg:hidden hidden">
     <div class="fixed top-0 z-20 h-15 w-full bg-darkGray px-5 shadow-md lg:hidden">
         <!--top section my divar -->
         <div class="flex items-center w-full h-full">
             <span class="font-bold">دیوار من</span>
         </div>
     </div>
-
-    <div class="absolute left-0 right-0 top-18 bg-bgGray max-w-full max-h-screen">
-        <ul class="*:flex *:gap-x-3 *:items-center *:p-2 *:text-sm *:font-bold *:pr-4 *:py-2">
-            <li class="">
-                <svg class="size-4">
-                    <use href="#login"></use>
-                </svg>
-                <span>ورود</span>
-            </li>
-            <li class="">
-                <svg class="size-4">
-                    <use href="#folder"></use>
-                </svg>
-                <span>آگهی های من</span>
-            </li>
-            <li class="">
-                <svg class="size-4">
-                    <use href="#bookmark"></use>
-                </svg>
-                <span>نشان ها</span>
-            </li>
-            <li class="">
-                <svg class="size-4">
-                    <use href="#paper"></use>
-                </svg>
-                <span>یادداشت ها</span>
-            </li>
-            <li class="">
-                <svg class="size-4">
-                    <use href="#history"></use>
-                </svg>
-                <span>بازدید های اخیر</span>
-            </li>
-            <li class="">
-                <svg class="size-4">
-                    <use href="#setting"></use>
-                </svg>
-                <span>تنظیمات</span>
-            </li>
-        </ul>
+    <div id="myDivarMobiContainer" class="absolute left-0 right-0 top-18 bg-bgGray max-w-full max-h-screen p-5">
+        <!--loaded from js-->
     </div>
-
 </div>
-
 
 
 <!--loader-->
@@ -713,6 +638,7 @@
     <div class="w-10 h-10 border-4 border-t-red border-gray-300 rounded-full animate-spin"></div>
 </div>
 
+<script src="./js/function/myDivar.js" type="module"></script>
 <script src="./js/function/categoriesModal.js" type="module"></script>
 <script src="./js/function/cityModal.js" type="module"></script>
 <script src="./js/pages/main.js" type="module"></script>
