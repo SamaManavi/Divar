@@ -107,8 +107,25 @@
     <div class="w-full flex flex-col gap-y-5 items-start">
         <h3 class="text-xl font-bold">چه چیزی آگهی می کنید؟</h3>
         <span class="text-sm text-secondary/70">با جستجو در کادر زیر دسته آگهی را مشخص کنید.</span>
-        <input type="number" placeholder="عنوان آگهی را وارد کنید"
-               class="w-full border border-secondary/60 focus:border-primary hover:border-primary/50 cursor-pointer py-1.5 pr-2 rounded">
+        <div class="relative w-full">
+            <input id="searchSubSubCatInput" type="search" placeholder="عنوان آگهی را وارد کنید"
+                   class="w-full border border-secondary/60 focus:border-primary hover:border-primary/50 cursor-pointer py-1.5 pr-2 rounded">
+
+            <!--search-->
+            <div id="categorySearchModal" class="absolute w-full bg-bgGray shadow-box h-60 overflow-auto custom-scroll z-20 hidden">
+
+                <!--city list-->
+                <ul id="searchCategoriesContainer" class=" *:p-4 text-primary *:w-full *:hover:bg-secondary/10 *:transition-colors *:duration-300 *:cursor-pointer">
+                    <!--loaded from js-->
+                </ul>
+
+                <!--city empty-->
+                <div id="empty-search" class="h-full flex flex-col items-center justify-center hidden">
+                    <img src="./images/city-search-icon.png" alt="">
+                    <span class="text-secondary text-xs"> نتیجه ایی برای جستجوی شما یافت نشد.</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="flex items-center justify-between">
@@ -121,55 +138,15 @@
     </div>
 
     <div class="flex flex-col">
-        <ul class="*:border-b *:border-secondary/10 *:flex *:items-center *:justify-between *:py-4 *:hover:text-primary cursor-pointer">
-            <li>
-                <span class="text-sm">کالای دیجیتال</span>
-                <svg class="size-5 rotate-90">
-                    <use href="#chevron-down"></use>
-                </svg>
-            </li>
-            <li>
-                <span class="text-sm">وسایل نقلیه</span>
-                <svg class="size-5 rotate-90">
-                    <use href="#chevron-down"></use>
-                </svg>
-            </li>
-            <li>
-                <span class="text-sm">وسایل شخصی</span>
-                <svg class="size-5 rotate-90">
-                    <use href="#chevron-down"></use>
-                </svg>
-            </li>
+        <ul id="categoryContainerAd"
+            class="*:border-b *:border-secondary/10 *:py-4 *:hover:text-primary cursor-pointer">
+            <!--loaded from js-->
         </ul>
     </div>
 
-
-    <!--کلاس هیدن شده رو هر li کیلیک کنی نشون داده میشه-->
-    <div>
-        <span class="flex items-center gap-x-3 border-b border-secondary/10 py-4 *:hover:text-primary cursor-pointer">
-            <svg class="size-4">
-                <use href="#arrow-right"></use>
-            </svg>
-            <span class="text-sm">بازگشت به همه دسته ها</span>
-        </span>
-
-        <ul class="*:border-b *:border-secondary/10 *:flex *:items-center *:justify-between *:py-4 *:hover:text-primary cursor-pointer">
-            <li>
-                <span class="text-sm">سایل نقلیه</span>
-                <svg class="size-5 rotate-90">
-                    <use href="#chevron-down"></use>
-                </svg>
-            </li>
-            <li>
-                <span class="text-sm">وسایل شخصی</span>
-                <svg class="size-5 rotate-90">
-                    <use href="#chevron-down"></use>
-                </svg>
-            </li>
-        </ul>
-    </div>
 
 </main>
 
+<script src="./js/function/registerAd.js" type="module"></script>
 </body>
 </html>

@@ -1,14 +1,21 @@
 import {baseUrl, getFromSearchParam} from "./utils.js";
 
 
-
 const getCategories = async () => {
 
     const response = await fetch(`${baseUrl}/v1/category/`);
     return await response.json();
 }
 
-const showCategories = async (categories, categoriesContainer, isSubCat, isSubSubCat, isSubSubCatSelected) => {
+const getAllSubSubCategory = async () => {
+
+    const response = await fetch(`${baseUrl}/v1/category/sub`);
+    return await response.json();
+}
+
+const categories = await getCategories();
+
+const showCategories = (categories, categoriesContainer, isSubCat, isSubSubCat, isSubSubCatSelected) => {
 
     if (isSubCat) {
 
@@ -53,7 +60,7 @@ const showCategories = async (categories, categoriesContainer, isSubCat, isSubSu
                     <svg class="size-4 font-bold text-sm">
                         <use href="#chevron-down"></use>
                     </svg>
-                    <span class="font-bold text-sm">${await findCategoryParentNameById(categories.parent, true)}</span>
+                    <span class="font-bold text-sm">${findCategoryParentNameById(categories.parent, true)}</span>
                 </a>
             </li>
             <li class="group categoryLi" id="${categories.parent}">
@@ -76,19 +83,19 @@ const showCategories = async (categories, categoriesContainer, isSubCat, isSubSu
                     <span class="font-bold text-sm">همه آگهی ها</span>
                 </a>
             </li>
-            <li class="group categoryLi" id="${await findCategoryParentNameById(categories.parent, false)}">
+            <li class="group categoryLi" id="${findCategoryParentNameById(categories.parent, false)}">
                 <a href="#" class="flex items-center gap-x-2 text-primary">
                     <svg class="size-4 font-bold text-sm">
                         <use href="#chevron-down"></use>
                     </svg>
-                    <span class="font-bold text-sm">${await findGrandparentSubSubCat(categories.parent)}</span>
+                    <span class="font-bold text-sm">${findGrandparentSubSubCat(categories.parent)}</span>
                 </a>
             </li>
             <li class="group categoryLi" id="${categories.parent}">
-                <span class="font-bold text-sm text-primary cursor-pointer pr-10">${await findCategoryParentNameById(categories.parent, true)}</span>
+                <span class="font-bold text-sm text-primary cursor-pointer pr-10">${findCategoryParentNameById(categories.parent, true)}</span>
             </li>
             <ul class="flex flex-col gap-y-2 mt-3 mr-14 border-r border-secondary/30 *:text-secondary *:text-sm/7 *:font-bold *:hover:text-primary *:transition-colors *:duration-300 *:cursor-pointer">
-                     ${await renderSelectedSubSubCat(categories.parent)}
+                     ${renderSelectedSubSubCat(categories.parent)}
             </ul>
         `);
 
@@ -112,9 +119,8 @@ const showCategories = async (categories, categoriesContainer, isSubCat, isSubSu
     }
 }
 
-const findCategoryParentNameById = async (parentId, titleWanted) => {
+const findCategoryParentNameById = (parentId, titleWanted) => {
 
-    const categories = await getCategories();
     const categoryInfo = categories.data.categories.find((category) => category._id === parentId);
     const allSubCategories = categories.data.categories.flatMap((category) => category.subCategories);
     const subCategoriesInfo = allSubCategories.find((subCategory) => subCategory._id === parentId);
@@ -143,10 +149,10 @@ const findCategoryParentNameById = async (parentId, titleWanted) => {
     }
 }
 
-const findGrandparentSubSubCat = async (parentId) => {
+const findGrandparentSubSubCat = (parentId) => {
 
-    const parent = await findCategoryParentNameById(parentId, false);
-    return await findCategoryParentNameById(parent, true);
+    const parent = findCategoryParentNameById(parentId, false);
+    return findCategoryParentNameById(parent, true);
 }
 
 const renderCategoryTemplate = (categories) => {
@@ -163,9 +169,8 @@ const renderCategoryTemplate = (categories) => {
     }).join("");
 }
 
-const renderSelectedSubSubCat = async (parentID) => {
+const renderSelectedSubSubCat = (parentID) => {
 
-    const categories = await getCategories();
     const allSubCategories = categories.data.categories.flatMap((category) => category.subCategories);
     const subCategoriesInfo = allSubCategories.find((subCategory) => subCategory._id === parentID);
 
@@ -245,4 +250,12 @@ const priceFormater = (value) => {
 }
 
 
-export {getCategories, showCategories, renderFiltering, showFamousSearch, priceFormater}
+export {
+    getCategories,
+    showCategories,
+    renderFiltering,
+    showFamousSearch,
+    priceFormater,
+    findCategoryParentNameById,
+    getAllSubSubCategory
+}
