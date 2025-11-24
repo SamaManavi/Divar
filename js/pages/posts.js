@@ -21,6 +21,8 @@ window.addEventListener("load", async () => {
     const postPhotosContainerLaptop = document.querySelector("#postPhotosContainerLaptop");
     const postPhotosContainerThumbs = document.querySelector(".postPhotosContainerThumbs");
     const postPhotosContainerMain = document.querySelector(".postPhotosContainerMain");
+    const registerAd = document.querySelector("#registerAd");
+
 
     const postId = getFromSearchParam("id");
 
@@ -277,6 +279,21 @@ window.addEventListener("load", async () => {
             swiper: thumbsSwiper, // اتصال بندانگشتی‌ها به اسلایدر اصلی
         },
     });
+
+
+
+    //register ad
+    registerAd.addEventListener("click", async () => {
+
+        if (await isLogin()) {
+
+            location.href = "new-post.html";
+        } else {
+
+            loginModal();
+        }
+    });
+
 
 
 });
