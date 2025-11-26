@@ -80,8 +80,8 @@
         font-size: 12px;
         position: relative;
         display: inline-block;
-        width: 2.2em;    /* کمی بزرگ‌تر */
-        height: 1.3em;   /* کمی بلندتر */
+        width: 2.2em; /* کمی بزرگ‌تر */
+        height: 1.3em; /* کمی بلندتر */
     }
 
     .switch input {
@@ -105,14 +105,14 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 1.2em;   /* کمی بزرگ‌تر */
-        height: 1.3em;  /* کمی بزرگ‌تر */
+        width: 1.2em; /* کمی بزرگ‌تر */
+        height: 1.3em; /* کمی بزرگ‌تر */
         top: 0;
         right: 0;
         background-color: white;
 
         border-radius: 50px;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
@@ -196,7 +196,38 @@
 
 }
 
-@utility container{
+@utility container {
 
     @apply mx-auto px-2.5 lg:px-4 max-lg:max-w-full
+}
+
+.choices__item--choice {
+    @apply hover:bg-primary/10 p-2 cursor-pointer text-secondary;
+}
+
+.choices__item--choice:hover {
+    background-color: hsla(0, 0%, 100%, 0.1) !important;
+}
+
+/* حذف رنگ پس‌زمینه برای گزینه‌های highlight */
+.choices__inner,
+.choices__list,
+.choices__input {
+
+    @apply !bg-bgGray;
+}
+
+.choices__item.is-highlighted {
+
+    @apply !bg-darkGray;
+}
+
+.choices__list.choices__list--dropdown {
+
+    @apply shadow-box
+}
+
+.choices__item--selectable {
+
+    @apply pr-5
 }

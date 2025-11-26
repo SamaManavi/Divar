@@ -8,6 +8,8 @@
     <title>دیوار: بزرگترین سایت نیازمندی های رایگان در ایران</title>
 
     <link rel="icon" href="images/logo.svg" type="image/png">
+    <link rel="stylesheet" href="./vendor/leaflet/leaflet.css">
+    <link rel="stylesheet" href="./vendor/choicejs/choices.min.css">
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
@@ -125,52 +127,61 @@
     <div class="flex items-center justify-between">
         <div class="flex flex-col gap-y-4">
             <span class="text-sm font-bold">دسته بندی</span>
-            <span class="text-sm text-secondary/70">سواری وانت</span>
+            <span id="subCategoryTitle" class="text-sm text-secondary/70">سواری وانت</span>
         </div>
-        <a href="#" class="p-3 rounded bg-red cursor-pointer text-sm text-primary">تغیر دسته بندی</a>
+        <a href="new-post.html" class="p-3 rounded bg-red cursor-pointer text-sm text-primary">تغیر دسته بندی</a>
     </div>
 
     <div class="flex flex-col gap-y-4">
         <span class="font-bold">شهر</span>
-        <select class="w-40 text-secondary/70">
-            <option value="" class="hidden">شهر را انتخاب کنید</option>
+        <select id="citySelectBox" class="w-40 text-secondary/70">
+            <option class="hidden"></option>
         </select>
     </div>
 
     <div class="flex flex-col gap-y-4">
         <span class="font-bold">محله</span>
-        <select class="border border-secondary/20 py-1 rounded px-2 text-secondary/70">
-            <option value="" class="hidden">محله را انتخاب کنید</option>
+        <select id="neighborSelectBox" class="border border-secondary/20 py-1 rounded px-2 text-secondary/70">
+            <option value="" class="hidden"></option>
         </select>
     </div>
 
     <div class="flex flex-col gap-y-4">
         <h3 class="font-bold">موقعیت مکانی</h3>
-        <div class="w-full h-96  rounded"></div>
+        <div id="map" class="w-full h-96  rounded"></div>
     </div>
 
+    <!--image-->
     <div class="flex flex-col gap-y-4">
 
         <h3 class="font-bold">عکس آگهی</h3>
         <span class="text-sm text-secondary/70">افزودنِ عکس بازدید آگهی شما را تا سه برابر افزایش می‌دهد.</span>
         <!--images-->
-        <div class="grid grid-cols-3 sm:grid-cols-4 gap-4">
+        <div id="selectedImagesContainer" class="grid grid-cols-3 sm:grid-cols-4 gap-4">
             <!--image-->
             <div class="flex flex-col items-center justify-center gap-y-2 border border-dashed border-red size-25">
-                <svg class="size-5">
-                    <use href="#image"></use>
-                </svg>
-                <span class="text-xs">انتخاب عکس</span>
+                <input type="file" id="newPostImagesInput" class="hidden" accept="image/*" multiple="">
+                <label for="newPostImagesInput">
+                    <svg class="size-5">
+                        <use href="#image"></use>
+                    </svg>
+                    <span class="text-xs">انتخاب عکس</span>
+                </label>
             </div>
         </div>
         <span class="text-sm text-secondary/70">تعداد عکس‌های انتخاب شده نباید بیشتر از 10 باشد.</span>
+    </div>
+
+    <!--productFields container-->
+    <div class="flex flex-col gap-y-4" id="productFieldsContainer">
+        <!--loaded from js-->
     </div>
 
     <div class="flex items-center justify-between">
 
         <h3 class="font-bold">مایل به معاوضه</h3>
         <label class="switch">
-            <input id="has-picture" type="checkbox">
+            <input id="exchange" type="checkbox">
             <span class="slider"></span>
         </label>
     </div>
@@ -178,23 +189,38 @@
     <div class="flex flex-col gap-y-4">
 
         <h3 class="font-bold">قیمت کل</h3>
-        <input type="number" placeholder="قیمت کل را وارد کنید" class="border border-secondary/20 focus:border-primary py-1.5 pr-2 rounded">
+        <input id="totalAmount" type="number" placeholder="قیمت کل را وارد کنید"
+               class="border border-secondary/20 focus:border-primary py-1.5 pr-2 rounded">
     </div>
 
     <div class="flex flex-col gap-y-4">
 
         <h3 class="font-bold">عنوان آگهی</h3>
-        <input type="number" placeholder="عنوان آگهی را وارد کنید" class="border border-secondary/20 focus:border-primary py-1.5 pr-2 rounded">
+        <input id="adName" type="text" placeholder="عنوان آگهی را وارد کنید"
+               class="border border-secondary/20 focus:border-primary py-1.5 pr-2 rounded">
     </div>
 
     <div class="flex flex-col gap-y-4">
 
         <h3 class="font-bold">توضیحات آگهی</h3>
-        <textarea rows="8" placeholder="توضیحات آگهی را وارد کنید"
+        <textarea id="description" rows="8" placeholder="توضیحات آگهی را وارد کنید"
                   class="w-full p-3 text-sm shadow-one outline-0 cursor-pointer focus:border-primary border border-secondary/20 rounded"></textarea>
     </div>
 
-
+    <div class="flex justify-end gap-x-4">
+        <a href="main.html" id="postCancelBtn" class="w-30 h-9.5 text-secondary flex items-center justify-center rounded hover:bg-secondary/20 border border-secondary cursor-pointer">
+            انصراف
+        </a>
+        <button id="postSubmitBtn" class="w-30 h-10 bg-red text-white flex items-center justify-center rounded  hover:bg-[#c35767] cursor-pointer">
+            تایید
+        </button>
+    </div>
 </main>
+
+
+<script src="./vendor/sweetalert2/sweetalert2@11.js"></script>
+<script src="./vendor/leaflet/leaflet.js"></script>
+<script src="./vendor/choicejs/choices.min.js"></script>
+<script src="./js/function/register-post.js" type="module"></script>
 </body>
 </html>
