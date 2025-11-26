@@ -218,9 +218,6 @@
   .top-0 {
     top: calc(var(--spacing) * 0);
   }
-  .top-1 {
-    top: calc(var(--spacing) * 1);
-  }
   .top-1\.5 {
     top: calc(var(--spacing) * 1.5);
   }
@@ -236,26 +233,11 @@
   .top-11 {
     top: calc(var(--spacing) * 11);
   }
-  .top-12 {
-    top: calc(var(--spacing) * 12);
-  }
-  .top-13 {
-    top: calc(var(--spacing) * 13);
-  }
-  .top-14 {
-    top: calc(var(--spacing) * 14);
-  }
   .top-15 {
     top: calc(var(--spacing) * 15);
   }
   .top-18 {
     top: calc(var(--spacing) * 18);
-  }
-  .top-21 {
-    top: calc(var(--spacing) * 21);
-  }
-  .top-22 {
-    top: calc(var(--spacing) * 22);
   }
   .right-0 {
     right: calc(var(--spacing) * 0);
@@ -281,9 +263,6 @@
   .left-0 {
     left: calc(var(--spacing) * 0);
   }
-  .left-1 {
-    left: calc(var(--spacing) * 1);
-  }
   .left-2 {
     left: calc(var(--spacing) * 2);
   }
@@ -292,21 +271,6 @@
   }
   .left-4 {
     left: calc(var(--spacing) * 4);
-  }
-  .left-70 {
-    left: calc(var(--spacing) * 70);
-  }
-  .left-80 {
-    left: calc(var(--spacing) * 80);
-  }
-  .left-90 {
-    left: calc(var(--spacing) * 90);
-  }
-  .left-100 {
-    left: calc(var(--spacing) * 100);
-  }
-  .z-2 {
-    z-index: 2;
   }
   .z-10 {
     z-index: 10;
@@ -429,6 +393,10 @@
   .inline-block {
     display: inline-block;
   }
+  .\!size-25 {
+    width: calc(var(--spacing) * 25) !important;
+    height: calc(var(--spacing) * 25) !important;
+  }
   .size-3 {
     width: calc(var(--spacing) * 3);
     height: calc(var(--spacing) * 3);
@@ -501,6 +469,9 @@
   .h-7 {
     height: calc(var(--spacing) * 7);
   }
+  .h-9\.5 {
+    height: calc(var(--spacing) * 9.5);
+  }
   .h-10 {
     height: calc(var(--spacing) * 10);
   }
@@ -521,9 +492,6 @@
   }
   .h-20 {
     height: calc(var(--spacing) * 20);
-  }
-  .h-21 {
-    height: calc(var(--spacing) * 21);
   }
   .h-24 {
     height: calc(var(--spacing) * 24);
@@ -1523,6 +1491,13 @@
       transition-duration: 300ms;
     }
   }
+  .group-hover\:flex {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        display: flex;
+      }
+    }
+  }
   .group-hover\:rotate-270 {
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
@@ -1548,6 +1523,13 @@
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
         color: var(--color-white);
+      }
+    }
+  }
+  .group-hover\:opacity-40 {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        opacity: 40%;
       }
     }
   }
@@ -1666,6 +1648,16 @@
         background-color: color-mix(in srgb, hsla(0, 0%, 100%, 0.56) 10%, transparent);
         @supports (color: color-mix(in lab, red, red)) {
           background-color: color-mix(in oklab, var(--color-secondary) 10%, transparent);
+        }
+      }
+    }
+  }
+  .hover\:bg-secondary\/20 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: color-mix(in srgb, hsla(0, 0%, 100%, 0.56) 20%, transparent);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--color-secondary) 20%, transparent);
         }
       }
     }
@@ -2077,7 +2069,7 @@
     right: 0;
     background-color: white;
     border-radius: 50px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
   .switch input:checked + .slider {
@@ -2144,6 +2136,35 @@
   .custom-checkbox:checked ~ .checkmark:after {
     animation: checkAnim 0.2s forwards;
   }
+}
+.choices__item--choice {
+  cursor: pointer;
+  padding: calc(var(--spacing) * 2);
+  color: var(--color-secondary);
+  &:hover {
+    @media (hover: hover) {
+      background-color: color-mix(in srgb, #ffffffde 10%, transparent);
+      @supports (color: color-mix(in lab, red, red)) {
+        background-color: color-mix(in oklab, var(--color-primary) 10%, transparent);
+      }
+    }
+  }
+}
+.choices__item--choice:hover {
+  background-color: hsla(0, 0%, 100%, 0.1) !important;
+}
+.choices__inner, .choices__list, .choices__input {
+  background-color: var(--color-bgGray) !important;
+}
+.choices__item.is-highlighted {
+  background-color: var(--color-darkGray) !important;
+}
+.choices__list.choices__list--dropdown {
+  --tw-shadow: 0 10px 30px 1px var(--tw-shadow-color, rgba(255, 255, 255, 0.08));
+  box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+}
+.choices__item--selectable {
+  padding-right: calc(var(--spacing) * 5);
 }
 @property --tw-rotate-x {
   syntax: "*";

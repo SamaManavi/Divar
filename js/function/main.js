@@ -13,6 +13,12 @@ const getAllSubSubCategory = async () => {
     return await response.json();
 }
 
+const getSingleSubSubCategory = async (categoryId) => {
+
+    const response = await fetch(`${baseUrl}/v1/category/sub/${categoryId}`);
+    return await response.json();
+}
+
 const categories = await getCategories();
 
 const showCategories = (categories, categoriesContainer, isSubCat, isSubSubCat, isSubSubCatSelected) => {
@@ -257,5 +263,6 @@ export {
     showFamousSearch,
     priceFormater,
     findCategoryParentNameById,
-    getAllSubSubCategory
+    getAllSubSubCategory,
+    getSingleSubSubCategory
 }
