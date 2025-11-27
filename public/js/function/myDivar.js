@@ -16,7 +16,7 @@ const renderModal = async (container) => {
     
         <ul class="divide-y divide-secondary/10 *:flex *:gap-x-3 *:items-center *:p-2 *:text-sm *:font-bold *:pr-4 *:py-2">
         
-            <li class="">
+            <li class="menuOptionLogin">
                             <svg class="size-4">
                                 <use href="#user"></use>
                             </svg>
@@ -25,43 +25,43 @@ const renderModal = async (container) => {
                                 <p class="pt-2" id="phoneNumberNavbar">${userInfo.phone}</p>
                             </div>     
                         </li>            
-            <li class="">
+            <li data-adrs="my-divar/verify.html" class="menuOptionLogin">
                             <svg class="size-4">
                                 <use href="#shield-check"></use>
                             </svg>
                             <span class="text-xs">تایید حساب کابری</span>
                         </li>
-            <li class="">
+            <li data-adrs="my-divar/posts.html" class="menuOptionLogin">
                 <svg class="size-4">
                                 <use href="#folder"></use>
                             </svg>
                 <span>آگهی های من</span>
             </li>      
-            <li class="">
+            <li data-adrs="my-divar/bookmarks.html" class="menuOptionLogin">
                             <svg class="size-4">
                                 <use href="#bookmark"></use>
                             </svg>
                             <span>نشان ها</span>
                         </li>
-            <li class="">
+            <li data-adrs="my-divar/note.html" class="menuOptionLogin">
                             <svg class="size-4">
                                 <use href="#paper"></use>
                             </svg>
                             <span>یادداشت ها</span>
                         </li>
-            <li class="">
+            <li data-adrs="my-divar/recent.html" class="menuOptionLogin">
                 <svg class="size-4">
                                 <use href="#history"></use>
                             </svg>
                 <span>بازدید های اخیر</span>
             </li>
-            <li class="">
+            <li class="menuOptionLogin">
                 <svg class="size-4">
                                 <use href="#setting"></use>
                             </svg>
                 <span>تنظیمات</span>
             </li>
-            <li class="">
+            <li class="menuOptionLogin">
                 <svg class="size-4">
                                 <use href="#logout"></use>
                             </svg>
@@ -133,9 +133,15 @@ document.addEventListener("click", () => {
 myDivarModal.addEventListener("click", (event) => {
 
     const menuOption = event.target.closest(".menuOption");
+    const menuOptionLogin = event.target.closest(".menuOptionLogin");
 
     if (menuOption) {
         loginModal();
+    }
+
+    if (menuOptionLogin) {
+
+        location.href = `${menuOptionLogin.dataset.adrs}`
     }
 });
 
