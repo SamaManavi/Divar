@@ -92,7 +92,63 @@
     </symbol>
 </svg>
 
-<header class="fixed top-0 h-15 z-20 w-full bg-bgGray shadow-one">
+<!--header desktop-->
+<header class="max-lg:hidden fixed top-0 z-20 h-20 w-full bg-bgGray shadow-one">
+    <div class="container">
+        <!--top bar laptop-->
+        <div class="flex h-full w-full justify-between items-center lg:px-10 py-4">
+
+            <!--right section-->
+            <div class="flex items-center lg:gap-x-2 xl:gap-x-4">
+
+                <!--logo-->
+                <div class="flex items-center gap-5">
+                    <img src="./images/logo.svg" class="size-14" alt="logo">
+                    <span class="w-px h-6 bg-[#2c2c30]"></span>
+                </div>
+
+                <!--city name-->
+                <div id="cityModalBtnDesktop"
+                     class="group flex items-center justify-center h-11 w-20 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
+                    <svg class="size-5 group-hover:text-white">
+                        <use href="#location"></use>
+                    </svg>
+                    <span id="city-name-desktop" class="font-bold text-sm group-hover:text-white">تهران</span>
+                </div>
+
+            </div>
+
+            <!--left section-->
+            <div class="flex items-center lg:gap-x-2 xl:gap-x-4">
+
+                <!--chat-->
+                <div class="group flex items-center justify-center h-11 w-30 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
+                    <svg class="size-5 group-hover:text-white">
+                        <use href="#chat"></use>
+                    </svg>
+                    <span class="font-bold text-sm group-hover:text-white">چت و تماس</span>
+                </div>
+
+                <!--support-->
+                <div class="group flex items-center justify-center h-11 w-25 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
+                    <svg class="size-5 group-hover:text-white">
+                        <use href="#support"></use>
+                    </svg>
+                    <span class="font-bold text-sm group-hover:text-white">پشتبانی</span>
+                </div>
+
+                <!--register an ad-->
+                <a href="../new-post.html" id="registerAd"
+                   class="group flex items-center justify-center h-11 w-25 gap-x-2 rounded cursor-pointer bg-[#D14757] hover:bg-[#db707d] transition-colors duration-300">
+                    <span class="text-[#242424] font-bold">ثبت آگهی</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!--header mobile-->
+<header class="fixed top-0 h-15 z-20 w-full bg-bgGray shadow-one px-5 lg:hidden">
     <!--top bar laptop-->
     <div class="flex items-center gap-x-3 h-full w-full px-5">
         <svg class="size-5">
@@ -101,6 +157,7 @@
         <span class="text-sm">بازگشت</span>
     </div>
 </header>
+
 <main class="max-w-120 mx-auto max-sm:px-2.5 mt-30 mb-20 space-y-10">
 
     <!--title-->

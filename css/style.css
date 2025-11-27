@@ -287,6 +287,9 @@
   .z-100000 {
     z-index: 100000;
   }
+  .z-\[-9999999999\] {
+    z-index: -9999999999;
+  }
   .col-span-2 {
     grid-column: span 2 / span 2;
   }
@@ -347,6 +350,9 @@
   }
   .mt-30 {
     margin-top: calc(var(--spacing) * 30);
+  }
+  .mr-2 {
+    margin-right: calc(var(--spacing) * 2);
   }
   .mr-10 {
     margin-right: calc(var(--spacing) * 10);
@@ -487,6 +493,9 @@
   .h-15 {
     height: calc(var(--spacing) * 15);
   }
+  .h-16 {
+    height: calc(var(--spacing) * 16);
+  }
   .h-18 {
     height: calc(var(--spacing) * 18);
   }
@@ -597,6 +606,9 @@
   }
   .max-w-300 {
     max-width: calc(var(--spacing) * 300);
+  }
+  .max-w-360 {
+    max-width: calc(var(--spacing) * 360);
   }
   .max-w-full {
     max-width: 100%;
@@ -1149,6 +1161,9 @@
   .text-start {
     text-align: start;
   }
+  .font-vazir {
+    font-family: var(--font-vazir);
+  }
   .text-base {
     font-size: var(--text-base);
     line-height: var(--tw-leading, var(--text-base--line-height));
@@ -1478,6 +1493,11 @@
       transition-duration: 300ms;
     }
   }
+  .\*\*\:cursor-pointer {
+    :is(& *) {
+      cursor: pointer;
+    }
+  }
   .\*\*\:transition-colors {
     :is(& *) {
       transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
@@ -1790,6 +1810,11 @@
       padding-top: calc(var(--spacing) * 5);
     }
   }
+  .max-lg\:pt-40 {
+    @media (width < 64rem) {
+      padding-top: calc(var(--spacing) * 40);
+    }
+  }
   .max-lg\:pb-24 {
     @media (width < 64rem) {
       padding-bottom: calc(var(--spacing) * 24);
@@ -1978,9 +2003,19 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
+  .xl\:gap-x-2 {
+    @media (width >= 80rem) {
+      column-gap: calc(var(--spacing) * 2);
+    }
+  }
   .xl\:gap-x-4 {
     @media (width >= 80rem) {
       column-gap: calc(var(--spacing) * 4);
+    }
+  }
+  .xl\:px-4 {
+    @media (width >= 80rem) {
+      padding-inline: calc(var(--spacing) * 4);
     }
   }
   .xl\:pr-8 {
