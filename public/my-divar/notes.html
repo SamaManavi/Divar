@@ -119,75 +119,71 @@
 </svg>
 
 <!--header desktop-->
-<header class="h-16 shadow-one hidden lg:block bg-bgGray fixed top-0 left-0 right-0 z-50">
-    <nav class="max-w-360 h-full mx-auto flex justify-between px-4">
-        <div class="header-right flex items-center gap-x-2 xl:gap-x-4">
-            <!-- logo -->
-            <div class="logo">
-                <a href="../main.html"><img class="size-12" src="../images/logo.svg" alt="logo"></a>
-            </div>
-            <!-- divider -->
-            <span class="w-px h-6 bg-[#2c2c30]"></span>
-            <!--cities-->
-            <div class="flex items-center">
-                <div id="cities-modal-btn-laptop" class="h-10 flex items-center gap-x-2 text-secondary px-3 xl:px-4 hover:bg-darkGray hover:text-primary rounded-sm transition-colors duration-300 cursor-pointer">
-                    <svg class="size-5">
+<header class="max-lg:hidden fixed z-20 h-20 w-full bg-bgGray shadow-one">
+    <div class="container">
+        <!--top bar laptop-->
+        <div class="flex h-full w-full justify-between items-center lg:px-10 py-4">
+
+            <!--right section-->
+            <div class="flex items-center lg:gap-x-2 xl:gap-x-4">
+
+                <!--logo-->
+                <div class="flex items-center gap-5">
+                    <img src="../images/logo.svg" class="size-14" alt="logo">
+                    <span class="w-px h-6 bg-[#2c2c30]"></span>
+                </div>
+
+                <!--city name-->
+                <div id="cityModalBtnDesktop"
+                     class="group flex items-center justify-center h-11 w-20 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
+                    <svg class="size-5 group-hover:text-white">
                         <use href="#location"></use>
                     </svg>
-                    <span class="cityNameNavbar text-sm font-bold">تهران</span>
+                    <span id="city-name-desktop" class="font-bold text-sm group-hover:text-white">تهران</span>
                 </div>
-            </div>
-        </div>
 
-        <div class="header-left flex items-center gap-x-1 xl:gap-x-2 text-secondary text-sm font-bold">
-            <div class="h-10 flex items-center px-4 rounded-sm hover:bg-darkGray hover:text-primary transition-colors duration-300 cursor-pointer **:cursor-pointer">
-                <a href="#" class="flex items-center gap-x-2">
-                    <svg class="size-5">
+            </div>
+
+            <!--left section-->
+            <div class="flex items-center lg:gap-x-2 xl:gap-x-4">
+
+                <!--chat-->
+                <div class="group flex items-center justify-center h-11 w-30 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
+                    <svg class="size-5 group-hover:text-white">
                         <use href="#chat"></use>
                     </svg>
-                    چت و تماس
-                </a>
-            </div>
-            <div class="dropdown h-10 flex items-center px-4 rounded-sm hover:bg-darkGray hover:text-primary transition-colors duration-300 cursor-pointer **:cursor-pointer">
-                <button class="drop-btn flex items-center gap-x-2">
-                    <svg class="size-5">
+                    <span class="font-bold text-sm group-hover:text-white">چت و تماس</span>
+                </div>
+
+                <!--support-->
+                <div class="group flex items-center justify-center h-11 w-25 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
+                    <svg class="size-5 group-hover:text-white">
                         <use href="#support"></use>
                     </svg>
-                    پشتبانی
-                </button>
-            </div>
-            <button class="newPostBtn h-10 flex items-center px-4 rounded-sm bg-[#D14757] hover:bg-[#db707d] text-[#242424] font-vazir font-medium mr-2 transition-colors duration-300 cursor-pointer **:cursor-pointer">
-                ثبت آگهی
-            </button>
-        </div>
-    </nav>
-</header>
-<!--header mobile-->
-<header class="fixed z-20 h-18 w-full bg-darkGray px-5 shadow-md lg:hidden">
-    <!--top section search -->
-    <div class="flex items-center size-full">
-        <div class="flex items-center justify-between h-12 w-full bg-bgGray border border-secondary rounded-sm p-5">
-            <span class="text-sm"> جستجو در همه آگهی ها</span>
-
-            <!--city name-->
-            <div class="flex items-center gap-x-4 divide-x divide-secondary/40">
-                <button class="pl-4">
-                    <svg class="size-5">
-                        <use href="#magnifying-glass"></use>
-                    </svg>
-                </button>
-                <div class="flex items-center gap-x-2">
-                    <span class="text-sm">تهران</span>
-                    <button class="">
-                        <svg class="size-5">
-                            <use href="#location"></use>
-                        </svg>
-                    </button>
+                    <span class="font-bold text-sm group-hover:text-white">پشتبانی</span>
                 </div>
+
+                <!--register an ad-->
+                <a href="../new-post.html" id="registerAd"
+                   class="group flex items-center justify-center h-11 w-25 gap-x-2 rounded cursor-pointer bg-[#D14757] hover:bg-[#db707d] transition-colors duration-300">
+                    <span class="text-[#242424] font-bold">ثبت آگهی</span>
+                </a>
             </div>
         </div>
     </div>
 </header>
+
+<!--header mobile-->
+<header class="fixed top-0 h-15 z-20 w-full bg-bgGray shadow-one px-5 lg:hidden">
+    <!--top bar laptop-->
+    <div class="flex items-center gap-x-3 h-full w-full px-5">
+        <svg class="size-5">
+            <use href="#arrow-right"></use>
+        </svg>
+        <span class="text-sm">بازگشت</span>
+    </div>
+</header>
+
 
 <!-- main content -->
 <section class="container overflow-visible">
@@ -337,16 +333,14 @@
 <!--overlay-->
 <div id="modal-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-[1px] z-30 hidden"></div>
 
-<!--&lt;!&ndash;loader&ndash;&gt;-->
-<!--<div id="loader" class="w-full h-screen fixed inset-0 flex items-center justify-center bottom-16 bg-bgGray z-50">-->
-<!--    <div class="w-10 h-10 border-4 border-t-red border-gray-300 rounded-full animate-spin"></div>-->
-<!--</div>-->
+<!--loader-->
+<div id="loader" class="w-full h-screen fixed inset-0 flex items-center justify-center bottom-16 bg-bgGray z-50">
+    <div class="w-10 h-10 border-4 border-t-red border-gray-300 rounded-full animate-spin"></div>
+</div>
 
-<!--<script src="../vendor/sweetalert2/sweetalert2@11.js"></script>-->
-<!--<script src="../js/pages/shared.js" type="module"></script>-->
-<!--<script src="../js/pages/my-divar/shared.js" type="module"></script>-->
-<!--<script src="../js/utils/citiesModal.js" type="module"></script>-->
-<!--<script src="../js/script.js" type="module"></script>-->
-<!--<script src="../js/pages/my-divar/notes.js" type="module"></script>-->
+<script src="../vendor/sweetalert2/sweetalert2@11.js"></script>
+<script src="../js/pages/myDivar/shared.js" type="module"></script>
+<script src="../js/pages/myDivar/notes.js" type="module"></script>
+
 </body>
 </html>

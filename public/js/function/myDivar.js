@@ -114,15 +114,14 @@ const renderModal = async (container) => {
     `);
     }
 }
-const getBookmarks = async () => {
+const getBookmarks = async (page) => {
 
-    const response = await fetch(`${baseUrl}/v1/user/bookmarks`, {
+    const response = await fetch(`${baseUrl}/v1/user/bookmarks?page=${page}&limit=8`, {
 
         headers: {Authorization: `Bearer ${getToken()}`},
     });
     return (await response.json()).data;
 }
-
 const deletePostBookmarked = async (postId) => {
 
     const response = await fetch(`${baseUrl}/v1/bookmark/${postId}`, {
@@ -139,8 +138,6 @@ const renderBookmarkedCard = (posts, myBookmarksContainer) => {
 
     if (posts.length) {
 
-        myBookmarksContainer.innerHTML = "";
-
         noBookmark.classList.add("hidden")
 
         posts.forEach((post) => {
@@ -155,11 +152,11 @@ const renderBookmarkedCard = (posts, myBookmarksContainer) => {
                         <div class="card-footer">
                             <div class="details">
                                 <p>${post.dynamicFields[0].data}</p>
-                                <p>${post.price === 0 ? 'توافقی' : `${post.price}تومان`}</p>
+                                <p>${post.price === 0 ? 'توافقی' : `${post.price.toLocaleString()}تومان`}</p>
                             </div>
                             <div class="time-location">
                                 <span class="red-text">${calculateTimePassed(post.createdAt)}</span>
-                                <span>${post.neighborhood.name}</span>
+                                <span>${post.city.name}</span>
                             </div>
                         </div>
                     </div>
@@ -194,8 +191,37 @@ const renderBookmarkedCard = (posts, myBookmarksContainer) => {
         noBookmark.classList.remove("hidden")
     }
 }
+const getNotes = async () => {
 
+    const response = await fetch(`${baseUrl}/v1/user/notes`, {
 
+        headers: {Authorization: `Bearer ${getToken()}`},
+    });
+    return (await response.json()).data;
+}
 
-export {renderModal, getBookmarks, deletePostBookmarked, renderBookmarkedCard}
+const renderNoteCard = (posts, myNotesContainer) => {
+
+    const noNote = document.querySelector("#noNote");
+
+    if (posts.length) {
+
+        myNotesContainer.innerHTML = "";
+
+        noNote.classList.add("hidden")
+
+        posts.forEach((note) => {
+
+            myNotesContainer.insertAdjacentHTML("beforeend", `
+                
+        `)
+        });
+
+    } else {
+
+        noNote.classList.remove("hidden")
+    }
+}
+
+export {renderModal, getBookmarks, deletePostBookmarked, renderBookmarkedCard, renderNoteCard, getNotes}
 
