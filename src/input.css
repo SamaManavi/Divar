@@ -194,6 +194,75 @@
         animation: checkAnim 0.2s forwards;
     }
 
+    .ad-card {
+        @apply p-1 md:p-2;
+
+        article {
+            @apply flex flex-col border border-[#fff]/8
+        }
+
+        .content {
+            @apply flex p-4 rounded-sm;
+        }
+
+        .info {
+            @apply w-full flex flex-col justify-between  text-secondary text-sm/6;
+
+            .title {
+                @apply text-sm md:text-base/7 line-clamp-2 font-bold overflow-hidden text-primary ;
+            }
+
+            .details {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .time-location {
+
+                overflow: hidden !important;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+
+                @apply pr-0.5 text-xs lg:text-sm font-bold md:font-normal ;
+
+                .red-text {
+                    @apply text-[#d14757];
+                }
+            }
+
+        }
+
+        .image {
+
+            @apply relative min-w-34 h-34 flex justify-center;
+
+            img {
+                @apply mr-1 rounded-sm;
+            }
+
+            .up {
+                @apply absolute top-1 left-1 flex items-center gap-x-1 text-[#fafafa] text-xs/6 font-bold bg-[#000000b3] pl-2 pr-1 rounded-sm;
+
+                img {
+                    @apply size-4
+                }
+
+            }
+
+            .down {
+                @apply absolute bottom-1;
+
+                div {
+                    @apply flex items-center justify-center gap-x-1 text-[#fafafa] text-xs/6 font-bold bg-[#000000b3] rounded-sm pl-2 pr-1;
+                }
+
+                img {
+                    @apply size-4
+                }
+            }
+        }
+    }
 }
 
 @utility container {
@@ -231,3 +300,4 @@
 
     @apply pr-5
 }
+

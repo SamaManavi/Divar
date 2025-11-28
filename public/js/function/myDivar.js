@@ -1,7 +1,6 @@
-import {isLogin, loginModal} from "./auth.js";
+import {isLogin} from "./auth.js";
+import {baseUrl, calculateTimePassed, getToken} from "./utils.js";
 
-const myDivarBtnDesk = document.querySelector("#myDivarBtn");
-const myDivarModal = document.querySelector("#myDivarModal");
 
 const renderModal = async (container) => {
 
@@ -115,35 +114,88 @@ const renderModal = async (container) => {
     `);
     }
 }
+const getBookmarks = async () => {
 
-// open dropdown
-myDivarBtnDesk.addEventListener("click", async (event) => {
+    const response = await fetch(`${baseUrl}/v1/user/bookmarks`, {
 
-    event.stopPropagation();
-    myDivarModal.classList.remove("hidden");
-    await renderModal(myDivarModal);
-});
+        headers: {Authorization: `Bearer ${getToken()}`},
+    });
+    return (await response.json()).data;
+}
 
-// close dropdown
-document.addEventListener("click", () => {
+const deletePostBookmarked = async (postId) => {
 
-    myDivarModal.classList.add("hidden");
-})
+    const response = await fetch(`${baseUrl}/v1/bookmark/${postId}`, {
+        method: "DELETE", headers: {Authorization: `Bearer ${getToken()}`},
+    });
 
-myDivarModal.addEventListener("click", (event) => {
-
-    const menuOption = event.target.closest(".menuOption");
-    const menuOptionLogin = event.target.closest(".menuOptionLogin");
-
-    if (menuOption) {
-        loginModal();
+    if (response.ok) {
+        return (await response.json()).data;
     }
+}
+const renderBookmarkedCard = (posts, myBookmarksContainer) => {
 
-    if (menuOptionLogin) {
+    const noBookmark = document.querySelector("#noBookmark");
 
-        location.href = `${menuOptionLogin.dataset.adrs}`
+    if (posts.length) {
+
+        myBookmarksContainer.innerHTML = "";
+
+        noBookmark.classList.add("hidden")
+
+        posts.forEach((post) => {
+
+            myBookmarksContainer.insertAdjacentHTML("beforeend", `
+
+            <div class="ad-card">
+            <article>
+                <a href="../post.html?id=${post._id}" class="content">
+                    <div class="info">
+                        <h3 class="title">${post.title}</h3>
+                        <div class="card-footer">
+                            <div class="details">
+                                <p>${post.dynamicFields[0].data}</p>
+                                <p>${post.price === 0 ? 'توافقی' : `${post.price}تومان`}</p>
+                            </div>
+                            <div class="time-location">
+                                <span class="red-text">${calculateTimePassed(post.createdAt)}</span>
+                                <span>${post.neighborhood.name}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image"> 
+                    ${post.pics.length ? `
+                        <img src="${baseUrl}/${post.pics[0].path}" alt="">
+                    ` : `
+                        <div class="w-full flex items-center justify-center bg-stone-900/40">
+                            <img src="../images/no-camera.png" alt="">
+                        </div>
+                    `}  
+                              
+                    </div>
+                    
+                </a>
+                <div class="w-full p-4">
+                    <button id="${post._id}" class="deleteBookmark w-full flex items-center justify-center gap-x-2 border border-secondary/50 text-secondary py-2 cursor-pointer hover:bg-secondary/5">
+                        <svg class="size-5">
+                                    <use href="#trash"></use>
+                                </svg>
+                        <span class="text-sm">حذف نشان</span>
+                    </button>
+                </div>
+            </article>
+
+        </div>
+        `)
+        });
+
+    } else {
+
+        noBookmark.classList.remove("hidden")
     }
-});
+}
 
-export {renderModal}
+
+
+export {renderModal, getBookmarks, deletePostBookmarked, renderBookmarkedCard}
 
