@@ -42,7 +42,7 @@ const renderModal = async (container) => {
                             </svg>
                             <span>نشان ها</span>
                         </li>
-            <li data-adrs="my-divar/note.html" class="menuOptionLogin">
+            <li data-adrs="my-divar/notes.html" class="menuOptionLogin">
                             <svg class="size-4">
                                 <use href="#paper"></use>
                             </svg>
@@ -116,7 +116,7 @@ const renderModal = async (container) => {
 }
 const getBookmarks = async (page) => {
 
-    const response = await fetch(`${baseUrl}/v1/user/bookmarks?page=${page}&limit=8`, {
+    const response = await fetch(`${baseUrl}/v1/user/bookmarks?page=${page}`, {
 
         headers: {Authorization: `Bearer ${getToken()}`},
     });
@@ -160,17 +160,19 @@ const renderBookmarkedCard = (posts, myBookmarksContainer) => {
                             </div>
                         </div>
                     </div>
-                    <div class="image"> 
+                    <div class="flex-1">
+                                        <div class="relative w-34 h-34 flex justify-center"> 
                     ${post.pics.length ? `
-                        <img src="${baseUrl}/${post.pics[0].path}" alt="">
+                        <img class="shrink-0 size-full" src="${baseUrl}/${post.pics[0].path}" alt="">
                     ` : `
                         <div class="w-full flex items-center justify-center bg-stone-900/40">
-                            <img src="../images/no-camera.png" alt="">
+                            <img class="shrink-0" src="../images/no-camera.png" alt="">
                         </div>
                     `}  
                               
                     </div>
-                    
+
+                </div>
                 </a>
                 <div class="w-full p-4">
                     <button id="${post._id}" class="deleteBookmark w-full flex items-center justify-center gap-x-2 border border-secondary/50 text-secondary py-2 cursor-pointer hover:bg-secondary/5">
@@ -181,7 +183,6 @@ const renderBookmarkedCard = (posts, myBookmarksContainer) => {
                     </button>
                 </div>
             </article>
-
         </div>
         `)
         });
@@ -191,30 +192,56 @@ const renderBookmarkedCard = (posts, myBookmarksContainer) => {
         noBookmark.classList.remove("hidden")
     }
 }
-const getNotes = async () => {
+const getNotes = async (page) => {
 
-    const response = await fetch(`${baseUrl}/v1/user/notes`, {
+    const response = await fetch(`${baseUrl}/v1/user/notes?page=${page}`, {
 
         headers: {Authorization: `Bearer ${getToken()}`},
     });
     return (await response.json()).data;
 }
-
 const renderNoteCard = (posts, myNotesContainer) => {
 
     const noNote = document.querySelector("#noNote");
 
     if (posts.length) {
 
-        myNotesContainer.innerHTML = "";
-
         noNote.classList.add("hidden")
 
-        posts.forEach((note) => {
+        posts.forEach((post) => {
 
             myNotesContainer.insertAdjacentHTML("beforeend", `
-                
-        `)
+                <article>
+                    <div class="relative">
+                        <a href="#" class="flex gap-x-4 border border-secondary/20 p-4">
+                            <div class="">
+                                        <div class="relative w-34 h-34 flex justify-center"> 
+                    ${post.pics.length ? `
+                        <img class="shrink-0 size-full" src="${baseUrl}/${post.pics[0].path}" alt="">
+                    ` : `
+                        <div class="w-full flex items-center justify-center bg-stone-900/40">
+                            <img class="shrink-0" src="../images/no-camera.png" alt="">
+                        </div>
+                    `}  
+                              
+                    </div>
+
+                </div>
+                            <div class="flex-1">
+                                <h2 class="text-secondary text-xl py-3">${post.title}</h2>
+                                <span class="line-clamp-3 leading-[20px] overflow-hidden text-secondary/80 text-xs">
+                                ${post.note.content}
+                                </span>
+                            </div>
+                        </a>
+                        <div id="${post.note._id}" class="postNoteDelete absolute bottom-4 left-4 cursor-pointer text-secondary hover:text-primary">
+                            <svg class="size-5">
+                                <use href="#trash"></use>
+                            </svg>
+                        </div>
+                    </div>
+                </article>
+            `)
         });
 
     } else {
@@ -222,6 +249,16 @@ const renderNoteCard = (posts, myNotesContainer) => {
         noNote.classList.remove("hidden")
     }
 }
+const deleteNote = async (noteId) => {
 
-export {renderModal, getBookmarks, deletePostBookmarked, renderBookmarkedCard, renderNoteCard, getNotes}
+    const response = await fetch(`${baseUrl}/v1/note/${noteId}`, {
+        method: "DELETE", headers: {Authorization: `Bearer ${getToken()}`},
+    });
+
+    if (response.ok) {
+        return (await response.json()).data;
+    }
+}
+
+export {renderModal, getBookmarks, deletePostBookmarked, renderBookmarkedCard, renderNoteCard, getNotes, deleteNote}
 

@@ -1,22 +1,22 @@
-import {deletePostBookmarked, getBookmarks, renderBookmarkedCard} from "../../function/myDivar.js";
+import {deleteNote, getBookmarks, getNotes, renderBookmarkedCard, renderNoteCard} from "../../function/myDivar.js";
 
-const myBookmarksContainer = document.querySelector("#myBookmarksContainer");
+const myNotesContainer = document.querySelector("#myNotesContainer");
 const loader = document.querySelector("#loader");
-const miniLoader = document.querySelector(".miniLoader");
+const miniLoader = document.querySelector("#miniLoader");
 
 
-let bookmarksInfo = await getBookmarks(1);
-let posts = bookmarksInfo.posts;
-let pagination = bookmarksInfo.pagination;
+let notesInfo = await getNotes(1);
+let posts = notesInfo.posts;
+let pagination = notesInfo.pagination;
 
 // show bookmarks
-renderBookmarkedCard(posts, myBookmarksContainer);
+renderNoteCard(posts, myNotesContainer);
 loader.classList.add("hidden");
 
 // delete bookmarks
-myBookmarksContainer.addEventListener("click", (event) => {
+myNotesContainer.addEventListener("click", (event) => {
 
-    const deleteBtn = event.target.closest(".deleteBookmark");
+    const deleteBtn = event.target.closest(".postNoteDelete ");
 
     if (deleteBtn) {
 
@@ -39,7 +39,7 @@ myBookmarksContainer.addEventListener("click", (event) => {
             if (result.isConfirmed) {
 
                 loader.classList.remove("hidden");
-                await deletePostBookmarked(deleteBtn.id);
+                await deleteNote(deleteBtn.id);
                 location.reload();
                 loader.classList.add("hidden");
             }
@@ -47,10 +47,11 @@ myBookmarksContainer.addEventListener("click", (event) => {
     }
 });
 
-// pagination
+
 let currentPage = 2;
 let totalPages = pagination.totalPages;
 let isLoading = false;
+
 
 const loadMore = async () => {
 
@@ -61,12 +62,12 @@ const loadMore = async () => {
 
     try {
 
-        const data = await getBookmarks(currentPage);
+        const data = await getNotes(currentPage);
 
         currentPage = +data.pagination.page + 1;
         totalPages = data.pagination.totalPages;
 
-        renderBookmarkedCard(data.posts, myBookmarksContainer);
+        renderNoteCard(data.posts, myNotesContainer);
 
     } catch (e) {
         console.log(e);
