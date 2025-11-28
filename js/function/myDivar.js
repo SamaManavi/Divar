@@ -60,7 +60,7 @@ const renderModal = async (container) => {
                             </svg>
                 <span>تنظیمات</span>
             </li>
-            <li class="menuOptionLogin">
+            <li class="Exit">
                 <svg class="size-4">
                                 <use href="#logout"></use>
                             </svg>
@@ -259,6 +259,77 @@ const deleteNote = async (noteId) => {
         return (await response.json()).data;
     }
 }
+const getAllUsersPosts = async () => {
 
-export {renderModal, getBookmarks, deletePostBookmarked, renderBookmarkedCard, renderNoteCard, getNotes, deleteNote}
+    const response = await fetch(`${baseUrl}/v1/user/posts?limit=1000`, {
+
+        headers: {Authorization: `Bearer ${getToken()}`},
+    });
+    return (await response.json()).data;
+}
+const renderPostsCard = (posts, myPostsContainer) => {
+
+    const noPost = document.querySelector("#noPost");
+
+    myPostsContainer.innerHTML = "";
+    
+    if (posts.length) {
+
+        noPost.classList.add("hidden");
+
+        posts.forEach((post) => {
+            myPostsContainer.insertAdjacentHTML("beforeend", `
+                    <article class="border-b border-secondary/20 p-4">
+                        <a href="${post.status === 'published' ? `../post.html?id=${post._id}` : `#`}" class="flex justify-between flex-col lg:flex-row gap-2">
+                            <div class="flex items-start gap-x-4">
+                                <div class="size-25">
+                                    ${post.pics.length ? `
+                                            <img class="size-full rounded" src="${baseUrl}/${post.pics[0].path}" alt="">
+                                    ` : `
+                                            <div class="size-full flex items-center justify-center bg-stone-900/40 rounded">
+                                               <img src="../images/no-camera.png" alt="">
+                                            </div> 
+                                    `}
+                                </div>
+                                <div class="text-secondary overflow-hidden">
+                                    <h1 class="text-ls font-bold py-1">${post.title}</h1>
+                                    <p class="text-xs pt-6">${post.price === 0 ? 'توافقی' : post.price.toLocaleString() + ' تومان '}</p>
+                                    <span class="text-xs pt-2">${calculateTimePassed(post.createdAt)}</span>
+                                    <span class="text-secondary"> در ${post.city.name}, ${post.neighborhood?.name}</span>
+                                </div>
+                            </div>
+                            <div class="flex lg:flex-col justify-between">
+                                <div class="flex items-start gap-x-2 pt-1">
+                                    <h3 class="text-secondary text-base font-bold">وضعیت آگهی:</h3>
+                                    ${post.status === 'published' ? '<span class="text-sm text-green-500 font-bold pt-px">تایید شده</span>' : ''}
+                                    ${post.status === 'rejected' ? '<span class="text-sm text-red font-bold pt-px">رد شده</span>' : ''}
+                                    ${post.status === 'pending' ? '<span class="text-sm text-orange-400 font-bold pt-px">در صف انتظار</span>' : ''}
+                                </div>
+                                <div class="flex justify-end">
+                                    <button class="h-10 border border-red text-red px-4 rounded cursor-pointer hover:bg-red hover:text-white transition-colors">حذف آگهی</button>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                `)
+        })
+
+    } else {
+
+        noPost.classList.remove("hidden")
+    }
+}
+
+
+export {
+    renderModal,
+    getBookmarks,
+    deletePostBookmarked,
+    renderBookmarkedCard,
+    renderNoteCard,
+    getNotes,
+    deleteNote,
+    getAllUsersPosts,
+    renderPostsCard
+}
 

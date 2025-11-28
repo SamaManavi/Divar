@@ -1,4 +1,4 @@
-import {baseUrl, getToken, saveInLocalStorage} from "./utils.js";
+import {baseUrl, getToken, removeFromLocalStorage, saveInLocalStorage} from "./utils.js";
 import {renderSwalToast} from "./shared.js";
 
 document.body.insertAdjacentHTML("beforeend", `
@@ -243,6 +243,33 @@ const checkVerificationOfOTP = async (phoneNumber, OTPCode) => {
     return {status: response.ok, token: (await response.json()).data.token};
 }
 
+const logOut = () => {
+
+    Swal.fire({
+        title: "آیا از خروج مطمئن هستید؟",
+        icon: 'question',
+        showCancelButton: true,
+        cancelButtonText: 'خیر',
+        showConfirmButton: true,
+        confirmButtonText: 'بله',
+        reverseButtons: true,
+        customClass: {
+            popup: '!bg-bgGray',
+            title: '!text-xl !text-white',
+            confirmButton: '!bg-red !text-white !px-8 !py-2.5',
+            cancelButton: '!bg-transparent !border !border-secondary !text-secondary !px-8 !py-2'
+        }
+    }).then(async (result) => {
+
+        if (result.isConfirmed) {
+
+            removeFromLocalStorage('token');
+            location.reload();
+        }
+    });
+
+}
+
 
 // close modal
 modalLogin.addEventListener("click", (event) => {
@@ -337,4 +364,4 @@ backToStep1.addEventListener("click", () => {
     switchStep('signIn');
 })
 
-export {loginModal, isLogin}
+export {loginModal, isLogin, logOut}
