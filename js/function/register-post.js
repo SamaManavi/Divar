@@ -12,6 +12,7 @@ const exchange = document.querySelector("#exchange");
 const totalAmount = document.querySelector("#totalAmount");
 const adName = document.querySelector("#adName");
 const descriptionElm = document.querySelector("#description");
+const comeback = document.querySelector("#comeback");
 
 
 const subSubCatId = getFromSearchParam("categoryID");
@@ -282,3 +283,5 @@ postSubmitBtn.addEventListener("click", async () => {
         renderSwalToast("warning", "لطفا همه فیلد هارا پر کنید!");
     }
 });
+
+comeback.addEventListener("click", () => history.back());

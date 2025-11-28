@@ -58,6 +58,9 @@ const searchSubSubCatInput = document.querySelector("#searchSubSubCatInput");
 const searchCategoriesContainer = document.querySelector("#searchCategoriesContainer");
 const emptySearch = document.querySelector("#empty-search");
 const categorySearchModal = document.querySelector("#categorySearchModal");
+const comeback = document.querySelector("#comeback");
+
+comeback.addEventListener("click", () => history.back());
 
 let page = 0;
 
