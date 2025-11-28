@@ -1,4 +1,4 @@
-import {loginModal} from "../function/auth.js";
+import {loginModal, logOut} from "../function/auth.js";
 import {renderModal} from "../function/myDivar.js";
 
 
@@ -23,6 +23,7 @@ myDivarModal.addEventListener("click", (event) => {
 
     const menuOption = event.target.closest(".menuOption");
     const menuOptionLogin = event.target.closest(".menuOptionLogin");
+    const Exit = event.target.closest(".Exit");
 
     if (menuOption) {
         loginModal();
@@ -31,5 +32,9 @@ myDivarModal.addEventListener("click", (event) => {
     if (menuOptionLogin) {
 
         location.href = `${menuOptionLogin.dataset.adrs}`
+    }
+
+    if (Exit){
+        logOut();
     }
 });

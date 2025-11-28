@@ -373,14 +373,13 @@
                 </div>
             </div>
             <div>
-                <div id="noPost" class="flex justify-center flex-col items-center hidden">
+                <div id="noPost" class="flex justify-center flex-col items-center">
                     <span class="text-secondary text-xs py-6">هیچ آگهی ایی یافت نشد.</span>
                 </div>
                 <div id="myPostsContainer" class="flex-1 space-y-4">
 
                 </div>
             </div>
-            <div id="paginationContainer" class="flex justify-center py-6"></div>
         </main>
     </div>
 </section>
@@ -389,11 +388,12 @@
 <div id="modal-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-[1px] z-30 hidden"></div>
 
 <!--loader-->
-<div id="loader" class="w-full h-screen fixed inset-0 flex items-center justify-center bottom-16 bg-bgGray z-50">
+<div id="loader" class="w-full h-screen fixed inset-0 flex items-center justify-center bottom-16 bg-bgGray z-50 hidden">
     <div class="w-10 h-10 border-4 border-t-red border-gray-300 rounded-full animate-spin"></div>
 </div>
 
 <script src="../vendor/sweetalert2/sweetalert2@11.js"></script>
-<script src="../js/pages/posts.js" type="module"></script>
+<script src="../js/pages/myDivar/shared.js" type="module"></script>
+<script src="../js/pages/myDivar/posts.js" type="module"></script>
 </body>
 </html>
