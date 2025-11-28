@@ -2,13 +2,12 @@ import {deletePostBookmarked, getBookmarks, renderBookmarkedCard} from "../../fu
 
 const myBookmarksContainer = document.querySelector("#myBookmarksContainer");
 const loader = document.querySelector("#loader");
+const miniLoader = document.querySelector(".miniLoader");
 
 
-let posts = (await getBookmarks()).posts;
-const pagination = (await getBookmarks()).pagination;
-
-
-// console.log(pagination)
+let bookmarksInfo = await getBookmarks(1);
+let posts = bookmarksInfo.posts;
+let pagination = bookmarksInfo.pagination;
 
 // show bookmarks
 renderBookmarkedCard(posts, myBookmarksContainer);
@@ -41,7 +40,8 @@ myBookmarksContainer.addEventListener("click", (event) => {
 
                 loader.classList.remove("hidden");
                 await deletePostBookmarked(deleteBtn.id);
-                renderBookmarkedCard((await getBookmarks()).posts, myBookmarksContainer);
+                renderBookmarkedCard((await getBookmarks(1)).posts, myBookmarksContainer);
+                location.reload();
                 loader.classList.add("hidden");
             }
         });
@@ -49,4 +49,38 @@ myBookmarksContainer.addEventListener("click", (event) => {
 });
 
 
+let currentPage = 2;
+let totalPages = pagination.totalPages;
+let isLoading = false;
 
+
+const loadMore = async () => {
+
+    if (isLoading || currentPage > totalPages) return;
+
+    isLoading = true;
+    miniLoader.classList.remove("hidden");
+
+    try {
+
+        const data = await getBookmarks(currentPage);
+
+        currentPage = +data.pagination.page + 1;
+        totalPages = data.pagination.totalPages;
+
+        renderBookmarkedCard(data.posts, myBookmarksContainer);
+
+    } catch (e) {
+        console.log(e);
+    }
+
+    miniLoader.classList.add("hidden");
+    isLoading = false;
+}
+
+window.addEventListener("scroll", async () => {
+    const bottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 50;
+    if (bottom) {
+        await loadMore();
+    }
+});
