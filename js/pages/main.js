@@ -3,7 +3,7 @@ import {
     getCategories, priceFormater, renderFiltering, showCategories, showFamousSearch
 } from "../function/main.js";
 import {getPosts, showPosts} from "../function/posts.js";
-import {loginModal, isLogin} from "../function/auth.js";
+import {loginModal, isLogin, logOut} from "../function/auth.js";
 import {renderModal} from "../function/myDivar.js";
 
 
@@ -35,6 +35,7 @@ const myDivarModalMobi = document.querySelector("#myDivarModalMobi");
 const myDivarBtnMobi = document.querySelector("#myDivarMobiBtn");
 const myDivarMobiContainer = document.querySelector("#myDivarMobiContainer");
 const registerAd = document.querySelector("#registerAd");
+const ads = document.querySelector("#ads");
 
 
 // root protection
@@ -401,15 +402,36 @@ if (getFromLocalStorage("city")) {
     myDivarBtnMobi.addEventListener("click", async () => {
 
         myDivarModalMobi.classList.remove("hidden");
-        await renderModal(myDivarMobiContainer)
+        myDivarBtnMobi.classList.add("border-b-3", "border-red");
+        ads.classList.remove("border-b-3", "border-red");
+
+        await renderModal(myDivarMobiContainer);
+    });
+
+    ads.addEventListener("click", async () => {
+
+        myDivarModalMobi.classList.add("hidden");
+        myDivarBtnMobi.classList.remove("border-b-3", "border-red");
+        ads.classList.add("border-b-3", "border-red");
     });
 
     myDivarMobiContainer.addEventListener("click", (event) => {
 
         const menuOption = event.target.closest(".menuOption");
+        const menuOptionLogin = event.target.closest(".menuOptionLogin");
+        const Exit = event.target.closest(".Exit");
 
         if (menuOption) {
             loginModal();
+        }
+
+        if (menuOptionLogin) {
+
+            location.href = `${menuOptionLogin.dataset.adrs}`
+        }
+
+        if (Exit) {
+            logOut();
         }
     });
 

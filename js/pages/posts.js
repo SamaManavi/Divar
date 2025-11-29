@@ -280,8 +280,6 @@ window.addEventListener("load", async () => {
         },
     });
 
-
-
     //register ad
     registerAd.addEventListener("click", async () => {
 
