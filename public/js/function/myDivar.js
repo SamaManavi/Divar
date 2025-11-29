@@ -8,7 +8,6 @@ const renderModal = async (container) => {
 
     container.innerHTML = "";
 
-
     if (await isLogin()) {
 
         container.insertAdjacentHTML("beforeend", `

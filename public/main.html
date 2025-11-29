@@ -524,11 +524,11 @@
 <!--///////////////////////////////////////////////////////////////////////////-->
 
 <!--bottom section mobile - tablet-->
-<div class=" fixed bottom-0 w-full h-18 lg:hidden z-100000">
+<div class="fixed bottom-0 w-full h-18 lg:hidden z-40">
     <div class="flex items-center h-full w-full bg-darkGray shadow-one ">
 
         <!--ads-->
-        <div id="ads" class="flex-1 h-full">
+        <div id="ads" class="flex-1 h-full border-b-3 border-red">
             <div class="flex flex-col items-center justify-center h-full gap-y-1 cursor-pointer hover:bg-[#ffffff14]/80 duration-300">
                 <svg class="size-5 group-hover:text-white">
                     <use href="#home"></use>
@@ -539,22 +539,24 @@
 
         <!--bookmark-->
         <div class="flex-1 h-full">
-            <div class="flex flex-col items-center justify-center h-full gap-y-1 cursor-pointer hover:bg-[#ffffff14]/80 duration-300">
+            <a href="my-divar/bookmarks.html"
+               class="flex flex-col items-center justify-center h-full gap-y-1 cursor-pointer hover:bg-[#ffffff14]/80 duration-300">
                 <svg class="size-5 group-hover:text-white">
                     <use href="#bookmark"></use>
                 </svg>
-                <span class="font-bold text-xs group-hover:text-white">پشتبانی</span>
-            </div>
+                <span class="font-bold text-xs group-hover:text-white">نشان ها</span>
+            </a>
         </div>
 
-        <!--register an ad-->
+        <!--new post-->
         <div class="flex-1 h-full">
-            <div class="flex flex-col items-center justify-center h-full gap-y-1 cursor-pointer hover:bg-[#ffffff14]/80 duration-300">
+            <a href="new-post.html"
+               class="flex flex-col items-center justify-center h-full gap-y-1 cursor-pointer hover:bg-[#ffffff14]/80 duration-300">
                 <svg class="size-5 group-hover:text-white">
                     <use href="#plus"></use>
                 </svg>
-                <span class="font-bold text-xs group-hover:text-white">پشتبانی</span>
-            </div>
+                <span class="font-bold text-xs group-hover:text-white">افزودن آگهی</span>
+            </a>
         </div>
 
         <!--chat-->
@@ -577,7 +579,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 <!--famous search ad while search (desktop) ///// این صفحه پشت مودال هست خود مودال داخل بخش هدر دسکتاپ بخش سرچ اد است-->
@@ -622,7 +623,7 @@
 
 <!--my divar show whit click (mobile)-->
 <div id="myDivarModalMobi"
-     class="flex items-center justify-center max-h-screen size-full fixed inset-0 bg-bgGray z-10 lg:hidden hidden">
+     class="flex items-center justify-center max-h-screen size-full fixed inset-0 bg-bgGray z-30 lg:hidden hidden">
     <div class="fixed top-0 z-20 h-15 w-full bg-darkGray px-5 shadow-md lg:hidden">
         <!--top section my divar -->
         <div class="flex items-center w-full h-full">

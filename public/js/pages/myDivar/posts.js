@@ -7,8 +7,6 @@ const postSortContainer = document.querySelector("#postSortContainer");
 const postSorts = document.querySelectorAll(".postSort");
 
 
-console.log((await getAllUsersPosts()))
-
 let notesInfo = await getAllUsersPosts();
 let posts = notesInfo.posts;
 

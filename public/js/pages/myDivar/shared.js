@@ -2,6 +2,8 @@ import {isLogin, logOut} from "../../function/auth.js";
 
 const phoneNumberMyDivarSidebar = document.querySelector("#phoneNumberMyDivarSidebar");
 const myDivarLogout = document.querySelector("#myDivarLogout");
+const comeback = document.querySelector("#comeback");
+
 
 
 if (!await isLogin()) location.href = "../main.html";
@@ -13,6 +15,6 @@ myDivarLogout.addEventListener("click", () => {
 
     logOut();
 });
-
+comeback.addEventListener("click", () => history.back());
 
 export {phoneNumber}
