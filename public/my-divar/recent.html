@@ -134,55 +134,18 @@
                 </div>
 
                 <!--city name-->
-                <div class="group flex items-center justify-center h-11 w-20 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
+                <div id="cityModalBtnDesktop"
+                     class="group flex items-center justify-center h-11 w-20 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
                     <svg class="size-5 group-hover:text-white">
                         <use href="#location"></use>
                     </svg>
-                    <span class="font-bold text-sm group-hover:text-white">تهران</span>
+                    <span id="city-name-desktop" class="font-bold text-sm group-hover:text-white">تهران</span>
                 </div>
 
-                <!--categories-->
-                <div class="group flex items-center justify-center h-11 w-25 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
-                    <span class="font-bold text-sm group-hover:text-white">دسته ها</span>
-                    <svg class="size-5 group-hover:text-white">
-                        <use href="#chevron-down"></use>
-                    </svg>
-                </div>
-
-                <!--advertisements search-->
-                <div class="group flex relative">
-                    <input class="h-11 w-70 xl:w-120 bg-[#ffffff14] rounded-sm p-5" type="text"
-                           placeholder="جستجو در همه آگهی ها ">
-
-                    <button class="absolute left-2 top-2.5 group-hover:text-gray-300 duration-300">
-                        <svg class="size-5">
-                            <use href="#magnifying-glass"></use>
-                        </svg>
-                    </button>
-
-                    <!--  موقعی که رو اینپوت کیلیک شد و مودال زیر نمایش داده شد رنگ اینپون باید هم رنگ بک گراند مودال شود /// modal -->
-                    <div class="absolute left-0 right-0 shadow-one w-70 xl:w-120 h-auto bg-bgGray p-4 top-11 border-t border-secondary/20 rounded-br rounded-bl hidden">
-                        <span class="text-sm text-bold text-secondary pt-2"> بیشترین جستجو های دیوار</span>
-                        <ul class="most-searched flex flex-wrap gap-3 pt-4">
-                            <!--most searched-->
-                            <li class="h-7 flex items-center text-secondary cursor-pointer text-sm border border-secondary/50 px-3 py-1 rounded-full">
-                                آپارتمان
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
             </div>
 
             <!--left section-->
             <div class="flex items-center lg:gap-x-2 xl:gap-x-4">
-                <!--my divar-->
-                <div class="group flex items-center justify-center h-11 w-25 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
-                    <svg class="size-5 group-hover:text-white">
-                        <use href="#user"></use>
-                    </svg>
-                    <span class="font-bold text-sm group-hover:text-white">دیوار من</span>
-                </div>
 
                 <!--chat-->
                 <div class="group flex items-center justify-center h-11 w-30 gap-x-2 rounded cursor-pointer hover:bg-darkGray duration-300">
@@ -201,39 +164,23 @@
                 </div>
 
                 <!--register an ad-->
-                <div class="group flex items-center justify-center h-11 w-25 gap-x-2 rounded cursor-pointer bg-[#D14757] hover:bg-[#db707d] transition-colors duration-300">
-
+                <a href="../new-post.html" id="registerAd"
+                   class="group flex items-center justify-center h-11 w-25 gap-x-2 rounded cursor-pointer bg-[#D14757] hover:bg-[#db707d] transition-colors duration-300">
                     <span class="text-[#242424] font-bold">ثبت آگهی</span>
-                </div>
+                </a>
             </div>
         </div>
     </div>
 </header>
 
 <!--header mobile-->
-<header class="fixed z-20 h-18 w-full bg-darkGray px-5 shadow-md lg:hidden">
-    <!--top section search -->
-    <div class="flex items-center size-full">
-        <div class="flex items-center justify-between h-12 w-full bg-bgGray border border-secondary rounded-sm p-5">
-            <span class="text-sm"> جستجو در همه آگهی ها</span>
-
-            <!--city name-->
-            <div class="flex items-center gap-x-4 divide-x divide-secondary/40">
-                <button class="pl-4">
-                    <svg class="size-5">
-                        <use href="#magnifying-glass"></use>
-                    </svg>
-                </button>
-                <div class="flex items-center gap-x-2">
-                    <span class="text-sm">تهران</span>
-                    <button class="">
-                        <svg class="size-5">
-                            <use href="#location"></use>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
+<header class="fixed top-0 h-15 z-20 w-full bg-bgGray shadow-one px-5 lg:hidden">
+    <!--top bar laptop-->
+    <div id="comeback" class="flex items-center gap-x-3 h-full w-full px-5">
+        <svg class="size-5">
+            <use href="#arrow-right"></use>
+        </svg>
+        <span class="text-sm">بازگشت</span>
     </div>
 </header>
 
@@ -366,7 +313,7 @@
         <main class="col-span-12 lg:col-span-10 main-content">
             <div class="min-h-screen flex flex-col">
                 <h2 class="font-bold text-secondary py-4 pt-4 lg:pt-25">آگهی های اخیرا بازدید شده</h2>
-                <div id="noRecent" class="flex justify-center flex-col items-center hidden">
+                <div id="noPost" class="flex justify-center flex-col items-center hidden">
                     <span class="text-secondary text-xs">هیچ بازید اخیری یافت نشد.</span>
                 </div>
                 <div class="flex-1">
@@ -382,16 +329,13 @@
 <!--overlay-->
 <div id="modal-overlay" class="fixed inset-0 bg-black/40 backdrop-blur-[1px] z-30 hidden"></div>
 
-<!--&lt;!&ndash;loader&ndash;&gt;-->
-<!--<div id="loader" class="w-full h-screen fixed inset-0 flex items-center justify-center bottom-16 bg-bgGray z-50">-->
-<!--    <div class="w-10 h-10 border-4 border-t-red border-gray-300 rounded-full animate-spin"></div>-->
-<!--</div>-->
+<!--loader-->
+<div id="loader" class="w-full h-screen fixed inset-0 flex items-center justify-center bottom-16 bg-bgGray z-50 hidden">
+    <div class="w-10 h-10 border-4 border-t-red border-gray-300 rounded-full animate-spin"></div>
+</div>
 
-<!--<script src="../vendor/sweetalert2/sweetalert2@11.js"></script>-->
-<!--<script src="../js/pages/shared.js" type="module"></script>-->
-<!--<script src="../js/pages/my-divar/shared.js" type="module"></script>-->
-<!--<script src="../js/utils/citiesModal.js" type="module"></script>-->
-<!--<script src="../js/script.js" type="module"></script>-->
-<!--<script src="../js/pages/my-divar/recent.js" type="module"></script>-->
+<script src="../vendor/sweetalert2/sweetalert2@11.js"></script>
+<script src="../js/pages/myDivar/shared.js" type="module"></script>
+<script src="../js/pages/myDivar/recent.js" type="module"></script>
 </body>
 </html>

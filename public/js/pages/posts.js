@@ -1,5 +1,12 @@
 import {bookmarkHandler, getNote, getSinglePost, renderBreadcrumb} from "../function/posts.js";
-import {baseUrl, calculateTimePassed, getFromSearchParam, getToken} from "../function/utils.js";
+import {
+    baseUrl,
+    calculateTimePassed,
+    getFromLocalStorage,
+    getFromSearchParam,
+    getToken,
+    saveInLocalStorage
+} from "../function/utils.js";
 import {renderSwalCallInfo} from "../function/shared.js";
 import {isLogin, loginModal} from "../function/auth.js";
 
@@ -23,6 +30,7 @@ window.addEventListener("load", async () => {
     const postPhotosContainerMain = document.querySelector(".postPhotosContainerMain");
     const registerAd = document.querySelector("#registerAd");
 
+    let recentPosts = [];
 
     const postId = getFromSearchParam("id");
 
@@ -293,6 +301,20 @@ window.addEventListener("load", async () => {
     });
 
 
+
+    recentPosts = getFromLocalStorage("recents") || [];
+
+    if (recentPosts.length >= 10) {
+
+        recentPosts.shift();
+    }
+    const isDuplicate = recentPosts.find((post) => post === postId);
+
+    if (!isDuplicate){
+
+        recentPosts.push(postId);
+        saveInLocalStorage("recents", recentPosts);
+    }
 
 });
 
