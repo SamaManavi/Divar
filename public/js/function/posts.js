@@ -1,6 +1,6 @@
 import {baseUrl, calculateTimePassed, getFromLocalStorage, getFromSearchParam, getToken} from "./utils.js";
 
-const getPosts = async () => {
+const getPosts = async (page) => {
 
     const citiesLocalStorage = getFromLocalStorage("city");
     const cityId = citiesLocalStorage.map((city) => city.id).join("|");
@@ -11,7 +11,7 @@ const getPosts = async () => {
     const maxPrice = getFromSearchParam("maxPrice");
     const minPrice = getFromSearchParam("minPrice");
 
-    let url = `${baseUrl}/v1/post/?city=${cityId}&limit=100`;
+    let url = `${baseUrl}/v1/post/?city=${cityId}&page=${page}&limit=20`;
 
     if (categoryId) {
 
@@ -40,8 +40,6 @@ const getPosts = async () => {
 const showPosts = (posts, postsContainer) => {
 
     if (posts.length) {
-
-        postsContainer.innerHTML = "";
 
         posts.forEach((post) => {
 
