@@ -70,7 +70,6 @@ const showPosts = (posts, postsContainer) => {
         });
 
     } else {
-
         postsContainer.insertAdjacentHTML("beforeend", `
             <h3 class="text-red text-xl lg:text-2xl">آگهی یافت نشد</h3>
         `)

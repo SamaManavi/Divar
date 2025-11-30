@@ -37,11 +37,8 @@ myNotesContainer.addEventListener("click", (event) => {
         }).then(async (result) => {
 
             if (result.isConfirmed) {
-
-                loader.classList.remove("hidden");
                 await deleteNote(deleteBtn.id);
                 location.reload();
-                loader.classList.add("hidden");
             }
         });
     }

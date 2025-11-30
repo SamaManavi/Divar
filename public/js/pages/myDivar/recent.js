@@ -3,7 +3,7 @@ import {getSinglePost, showPosts} from "../../function/posts.js";
 
 const myRecentContainer = document.querySelector("#myRecentContainer");
 
-let recent = getFromLocalStorage("recents");
+let recent = getFromLocalStorage("recents") || [];
 
 async function loadRecentPosts() {
     const posts = await Promise.all(
