@@ -29,6 +29,7 @@ window.addEventListener("load", async () => {
     const postPhotosContainerThumbs = document.querySelector(".postPhotosContainerThumbs");
     const postPhotosContainerMain = document.querySelector(".postPhotosContainerMain");
     const registerAd = document.querySelector("#registerAd");
+    const map = document.querySelector("#map");
 
     let recentPosts = [];
 
@@ -315,6 +316,18 @@ window.addEventListener("load", async () => {
         recentPosts.push(postId);
         saveInLocalStorage("recents", recentPosts);
     }
+
+    map.innerHTML = `
+        <iframe
+          class="w-full rounded"
+          height="350"
+          style="border:0"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=${post.map.x},${post.map.y}&hl=fa&z=13&output=embed">
+        </iframe>
+    `;
 
 });
 
