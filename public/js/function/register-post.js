@@ -1,6 +1,6 @@
 import {getSingleSubSubCategory} from "./main.js";
 import {baseUrl, getFromSearchParam, getToken} from "./utils.js";
-import {getAllLocations} from "./index.js";
+import {getAllLocations} from "./cities.js";
 import {renderSwalToast} from "./shared.js";
 
 

@@ -1,4 +1,4 @@
-import {findCityObj, getAllLocations, showPopularCities} from "../function";
+import {findCityObj, getAllLocations, showPopularCities} from "../function/cities.js";
 import {getFromLocalStorage, saveInLocalStorage} from "../function/utils.js";
 import {getSocial, showSocial} from "../function/shared.js";
 

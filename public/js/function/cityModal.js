@@ -1,4 +1,4 @@
-import {getAllLocations} from "./index.js";
+import {getAllLocations} from "./cities.js";
 import {getFromLocalStorage, saveInLocalStorage} from "./utils.js";
 
 document.body.insertAdjacentHTML("beforeend", `
