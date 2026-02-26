@@ -9,7 +9,7 @@ scratch using **HTML**, **TailwindCSS**, and **Vanilla JavaScript**.
 
 ## 🚀 Demo
 
-👉 **Live Demo:** https://SamaManavi.github.io/Divar/main.html
+👉 **Live Demo:** https://SamaManavi.github.io/Divar
 
 ## 📌 Overview
 
